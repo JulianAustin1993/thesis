@@ -43,6 +43,31 @@
 
 % *****************************************************************************
 % **************************** Custom Packages ********************************
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{assumption}{Assumption}[chapter]
+
+
+\theoremstyle{definition}
+
+\newcommand{\bm}{\boldsymbol}
+\newcommand{\ve}[1]{\bm{{#1}}}
+\newcommand{\vesub}[2]{\bm{{#1}}_{#2}}
+\newcommand{\vesup}[2]{\bm{{#1}}^{#2}}
+\newcommand{\vess}[3]{\bm{{#1}}_{#2}^{#3}}
+\newcommand{\hve}[1]{\hat{\ve{#1}}}
+\newcommand{\hvesub}[2]{\hat{\ve{#1}}_{#2}}
+\newcommand{\hvesup}[2]{\hat{\ve{#1}}^{#2}}
+\newcommand{\hvess}[3]{\hat{\ve{#1}}_{#2}^{#3}}
+\newcommand{\tve}[1]{\tilde{\ve{#1}}}
+\newcommand{\tvesub}[2]{\tilde{\ve{#1}}_{#2}}
+\newcommand{\tvesup}[2]{\tilde{\ve{#1}}^{#2}}
+\newcommand{\tvess}[3]{\tilde{\ve{#1}}_{#2}^{#3}}
 
 % ************************* Algorithms and Pseudocode **************************
 
