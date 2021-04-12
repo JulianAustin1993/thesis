@@ -561,12 +561,12 @@ supported!}
     BoldFont = *-bold,
     ItalicFont = *-italic,
     BoldItalicFont = *-bolditalic,
-  ]{xits}
+  ]{XITS}
   
   \setmathfont[ 
     Extension = .otf,
     BoldFont = *bold,
-  ]{xits-math}
+  ]{XITS-Math}
   
 \else
   % default: pdfLaTeX

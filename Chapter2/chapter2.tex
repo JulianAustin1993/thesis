@@ -3,6 +3,11 @@
 %*********************************** Second Chapter *****************************
 %*******************************************************************************
 
+\nomenclature[z-TMQ]{TMQ}{Total vertically integrated precipitation from CESM-LE, \citep{kay_community_2015}}
+\nomenclature[z-PS]{PS}{Pressure at reference height of $2\si{\meter}$ from CESM-LE, \citep{kay_community_2015}}
+\nomenclature[z-TREFHT]{TREFHT}{Temperature at reference hieght of $2\si{\meter}$ from CESM-LE, \citep{kay_community_2015}}
+\nomenclature[z-U10]{U10}{Wind speed at height of $10\si{\meter}$ from CESM-LE, \citep{kay_community_2015}}
+
 \chapter{Data sets\label{cha:data}}  %Title of the Second Chapter
 
 \ifpdf
@@ -11,13 +16,25 @@
     \graphicspath{{Chapter2/Figs/Vector/}{Chapter2/Figs/}}
 \fi
 
-In the following chapter we describe in detail our data which we will use as a source for assessing the performance of the models described within. We use a publicly available set of climate model simulations known as the CESM Large Ensemble (CESM-LE) data set, \citep{kay_community_2015}. The CESM-LE data set provides a good example of EO data that is discussed in Section~\ref{sec:eo}. This data set will be used throughout this body of work as a intriguing example of the abilities of the discussed methodology. 
+In the following chapter we describe in detail our data which we will use as a source for assessing the performance of the models described within.
+We use a publicly available set of climate model simulations known as the CESM Large Ensemble (CESM-LE) data set, \citep{kay_community_2015}.
+The CESM-LE data set provides a good example of EO data that is discussed in Section~\ref{sec:eo}.
+This data set will be used throughout this body of work as a intriguing example of the abilities of the discussed methodology. 
 
  \section[CESM-LE]{\label{sec:cesmle}Community Earth System Model - Large Ensemble,  \citep{kay_community_2015}}
+ The CESM-LE data set is an extremely popular and significant data set in the climate research community.
+ It was developed to enable the assessment of recent past and near future climate change in the presence of internal climate variability, \citep{kay_community_2015}.
+ It does so by providing 40 simulations of a complex climate model where each simulation is subject to the same radiative forcing scenario but begin a slightly perturbed atmospheric state.
+ As such the forty resultant simulations present the various trajectories the model might take due to internal climate variability of the model. 
  
- The CESM-LE data set is an extremely popular and significant data set in the climate research community. It was developed to enable the assessment of recent past and near future climate change in the presence of internal climate variability, \citep{kay_community_2015}. It does so by providing 40 simulations of a complex climate model where each simulation is subject to the same radiative forcing scenario but begin a slightly perturbed atmospheric state. As such the forty resultant simulations present the various trajectories the model might take due to internal climate variability of the model. 
- 
- The model used to run the forty member ensemble is the Community System Earth Model version 1, \citep{hurrell_community_2013}, with the Community Atmosphere model version 5, \citep{hurrell_community_2013}, as the atmospheric component. The model is a fully coupled climate model which consists of a model for each the Land, Ocean, Atmosphere and Sea Ice components of the climate. These are brought together with a coupler model. Figure~\ref{fig:cesm} provides a simple overview as to how CESM model couples the various components. Such a model is capable of simulating various Land, Ocean, Atmosphere and Sea Ice variables of the climate, such as the wind speed, temperature or pressure. The CESM-LE produces simulations of such variables on the nominal $1\deg$ horizontal separation across the globe which induces our spatial resolution of the data.  The ensemble produces results at varying levels of temporal resolution between the years 1920 and 2100 for non-control simulations. The temporal resolution varies by variable of interest between 6-hourly, Daily, and Monthly frequency of observations.
+ The model used to run the forty member ensemble is the Community System Earth Model version 1, \citep{hurrell_community_2013}, with the Community Atmosphere model version 5, \citep{hurrell_community_2013}, as the atmospheric component.
+ The model is a fully coupled climate model which consists of a model for each the Land, Ocean, Atmosphere and Sea Ice components of the climate.
+ These are brought together with a coupler model.
+ Figure~\ref{fig:cesm} provides a simple overview as to how CESM model couples the various components.
+ Such a model is capable of simulating various Land, Ocean, Atmosphere and Sea Ice variables of the climate, such as the wind speed, temperature or pressure.
+ The CESM-LE produces simulations of such variables on the nominal $1\deg$ horizontal separation across the globe which induces our spatial resolution of the data.
+ The ensemble produces results at varying levels of temporal resolution between the years 1920 and 2100 for non-control simulations.
+ The temporal resolution varies by variable of interest between 6-hourly, Daily, and Monthly frequency of observations.
  
  \begin{figure}[htbp!] 
  	\centering    
@@ -27,7 +44,22 @@ In the following chapter we describe in detail our data which we will use as a s
  \end{figure}
 
  
- For this body of work we use the CESM-LE data by considering the forty members as separate simulations. Each simulation giving us a realisation of the various climate variables generated by the process described in \citep{kay_community_2015}. Further we only consider modelling the time between December 2020 and January 2025. These time points were chosen such that the length of time gave reasonable ability to capture periodic elements but that the size of the data did not become too large. Additional to reduce the size of the data we resample the model simulations to a smaller spatial grid. Figure~\ref{fig:cesm_grid} shows the resampled spatial observation grid over the globe that we use.
+ For this body of work we use the CESM-LE data by considering the forty members as separate simulations.
+ Each simulation giving us a realisation of the various climate variables generated by the process described in \citep{kay_community_2015}.
+ We apply a set of preprocessing to the raw data provided by CESM-LE as described below. 
+ 
+ \subsection{Preprocessing \label{sec:preprocessing}}
+ The main preprocessing step we take from the CESM-LE data is to reduce the data size through a series of spatial resampling and temporal cut off.
+ We reduce the data size by considering only a subset of the full data set.
+ We only consider modelling the times between December 2020 and January 2025.
+ These time points were chosen such that the length of time gave reasonable ability to capture periodic elements but that the size of the data did not become too large.
+ By using monthly frequency observations and this 5 year time horizon we have a temporal dimension of 60 for each spatial grid point. 
+ 
+  Additionally, to reduce the size of the data further, we resample the model simulations to a smaller spatial grid.
+  Figure~\ref{fig:cesm_grid} shows the resampled spatial observation grid over the globe that we use.
+  Resampling is achieved by averaging values of neighbouring pixels until our desired resolution is achieved.
+  In this case we resample until the spatial size of the data set is $64 \times 96$ which corresponds to a reduction factor of $3$ from the original CESM-LE data.
+  Obviously using such an approach reduces the resolution and thus our ability to see small scale spatial patterns however it allows the data sets to be much more manageable in terms of performing computations over them.  
  
  \begin{figure}[htbp!] 
  	\centering    
@@ -35,40 +67,156 @@ In the following chapter we describe in detail our data which we will use as a s
  	\caption[CESM-LE resampled spatial grid]{The resampled spatial grid of observation measurements across the globe.}
  	\label{fig:cesm_grid}
  \end{figure}
- 
- 
- 
-  In the following work we  focus on four atmospheric model variables from the  CESM-LE simulations. These are; pressure (see Section~\ref{ssec:pressure}), Temperature (see Section~\ref{ssec:temp}), Precipitation (see Section~\ref{ssec:precip}), and Wind (see Section~\ref{ssec:wind}). We describe each component in detail in their respective section and throughout this work we consider each as a separate EO data set. 
 
-\subsection{Precipitation \label{ssec:precip}}
-The total (vertically integrated) precipitable water component abbreviated as TMQ in the model descriptions is an atmospheric component output of the CESM-LE. The component is given units of $\si{\kilogram\per\metre\squared} $ and is available monthly on the full spatial grid with monthly precipitation being average over time from the model 6 hourly output. 
-
-We can see clearly the spatial variability of the precipitation over the globe by considering the heat map of June 2021 monthly precipitation for a single simulation which is shown in Figure~\ref{fig:precip_june}. As one would expect there is clear spatial correlation as for example the tropics observe large amounts of precipitation whereas desert regions observe little. 
  
+ \subsection{Variables \label{ssec:variables}}
+ In the following work we  focus on four atmospheric model variables from the  CESM-LE simulations.
+ These are; Pressure, Temperature, Precipitation, and Wind.
+ We describe each component in detail in their respective section and throughout this work we consider each as a separate EO data set. 
+
+\subsubsection{Precipitation \label{sssec:precip}}
+The total (vertically integrated) precipitable water component abbreviated as TMQ in the model descriptions is an atmospheric component output of the CESM-LE.
+The component is given units of $\si{\kilogram\per\metre\squared} $ and is available monthly on the full spatial grid with monthly precipitation being average over time from the model 6 hourly output. 
+
+We can see clearly the spatial variability of the precipitation over the globe by considering the heat map of June 2021 monthly precipitation for a single simulation which is shown in Figure~\ref{fig:precip_june}.
+As one would expect there is clear spatial correlation as for example the tropics observe large amounts of precipitation whereas desert regions observe little.
+We can similarly observe clear temporal correlations in the precipitation variable of the CESM model.
+In particular Figure~\ref{fig:precip_temp} shows the time series of two locations on the globe.
+Each exhibit clear periodic signals as wet seasons and dry seasons repeat each year.
 
 \begin{figure}[htbp!] 
-	\centering    
-	\includegraphics[width=1.0\textwidth]{Example_image}
-	\caption[Monthly precipitation for June 2021]{The simulated average monthly precipitation across the globe for June 2021 from ensemble member 1 of the CESM-LE data. }
-	\label{fig:precip_june}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{TMQ as at June 2021.}
+		\label{fig:precip_june}   
+	\end{subfigure}             
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{TMQ over time.}
+		\label{fig:precip_temp}
+	\end{subfigure}             
+	\caption[Overview of Precipitation variable]{Overview of the monthly average precipitation variable from CESM-LE ensemble member 1. Figure~\ref{fig:precip_june} highlights the spatial correlation present while Figure~\ref{fig:precip_temp} highlights the temporal correlation at two distinct locations.}
+	\label{fig:precip_overview}
 \end{figure}
 
-We can similarly observe clear temporal correlations in the precipitation variable of the CESM model. In particular Figure~\ref{fig:precip_temp} shows the time series of two locations on the globe. Each exhibit clear periodic signals as wet seasons and dry seasons repeat each year. Additional we see clearly that there is in sense a smooth transition from one month to the next in terms of precipitation value which suggest a FDA approach as discussed in Chapter~\ref{cha:Into} may be relevant. 
+\mynote{Add commentary on the spatial correlation structure and possible non-stationarity.}
+
+\subsubsection{Pressure \label{sssec:pressure}}
+The surface pressure component abbreviated as PS in the model descriptions is an atmospheric component output of the CESM-LE.
+The component is given in units of $\si{\pascal}$ and is available monthly on the full spatial grid with monthly pressure being averaged over time from the model 6 hourly outputs.
+
+We can see clearly the spatial variability of the pressure over the globe by considering the heat map of June 2021 monthly pressure for a single simulation which is shown in Figure~\ref{fig:pressure_june}.
+One can clearly see areas of high and low pressure.
+For example the high pressure zone over the North Atlantic and low pressure zone over Asia.
+We can similarly observe clear temporal correlations in the pressure variable of the CESM model. In particular Figure~\ref{fig:pressure_temp} shows the time series of two locations on the globe. Each exhibit clear smooth signals over time.
 
 \begin{figure}[htbp!] 
-	\centering    
-	\includegraphics[width=1.0\textwidth]{Example_image}
-	\caption[Monthly precipitation between December 2020 and January 2025]{The simulated average monthly precipitation at two points on the globe from ensemble member 1 of the CESM-LE data over five years between December 2020 and January 2025.  }
-	\label{fig:precip_temp}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{PS as at June 2021.}
+		\label{fig:pressure_june}   
+	\end{subfigure}             
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{PS  over time.}
+		\label{fig:pressure_temp}
+	\end{subfigure}             
+	\caption[Overview of Pressure variable]{Overview of the monthly average pressure variable from CESM-LE ensemble member 1. Figure~\ref{fig:pressure_june} highlights the spatial correlation present while Figure~\ref{fig:pressure_temp} highlights the temporal correlation at two distinct locations.}
+	\label{fig:pressure_overview}
 \end{figure}
 
+\mynote{Add commentary on the spatial correlation structure and possible non-stationarity.}
 
-\subsection{Pressure \label{ssec:pressure}}
-The surface pressure component abbreviated as PS in the model descriptions is an atmospheric component output of the CESM-LE. The component is given in units of $\si{\pascal}$ and is available monthly on the full spatial grid with monthly pressure being averaged over time from the model 6 hourly outputs.
-\subsection{Temperature \label{ssec:temp}}
-The temperature model component abbreviated to TREFHT in the model description is an atmospheric component output of the CESM-LE. The component refers to the average temperature in $\si{\kelvin}$ at the model reference height which is $w\si{\meter}$ above sea level. The average is available monthly with the average being that of the model 6 hourly output for the month. Such a response variable is again available on the full spatial grid of the model. 
+\subsubsection{Temperature \label{sssec:temp}}
+The temperature model component abbreviated to TREFHT in the model description is an atmospheric component output of the CESM-LE.
+The variable refers to the average temperature in $\si{\kelvin}$ at the model reference height which is $2\si{\meter}$ above sea level.
+The average is available monthly with the average being that of the model 6 hourly output for the month.
+Such a response variable is again available on the full spatial grid of the model. 
 
-\subsection{Wind \label{ssec:wind}}
-The wind model component abbreviated to U10 in the model description is an atmospheric component output of the CESM-LE. The component refers to the average wind speed in $\si{\meter\per\second}$ at a height of $10\si{\meter}$. Again the component is available on the full spatial grid and is available as a monthly average over time.
- 
- 
+Quite clearly the temperature exhibits clear spatial correlation across the globe and periodic signals through time as area move from winter to summer.
+Figures~\ref{fig:temp_june},~\ref{fig:temp_temp} highlight this for the spatial and temporal correlation respectively.
+
+\begin{figure}[htbp!] 
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{TREFHT as at June 2021.}
+		\label{fig:temp_june}   
+	\end{subfigure}             
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{TREFHT  over time.}
+		\label{fig:temp_temp}
+	\end{subfigure}             
+	\caption[Overview of Temperature variable]{Overview of the monthly average temperature variable from CESM-LE ensemble member 1. Figure~\ref{fig:temp_june} highlights the spatial correlation present while Figure~\ref{fig:temp_temp} highlights the temporal correlation at two distinct locations.}
+	\label{fig:temp_overview}
+\end{figure}
+
+\mynote{Add commentary on the spatial correlation structure and possible non-stationarity.}
+
+\subsubsection{Wind \label{sssec:wind}}
+The wind model component abbreviated to U10 in the model description is an atmospheric component output of the CESM-LE.
+The component refers to the average wind speed in $\si{\meter\per\second}$ at a height of $10\si{\meter}$.
+Again the component is available on the full spatial grid and is available as a monthly average over time.
+
+The wind variable is tightly related to that of the pressure, described in Section~\ref{sssec:pressure}, due to the nature of the phenomenon.
+As such there is clear spatial and temporal correlations in the variable.
+We visualise the spatial correlation in Figure~\ref{fig:wind_june} by considering a snap shot of the average wind in June 2021.
+Comparing such a figure with that of the Pressure variable in Figure~\ref{fig:pressure_june} we can see clear relationship with the two variables where the average wind speed is highest as we move from points of high pressure to those of low.
+Winds alike the other model variables also exhibit temporal correlation. 
+
+\begin{figure}[htbp!] 
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{U10 as at June 2021.}
+		\label{fig:wind_june}   
+	\end{subfigure}             
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{U10 over time.}
+		\label{fig:wind_temp}
+	\end{subfigure}             
+	\caption[Overview of Wind variable]{Overview of the monthly average wind variable from CESM-LE ensemble member 1. Figure~\ref{fig:wind_june} highlights the spatial correlation present while Figure~\ref{fig:wind_temp} highlights the temporal correlation at two distinct locations.}
+	\label{fig:wind_overview}
+\end{figure}
+
+\mynote{Add commentary on the spatial correlation structure and possible non-stationarity.}
+
+\subsection{Simulations}
+For each variable discussed in Section~\ref{ssec:variables} the CESM-LE data provides forty simulations, one from each ensemble member.
+We have highlighted the variable spatial and temporal correlations in the four variables discussed in the Figures~\ref{fig:precip_overview},~\ref{fig:pressure_overview},~\ref{fig:temp_overview}, and~\ref{fig:wind_overview} for a single simulation.
+However we also have variability within simulations and it is useful to view the variability in the variables by the separate realisations of the CESM model.
+It is important that any model developed for such data should be able to account for this variability in the data generating process.
+Figure~\ref{fig:std_overview} displays a snap shot of the standard deviation of the respective variables in June 2021.
+
+\begin{figure}[htbp!] 
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{TMQ.}
+		\label{fig:std_precip_june}   
+	\end{subfigure}             
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{PS.}
+		\label{fig:std_pressure_temp}
+	\end{subfigure}             
+	\hfill
+		\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{TREFHT.}
+		\label{fig:std_temp_june}   
+	\end{subfigure}             
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Example_image}
+		\caption{U10.}
+		\label{fig:std_wind_temp}
+	\end{subfigure}             
+	\caption[Overview of variability of Precipitation, Pressure, Temperature, and Wind speed.]{ Standard deviation of the four variables considered at June 2021 for the 40 simulations present in the CESM-LE data set.}
+	\label{fig:std_overview}
+\end{figure}
+
+\mynote{To do discussion on areas of increased variability with commentary on how these will probably be the area with most uncertainty in prediction.}
