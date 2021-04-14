@@ -6,6 +6,7 @@
 \chapter{Background Methodologies \label{cha:background}}  %Title of the Thrid Chapter
 
 \nomenclature[a-GP]{$\mathcal{GP}\left(m(\cdot), k(\cdot, \cdot)\right)$}{Gaussian Process with mean function $m(\cdot)$ and covariance function $k(\cdot, \cdot)$}
+\nomenclature[s-k]{k}{Principal component index.}
 
 \ifpdf
     \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
@@ -210,14 +211,6 @@ A B-spline basis system of size $Q$ can then be considered by choosing the exten
 	\label{eqn:bspline_basis}
 \end{equation}
 where $Q$ is the number of basis functions to use in the system, $\ve{\tau}$ is the extended knot vector, and $B_{d, q}^{\ve{\tau}}$ is the $q^\text{th}$ B-spline of order $d$ defined by Equation~\eqref{eqn:bspline_high} for our knot vector $\ve{\tau}$.
-Figure~\ref{fig:bspline_basis} shows the first $7$ B-spline functions of order 4 with equally spaced knots over the domain $\left[ 0, 1 \right]$.
-
- \begin{figure}[htbp!] 
-	\centering    
-	\includegraphics[width=1.0\textwidth]{Example_image}
-	\caption[Example  B-spline functions of order 4]{First seven B-spline functions of order four with equally spaced interior knots over the domain $\left[ 0, 1 \right]$. The vertical dotted lines indicate the knot positions.}
-	\label{fig:bspline_basis}
-\end{figure}
 
 \subsection{Regression splines \label{ssec:spline_reg}}
 As discussed in Section~\ref{sec:pace} the PACE methodology requires estimation of both the mean function, $\mu(t)$, and covariance surface $G\left(s, t\right)$. 
@@ -239,16 +232,7 @@ As such we assume that our function  can be represented using an order $d$ B-spl
 \end{align}
 
 where $\ve{c}=\left( c_1,\cdots, c_K \right)^\transpose$, $\vess{B}{d}{\ve{\tau}}(t) = \transpose{\left( B_{d, 1}^{\ve{\tau}}(t), B_{d, 2}^{\ve{\tau}}(t), \cdots, B_{d, Q}^{\ve{\tau}}(t) \right)}$, and $Q$ is the dimension of the expansion.
-An example of such a basis expansion is given in Figure~\ref{fig:basis_expansion}.
-From this we can clearly see how the function $\chi_i$ is broken down into a finitely many constituent parts of scaled known basis functions.
-If such basis functions have nice properties such as simplicity to compute then such a representation for $f$ given by Equation~\eqref{eqn:basis_expansion} can be extremely useful since most problems can be reduced to problems involving the finite dimensional vector $\ve{c} \in \mathbb{R}^Q$. 
-
-\begin{figure}[htbp!] 
-	\centering    
-	\includegraphics[width=1.0\textwidth]{Example_image}
-	\caption[Example B-spline basis expansion]{Example B-spline basis expansion of known function with basis functions shown for clarity.}
-	\label{fig:basis_expansion}
-\end{figure}
+If such basis functions have nice properties like being easy to compute then such a representation for $f$ given by Equation~\eqref{eqn:basis_expansion} can be extremely useful since most problems can be reduced to involving only the finite dimensional vector $\ve{c} \in \mathbb{R}^Q$. 
 
 Our representation of $\chi_i$ using a basis system then becomes the problem of choosing the coefficients $\vesup{c}{\transpose}$ using only our set of observations of $\vesub{Y}{i}$ which are observed with error.
 The most common method for fitting a basis system to discretely observed data is by choosing the coefficients of the expansion $c_q$ given in Equation~\ref{eqn:basis_expansion} by minimising the criterion:

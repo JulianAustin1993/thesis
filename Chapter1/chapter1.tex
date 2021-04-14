@@ -37,27 +37,55 @@
 Many area of science produce data on both a spatial and temporal scale.
 Take for example, the production of Earth observation data. Earth Observation (EO) is the collection of information on the state of a physical, chemical or biological system of the planet.
 Typically EO data is acquired through some form of remote sensing in addition to perhaps some in-situ measurements.
-Typically EO data is acquired to study a process either over a large area of land, a large time horizon, or both.
+EO data is acquired to study a process either over a large area of land, a large time horizon, or both.
 For example such EO studies include; land usage change in wetland environments in southern Spain, \citep{muro_short-term_2016}, crop production in the Netherlands, \citep{khabbazan_crop_2019}, and land deformation of the Tuscany region over a two year time period, \citep{raspini_continuous_2018}.
 In each case there is significant spatial and temporal dependency that is to be considered in the observed processes.
 For example \citeauthor{raspini_continuous_2018} use the temporal dependency in ground deformation signals to highlight areas of significant change in movement, \citep{raspini_continuous_2018}.
 They combine this with spatial maps to provide a monitoring bulletin for their area of interest.
 Of course to provide actionable insights from EO data requires an understanding of both the spatial and temporal dependency and as such models that can handle both forms of dependency whilst maintaining parsimony are desired in the EO community. 
 
-The three studies highlighted above all use space borne remote sensing to observe their process of interest. 
-Space borne remote sensing, typically achieved through the use of satellite based sensors, is becoming more prominent as a source of EO data.
+An area where EO data is prominent is climatology.
+In such a setting the focus is on the study of the atmosphere and weather patterns over time.
+In this case spatial and temporal dependency in the EO data used in various climatology studies is fairly evident.
+For example, consider the Community Earth System Model (CESM), \citep{kay_community_2015}, produced by the National Centre for Atmospheric Research (NCAR).
+Such a model provides simulations of various aspects of the Earth's climates for past, present and future time points.
+Figure~\ref{fig:cesm_example} provides an example of a subset of the CESM data focusing on the temperature in Kevlin ($\si{\kelvin}$) over the globe.
+As expected we can see a clear temporal pattern emerging in various regions which relates to the seasons as the occur across the globe. 
+Of most obvious is the gradual increase then reduction in temperature we see over the polar regions.
+Figure~\ref{fig:cesm_example} also highlights clear spatial patterns with temperature varying as we move around the globe.
+One which is particularly noticeable is the localised change in temperature in north Africa between the months of May to September.
+In addition to these simple observations, there are obviously more complex patterns at play. 
+For example, consider the transition from sea to land.
+The spatial pattern observed is often more rough than say the change in temperature across a country. 
+Understanding such a complex process motivate a model which takes into account both spatial and temporal correlations jointly. 
+See Section~\ref{sec:cesmle} for a more detailed description of such a data set.
+One notable feature of such a data set is the gridded observation and relatively frequent temporal observations. 
+These properties are typical in EO data. 
+
+
+
+\begin{figure}[htbp!] 
+	\centering    
+	\includegraphics[width=1.0\textwidth]{cesm_temp_example}
+	\caption[Average monthly temperature from CESM-LE]{Monthly average temperature over the globe in Kelvin ($\si{\kelvin}$) from a single simulation from CESM-LE. The figure illustrates both the temporal and spatial dependency that is observed in temperature across the globe. The figure is projected to the Robinson projection for illustration purposes.}
+	\label{fig:cesm_example}
+\end{figure}
+
+An area which generate large amounts of EO data is remote sensing.
+The three studies ,\citep{muro_short-term_2016, raspini_continuous_2018, khabbazan_crop_2019} use space borne remote sensing to observe their process of interest. 
+Space borne remote sensing, typically achieved through the use of satellite based sensors, is becoming more prominent as a source of EO data and in particularly as a source of climatology data.
 This is largely due too the increase in satellites launched which have been designed to capture various processes of the earth.
 Figure~\ref{fig:sar_timeline} highlights the rise in availability of a single type of remote sensing satellite.
 One particularly prominent remote sensing system is the European Space Agency's Sentinel Constellation, \cite{aschbacher_european_2012}.
 The Sentinel constellation of satellites provides a wide range of remote sensing sensors which are easily accessible.
 The constellation provides capabilities capturing various EO processes through various forms of sensors such as Synthetic Aperture Radar (SAR), optical and multispectral sensors.
-As such the Sentinel constellation has been widely used in EO studies.
-For example the three studies above, \citep{muro_short-term_2016, khabbazan_crop_2019, raspini_continuous_2018}  all utilise the Sentinel 1 SAR sensors for their observation source. 
+For example, European Space Agency's Sentinel-4 from the Sentinel Constellation, \cite{aschbacher_european_2012}, provides observation dedicated to air quality monitoring.
+As such the Sentinel constellation has been widely used in EO studies; the three studies above, \citep{muro_short-term_2016, khabbazan_crop_2019, raspini_continuous_2018}  all utilise the Sentinel 1 SAR sensors for their observation source. 
 
 \begin{figure}[htbp!] 
 	\centering    
-	\includegraphics[width=1.0\textwidth]{Example_image}
-	\caption[Timeline of major EO satellites]{A timeline of major satellite launches and operating periods for EO missions using SAR based sensors.}
+	\includegraphics[width=1.0\textwidth]{Sensors}
+	\caption[Timeline of major EO satellites]{A timeline of major satellite launches and operating periods for EO missions using SAR based sensors. This highlights the rapid rise in availability of such remote sensing capabilities, driven by the demand for observations to cover large spatial and temporal scales in areas such a climatology. The C, L, X band refers to the type of SAR sensor equipped to the satellite which are used in different applications. See \citep{oliver_understanding_2004} for details.}
 	\label{fig:sar_timeline}
 \end{figure}
 
@@ -66,30 +94,14 @@ This is in response to the rising demand for monitoring EO processes over time.
 This has been made possible by the development of remote sensing technologies which makes the revisit time possible.
 For example the Sentinel 1 satellite constellation can provide revisit times of approximately five days for areas of Europe. Such short revisit times are advantageous as they give higher temporal resolution and thus models can incorporate this additional information.
 For example, \citeauthor{raspini_continuous_2018} utilise this in their study of land deformation change to identify anomalous regions.
-Figure~\ref{fig:example_st} gives an example of EO data taken from the Sentinel 1 satellite of the Sentinel constellation.
-The figure gives an idea about the spatial and temporal resolution available using such a data source.
-The increasing availability of high temporal frequency EO data such as those provided by the Sentinel satellite constellation thus drives a demand for statistical models which can handle high resolution spatial and high resolution temporal  dependency.  
-
-\begin{figure}[htbp!] 
-	\centering    
-	\includegraphics[width=1.0\textwidth]{Example_image}
-	\caption[Sentinel 1 SAR image time series.]{An collection of Sentinel 1 SAR images over Newcastle, UK for the period between January 2019 and January 2021.   This example of Earth observation data exhibits spatial and temporal dependencies. Contains modified Copernicus data.}
-	\label{fig:example_st}
-\end{figure}
-
-Another area where EO data is prominent is climatology.
-In this setting the focus, rather than in the geological studies in \citep{muro_short-term_2016, khabbazan_crop_2019, raspini_continuous_2018}, is on the study of the atmosphere and weather over the globe.
-In this case spatial and temporal dependency in the EO data used in various climatology studied is obvious.
-For example, consider the Community Earth System Model (CESM), \citep{kay_community_2015}, produced by the National Centre for Atmospheric Research (NCAR).
-Such a model provides simulations of various aspects of the Earth's climates for past, present and future time points.
-The data derived through the CESM shares various aspects with typical remotely sensed EO data such as the Sentinel data. 
+The increasing availability of high temporal frequency EO data such as those provided by the CESM-LE data set or the Sentinel satellite constellation thus drives a demand for statistical models which can handle high resolution spatial and high resolution temporal  dependency.  
 
 In particular, both sources of data share an inherent spatial and temporal dependency.
 That is to say the underlying process driving both remotely sensed observations of the Earth and the CESM simulations will vary over the globe and also will be driven by the state of the system at a prior time points.
 That is not to say the process is the same for both but rather that there is a commonality in that they could both be considered spatio-temporal processes.
 In addition there are more concrete similarities in the data.
 Typically, both data sources are described on a lattice of points over space which is usually regular.
-Such a lattice is usually represented through a geodetic coordinate system which grounds an datum to a real world location.
+Such a lattice is usually represented through a geodetic coordinate system which grounds a datum to a real world location.
 Finally, both sets have repeated observations through time over the same space.
 Due to the cross over in properties of both data sources typically we observe similar statistical techniques being used for both. 
 
