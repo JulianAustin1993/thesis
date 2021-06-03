@@ -3,13 +3,13 @@
 %*********************************** Second Chapter *****************************
 %*******************************************************************************
 
-\nomenclature[z-TMQ]{TMQ}{Total vertically integrated precipitation from CESM-LE, \citep{kay_community_2015}}
-\nomenclature[z-PS]{PS}{Pressure at reference height of $2\si{\meter}$ from CESM-LE, \citep{kay_community_2015}}
-\nomenclature[z-TREFHT]{TREFHT}{Temperature at reference hieght of $2\si{\meter}$ from CESM-LE, \citep{kay_community_2015}}
-\nomenclature[z-U10]{U10}{Wind speed at height of $10\si{\meter}$ from CESM-LE, \citep{kay_community_2015}}
-\nomenclature[z-CESM-LE]{CESM-LE}{CESM Large Ensemble, \citep{kay_community_2015}}
+\nomenclature[z-TMQ]{TMQ}{Total vertically integrated precipitation from CESM-LE.}
+\nomenclature[z-PS]{PS}{Pressure at reference height of $2\si{\meter}$ from CESM-LE.}
+\nomenclature[z-TREFHT]{TREFHT}{Temperature at reference hieght of $2\si{\meter}$ from CESM-LE.}
+\nomenclature[z-U10]{U10}{Wind speed at height of $10\si{\meter}$ from CESM-LE.}
+\nomenclature[z-CESM-LE]{CESM-LE}{Community Earth System Model - Large Ensemble.}
 
-\chapter{Data sets\label{cha:data}}  %Title of the Second Chapter
+\chapter{Data Sets\label{cha:data}}  %Title of the Second Chapter
 
 \ifpdf
     \graphicspath{{Chapter2/Figs/Raster/}{Chapter2/Figs/PDF/}{Chapter2/Figs/}}
@@ -24,10 +24,10 @@ The CESM-LE data set provides a good example of EO data that is discussed in Sec
  \section[CESM-LE]{\label{sec:cesmle}Community Earth System Model - Large Ensemble}
  The CESM-LE data set is an extremely popular and significant data set in the climate research community.
  It was developed to enable the assessment of recent past and near future climate change in the presence of internal climate variability, \citep{kay_community_2015}.
- It does so by providing forty simulations of a complex climate model where each simulation is subject to the same radiative forcing scenario but initialised from a slightly perturbed atmospheric state.
+ It does so by providing $40$ simulations of a complex climate model where each simulation is subject to the same radiative forcing scenario but initialised from a slightly perturbed atmospheric state.
  As such the forty resultant simulations present the various trajectories the model might take due to internal climate variability of the model. 
  
- The model used to run the forty member ensemble is the Community System Earth Model version 1, \citep{hurrell_community_2013}, with the Community Atmosphere model version 5, \citep{hurrell_community_2013}, as the atmospheric component.
+ The model used to run the forty member ensemble is the Community Earth System Model version 1, \citep{hurrell_community_2013}, with the Community Atmosphere model version 5, \citep{hurrell_community_2013}, as the atmospheric component.
  The model is a fully coupled climate model which consists of a model for each of land, ocean, atmosphere and sea ice components of the climate.
  These are brought together with a coupler model.
  Figure~\ref{fig:cesm} provides a simple overview as to how CESM model couples the various components.
@@ -119,7 +119,7 @@ This highlights the fact that not only do we have temporal correlation but this 
 		\caption{TMQ over time.}
 		\label{fig:precip_temp}
 	\end{subfigure}             
-	\caption[Overview of Precipitation variable]{Overview of the monthly average precipitation variable (TMQ) from CESM-LE ensemble member 1. Figure~\ref{fig:precip_june} highlights the spatial correlation present while Figure~\ref{fig:precip_temp} highlights the temporal correlation at two distinct locations; namely Colombia and the United Kingdom. The orange circle and blue square markers mark these respectively on Figure~\ref{fig:precip_temp} with the white markers highlighting their locations in Figure~\ref{fig:precip_june}. Note the level difference in temporal correlation structure between the two location, indicative of a spatio-temporal correlation process occurring.}
+	\caption[Overview of Precipitation variable]{Overview of the monthly average precipitation variable (TMQ) from CESM-LE ensemble member 1. Figure~\ref{fig:precip_june} highlights the spatial correlation present while Figure~\ref{fig:precip_temp} highlights the temporal correlation at two distinct locations; namely Colombia and the United Kingdom. The orange circle and blue square markers mark these respectively on Figure~\ref{fig:precip_temp} with the white markers highlighting their locations in Figure~\ref{fig:precip_june}. Note the level difference in temporal correlation structure between the two locations, indicative of a spatio-temporal correlation process occurring.}
 	\label{fig:precip_overview}
 \end{figure}
 
@@ -128,7 +128,7 @@ The surface pressure variable abbreviated as PS is another atmospheric component
 The component is given in Pascals ($\si{\pascal}$) and represents the surface pressure at a height of $2\si{\meter}$. It is available monthly on the full spatial grid and the monthly average is calculated as the average over time from the CESM-LE model six hourly output.
 
 Figure~\ref{fig:pressure_overview} gives a brief insight to this variable. 
-We can see the spatial correlation structure of Pressure over the globe in Figure~\ref{fig:pressure_june}.
+We can see the spatial correlation structure of pressure over the globe in Figure~\ref{fig:pressure_june}.
 One can clearly see areas of high and low pressure.
 For example, there is a significant difference between the low pressure zone over Antarctica and high pressure zone over Australia. 
 It is interesting to note that we see a clear difference in the smooth structure over sea and a rougher structure over land variables. 
@@ -158,7 +158,7 @@ The temperature variable abbreviated to TREFHT is an atmospheric component outpu
 The variable refers to the average temperature in Kelvin ($\si{\kelvin}$) at the model reference height which is $2\si{\meter}$ above sea level.
 The average is available monthly with said average being calculated from the model six hourly output over the month.
 
-Quite clearly the temperature exhibits spatial correlation across the globe and periodic signals through time as area move from winter to summer.
+Quite clearly the temperature exhibits spatial correlation across the globe and periodic signals through time the seasons unfold.
 Figures~\ref{fig:temp_june},~\ref{fig:temp_temp} highlight this for the spatial and temporal correlation respectively.
 Clearly the temperature at June increases as we move closer to the equator and decreases at the poles. 
 Similarly to the precipitation, we observe that the spatial correlation structure is clearly anisotropic. 
@@ -198,8 +198,8 @@ We can see, in contrast to the previous three variables, that this has a much ro
 In fact it is interesting to observe the distinct difference in variability over the sea compared to that over the land. 
 This may suggest that we have two types of correlation structure existing for this variable, one for the land and one for the sea. 
 In this case the model for the whole variable will clearly need to include a non-stationary spatial component to capture such a phenomena.
-Wind speed, alike the other studied model variables, also exhibit temporal correlation. 
-This is illustrated for two locations, Colombia and the UK, in Figure~\ref{fig:wind_temp}. 
+Wind speed, like the other studied model variables, also exhibits temporal correlation. 
+This is illustrated for the usual two locations, Colombia and the UK, in Figure~\ref{fig:wind_temp}. 
 The temporal correlation is much less pronounced for this variable than compared to the others. 
 Visually there is perhaps evidence for a periodic signal for the UK location. 
 However, yet again we do see a clear level shift between the two location. 
@@ -222,10 +222,10 @@ Similar to the other variables this suggests a model which includes both space a
 	\label{fig:wind_overview}
 \end{figure}
 
-\subsection{Simulations}
-For each variable discussed in Section~\ref{ssec:variables} the CESM-LE data provides forty simulations; one from each ensemble member.
+\subsection{Replications}
+For each variable discussed in Section~\ref{ssec:variables} the CESM-LE data provides $40$ replications; one from each ensemble member.
 We have illustrated the spatial and temporal correlations in the four variables in the Figures~\ref{fig:precip_overview},~\ref{fig:pressure_overview},~\ref{fig:temp_overview}, and~\ref{fig:wind_overview} for a single simulation.
-However we also have variability between simulations and it is useful to illustrate this as it may provide insight into where we may expect difficulty in modelling.
+However we also have variability between replications and it is useful to illustrate this as it may provide insight into where we may expect difficulty in modelling.
 It is important that any model developed for such data should be able to account for this variability in the data generating process.
 Figure~\ref{fig:std_overview} displays a snap shot of the standard deviation of the respective variables in June 2021.
 
@@ -252,24 +252,24 @@ Figure~\ref{fig:std_overview} displays a snap shot of the standard deviation of 
 		\caption{U10.}
 		\label{fig:std_wind_june}
 	\end{subfigure}             
-	\caption[Spatial overview of variability of Precipitation, Pressure, Temperature, and Wind speed.]{ Standard deviation of the four variables considered at June 2021 for the forty simulations present in the CESM-LE data set. The locations of the UK and Colombia are shown by the white square and circle markers respectively. These points are used as examples in Figure~\ref{fig:std_overview_temp}. }
+	\caption[Spatial overview of variability of Precipitation, Pressure, Temperature, and Wind speed.]{ Standard deviation of the four variables considered at June 2021 for the $40$ replications present in the CESM-LE data set. The locations of the UK and Colombia are shown by the white square and circle markers respectively. These points are used as examples in Figure~\ref{fig:std_overview_temp}. }
 	\label{fig:std_overview}
 \end{figure}
 
 Figure~\ref{fig:std_overview} gives an indication of how drastically each simulation differs for each variable.
-We would like to propose a model that can accommodate all the different scenarios presented in the various simulations. 
+We would like to propose a model that can accommodate all the different scenarios presented in the various replications. 
 Thus our model must be able to adapt to the regions of high standard deviation. 
 From Figure~\ref{fig:std_precip_june} we can see that each simulation varies significantly in the tropics, but mostly around Indonesia.
 As such we might be particularly interested in our model performance in this area for the precipitation variable.
 For the pressure variable there is an increase in standard deviation for the poles and particularly to the south west of Antarctica, see Figure\ref{fig:std_pressure_june}.
 There is a similar result for the temperature variable in Figure~\ref{fig:std_temp_june}.
 Therefore we will be interested in model performance in this area for these variables.
-The wind speed variable has many more localised areas with high variance from simulations.
+The wind speed variable has many more localised areas with high variance from replications.
 For example, the localised high variance of the coast of India and eastern Africa.  
 These may pose a significant challenge to accommodate in a model for this variable.
 
-Similar to the spatial variability in simulations we can consider the variability over time.
-Figure~\ref{fig:std_overview_temp} highlight this variation over the forty simulations from the CESM-LE data set. 
+Similar to the spatial variability in replications we can consider the variability over time.
+Figure~\ref{fig:std_overview_temp} highlights this variation over the $40$ replications from the CESM-LE data set. 
 
 \begin{figure}[htbp!] 
 	\centering
@@ -294,21 +294,21 @@ Figure~\ref{fig:std_overview_temp} highlight this variation over the forty simul
 		\caption{U10.}
 		\label{fig:std_wind_temp}
 	\end{subfigure}             
-	\caption[Temporal overview of variability of Precipitation, Pressure, Temperature, and Wind speed.]{ Four variables over observation period December 2020 to January 2026 for the forty simulations present in the CESM-LE data set at two locations; namely Colombia and UK. These are represented by the blue and orange colours respectively.}
+	\caption[Temporal overview of variability of Precipitation, Pressure, Temperature, and Wind speed.]{ Four variables over observation period December 2020 to January 2026 for the $40$ replications present in the CESM-LE data set at two locations; namely Colombia and UK. These are represented by the blue and orange colours respectively.}
 	\label{fig:std_overview_temp}
 \end{figure}
 
-We can see clearly from Figure~\ref{fig:std_temp_temp} that the temperature variable function over time shows little variation between simulations. 
+We can see clearly from Figure~\ref{fig:std_temp_temp} that the temperature variable function over time shows little variation between replications. 
 However, variability does tend to increase in the troughs of these functions. 
 Such a phenomena is more pronounced for the Colombia location. 
 It may be interesting to assess performance of proposed models of the temperature variable with regard to this.
 The precipitation functions vary differently for the Colombia and UK locations.
 From the UK time series we see that although variability is high we can observe a periodic signal. 
-It may be interesting to asses whether any model for this variable is able to pick up such a periodic signal, given that a single simulation may not show great periodicity.
-Pressure similarly exhibits very different function variability between locations, with the Colombia functions showing large changes in pressure compared to the changes observed between simulations at the UK location. 
-Again this indicates that there is a clear spatial component to the process driving such simulations. 
+It may be interesting to assess whether any model for this variable is able to pick up such a periodic signal, given that a single simulation may not show great periodicity.
+Pressure similarly exhibits very different function variability between locations, with the Colombia functions showing large changes in pressure compared to the changes observed between replications at the UK location. 
+Again this indicates that there is a clear spatial component to the process driving such replications. 
 
-The above illustration of variability in simulations gives an indication about the difficulties that any model must overcome to describe such variables and gives testament to the use of such a data set to test our proposed model for EO data.
+The above illustration of variability in replications gives an indication about the difficulties that any model must overcome to describe such variables and gives testament to the use of such a data set to test our proposed model for EO data.
 
 
 

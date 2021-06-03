@@ -21,20 +21,20 @@
 \nomenclature[z-FDA]{FDA}{Functional Data Analysis.}
 \nomenclature[a-t]{t}{Temporal location.}
 \nomenclature[a-s]{$\ve{s}$}{Spatial location.}
-\nomenclature[a-T]{$\mathcal{T}$}{Temporal Domain.}
-\nomenclature[a-S]{$\mathcal{S}$}{Spatial Domain.}
+\nomenclature[a-T]{$\mathcal{T}$}{Temporal domain.}
+\nomenclature[a-S]{$\mathcal{S}$}{Spatial domain.}
 \nomenclature[a-X]{$\mathcal{X}$}{Functional random variable.}
 \nomenclature[a-N]{N}{Number of spatial observations.}
 \nomenclature[a-Ji]{$J_i$}{Number of temporal observations for $i^\text{th}$ functional observation.}
 \nomenclature[a-y]{$y_{ij}$}{Observed response at time $t_j$ for $i^\text{th}$ functional observation. See Equation~\ref{eqn:fd_temporal}.}
-\nomenclature[a-Y]{Y}{Observed data set. See Equation~\ref{eqn:observed_data}.}
+\nomenclature[a-Y]{Y}{Observed data set.}
 \nomenclature[g-chi]{$\chi$}{Functional data (observation of $\mathcal{X}$).}
-\nomenclature[g-epsilon]{$\varepsilon_{ij}$}{Noise process at time $t_j$ for $i^\text{th}$ functional observation. See Equation~\ref{eqn:fd_temporal}.}
-\nomenclature[s-i]{i}{Spatial index.}
-\nomenclature[s-j]{j}{Temporal index.}
+\nomenclature[g-epsilon]{$\varepsilon_{ij}$}{Noise process at time $t_j$ for $i^\text{th}$ functional observation.}
+\nomenclature[s-i]{$i$}{Spatial index.}
+\nomenclature[s-j]{$j$}{Temporal index.}
 
 
-\section{Earth observation\label{sec:eo}}
+\section{Earth Observation\label{sec:eo}}
 Many areas of science produce data on both a spatial and temporal scale.
 Take for example, the production of Earth Observation data. Earth Observation (EO) is the collection of information on the state of a physical, chemical or biological system of the planet.
 Typically EO data is acquired through some form of remote sensing in addition to perhaps some in-situ measurements.
@@ -52,8 +52,8 @@ In this case spatial and temporal dependency in the EO data used in various clim
 For example, consider the Community Earth System Model (CESM), \citep{kay_community_2015}, produced by the National Centre for Atmospheric Research (NCAR).
 Such a model provides simulations of various aspects of the Earth's climates for past, present and future time points.
 See Section~\ref{sec:cesmle} for a more detailed description of such a data set.
-Figure~\ref{fig:cesm_example} provides an example of a subset of the CESM data focusing on the temperature in Kevlin ($\si{\kelvin}$) over the globe.
-As expected we can see a clear a temporal pattern emerging in various regions which relates to the seasons.
+Figure~\ref{fig:cesm_example} provides an example of a subset of the CESM data focusing on the temperature in Kelvin ($\si{\kelvin}$) over the globe.
+As expected we can see a clear temporal pattern emerging in various regions which relates to the seasons.
 For example, there is clear evidence for temporal correlation over the polar regions due to the gradual increase then reduction in temperature we see over these regions.
 Figure~\ref{fig:cesm_example} also highlights clear spatial patterns with temperature varying as we move around the globe.
 One particularly noticeable pattern is the localised change in temperature over north Africa between the months of May to September.
@@ -71,12 +71,12 @@ Understanding such a complex process motivates a model which must take into acco
 	\label{fig:cesm_example}
 \end{figure}
 
-The CESM data is generated through simulations of a complex model of the Earth (See Section~\ref{sec:cesmle} for more detail).
+The CESM data is generated through simulations of a complex model of the Earth (see Section~\ref{sec:cesmle} for more detail).
 However, EO data is also becoming more frequently generated through remote sensing.
 Remote sensing is the monitoring of a physical characteristic of an area through measuring its reflected and emitted radiation at a distance. 
 Space borne remote sensing, typically achieved through the use of satellite based sensors, is becoming more prominent as a source of EO data and in particularly as a source of climatology data.
 The three studies above, \citep{muro_short-term_2016, raspini_continuous_2018, khabbazan_crop_2019}, use space borne remote sensing to observe their process of interest. 
-This is largely due too the increase in satellites launched which have been designed to capture various processes of the earth.
+This is largely due to the increase in satellites launched which have been designed to capture various processes of the earth.
 Figure~\ref{fig:sar_timeline} highlights the rise in availability of a single type of remote sensing satellite.
 One particularly prominent remote sensing system is the European Space Agency's Sentinel Constellation, \cite{aschbacher_european_2012}.
 The Sentinel constellation of satellites provides a wide range of remote sensing sensors which are easily accessible.
@@ -94,13 +94,13 @@ As such the Sentinel constellation has been widely used in EO studies; the three
 
 A prominent focus of the Sentinel satellite constellation is to provide repeated observations at relatively high frequency, \cite{aschbacher_european_2012}.
 This is in response to the rising demand for monitoring EO processes over time.
-This has been made possible by the development of remote sensing technologies which makes the revisit time possible.
+High frequency revisit times has been made possible by the development of remote sensing technologies.
 For example, the Sentinel 1 satellite constellation can provide revisit times of approximately five days for areas of Europe.
 Such short revisit times are advantageous as they give higher temporal resolution and thus studies can incorporate this additional information.
 For example, \citeauthor{raspini_continuous_2018} utilise this in their study of land deformation change to identify anomalous regions, \citep{raspini_continuous_2018}.
 The increasing availability of high temporal frequency EO data such as those provided by the CESM-LE data set or the Sentinel satellite constellation thus drives a demand for statistical models which can handle both high resolution spatial and temporal dependency.  
 
-EO data, such as those provided by the CESM model or through remote sensing, have an inherent spatial and temporal dependency.
+Earth observation data, such as those provided by the CESM model or through remote sensing, have an inherent spatial and temporal dependency.
 That is to say the underlying process driving both remotely sensed observations of the Earth and the CESM simulations will vary over the globe and also will be driven by the state of the system at prior time points.
 That is not to say the process is the same for both but rather that there is a commonality in that they could both be considered spatio-temporal processes.
 In addition there are more concrete similarities in the collection of such EO data.
@@ -112,7 +112,7 @@ This usually relates to the repeated imaging of the same area of interest at mul
 
 The description of such spatio-temporal processes is well studied in statistics and a large amount of effort has been used to develop various models to suit them.
 A well known monograph which deals with such processes is that written by \citeauthor{cressie_statistics_2011}, \cite{cressie_statistics_2011}.
-The monographs details various forms of spatio-temporal processes and typically focuses on the extension of spatial method to incorporate the additional temporal dimension.
+The monograph details various forms of spatio-temporal processes and typically focuses on the extension of spatial method to incorporate the additional temporal dimension.
 We discuss these methods in more detail in Section~\ref{sec:st_methods}.
 Of particular importance in these methods is that temporal and spatial dimensions are treated distinctly as they are inherently different in the physical process.
 For example, one could consider a spatial point influencing its neighbours in all directions however a temporal point reasonably shouldn't influence its past.
@@ -123,8 +123,8 @@ FDA is typically applied to analyse data which vary over a continuum, \citep{ram
 Time is one such continuum.
 EO data with high frequency temporal observations are therefore suitable candidates for FDA models.
 FDA is a relatively new branch of statistics and as such few studies have been presented which use FDA techniques on EO data.
-\citeauthor{liu_functional_2012} considers FDA techniques on periodic EO data, \citep{liu_functional_2012}. 
-Similarly \citeauthor{hooker_maximal_2015} considers FDA techniques to model the Harvard modified vegetation index sourced from EO data.
+\citeauthor{liu_functional_2012} consider FDA techniques on periodic EO data, \citep{liu_functional_2012}. 
+Similarly \citeauthor{hooker_maximal_2015} consider FDA techniques to model the Harvard modified vegetation index sourced from EO data.
 In both the above studies they consider EO data as a collection of functional observations indexed by space where each functional observation represents a trajectory over time.
 
 The monograph of \citeauthor{ramsay_functional_2010} provides a comprehensive introduction to the themes of FDA, \citep{ramsay_functional_2010}.
@@ -137,7 +137,7 @@ In this work we consider developing such models for dependent functional data wi
 We consider adapting well studied FDA methodologies and borrow techniques from spatio-temporal statistics to allow for spatially dependent observations.
 In Section~\ref{sec:fr} we make concrete our definition of functional data. 
 
-\section{Functional representation \label{sec:fr}}
+\section{Functional Representation \label{sec:fr}}
 As mentioned in Section~\ref{sec:eo} EO data can be viewed as a collection of functional data.
 However there is a choice about how we interpret observations in this conversion.
 We may consider the data as a collection of functional observations with time being our functional dimension and space our collection dimension.
@@ -202,7 +202,7 @@ In this case one considers the modelling of the EO dataset by ensuring smoothnes
 We can then consider building in spatial dependency by assuming a sampling correlation in our $N$ functional data.
 An area where such spatial dependency has been long studied is multivariate spatio-temporal methods.
 
-\section{Spatio-Temporal methods, \label{sec:st_methods}}
+\section{Spatio-Temporal Methods, \label{sec:st_methods}}
 In the statistical literature spatial and spatio-temporal models have been extremely well studied, especially due to the prevalence of geo-statistical applications.
 In the following we briefly review some of the most commonly observed spatial and spatio-temporal statistical models in the multivariate analysis literature. 
 
@@ -215,16 +215,16 @@ Such models treat spatial data as samples from a random spatial process and that
 A prime example of the spatial Kriging model in use for EO data is given in \cite{rossi_kriging_1994}.
 Extensions to the basic Kriging technique have also been employed across a number of geo-statistical settings, including Co-Kriging involving extra covariate information for reconstruction, \cite{zhang_restoration_2009}.
 Kriging is well known in many fields through various names, in the FDA literature it is most often referred to as Gaussian processes regression.
-\citeauthor{shi_gaussian_2011} describes in detail the concept of Gaussian processes in the context of functional regression, \citep{shi_gaussian_2011}, and we discuss them more in Section~\ref{sec:gp}. 
+\citeauthor{shi_gaussian_2011} describe in detail the concept of Gaussian processes in the context of functional regression, \citep{shi_gaussian_2011}, and we discuss them more in Section~\ref{sec:gp}. 
 
-As is detailed in \cite{cressie_statistics_2010} an key aspect to geo-statistical modelling is the specification of spatial dependency in the observed data.
+As is detailed in \cite{cressie_statistics_2010} a key aspect to geo-statistical modelling is the specification of spatial dependency in the observed data.
 A common way for such specification is through parametric covariance or kernel functions.
-\cite{cressie_statistics_2010} details the traditional stationary parametric functions such as the Mat\`{e}rn covariance.
+Traditional stationary parametric functions such as the Mat\`{e}rn covariance are discussed in detail in \cite{cressie_statistics_2010}.
 These commonly rely on the assumption of isotropy and stationarity in modelling which rarely holds in practice.
 Further literature has considered extensions of these and is in fact an active area of research.
-\citeauthor{schmidt_flexible_2020} compares a variety of methods for producing non stationary and heterogeneous covariance structures for the goal of spatial interpolation, \citep{schmidt_flexible_2020}.
+\citeauthor{schmidt_flexible_2020} compare a variety of methods for producing non stationary and heterogeneous covariance structures for the goal of spatial interpolation, \citep{schmidt_flexible_2020}.
 They group the various methods of creating such structures into four categories; deformation, convolution, covariate, and stochastic partial differential equations.
-The deformation approach proposed by \citeauthor{sampson_nonparametric_1992} extends the anisotropic stationary covariances such as though describe in \cite{cressie_statistics_2010} by allowing for a non linear transformation to the space which creates a latent space where isotropy holds, \cite{sampson_nonparametric_1992}.
+The deformation approach proposed by \citeauthor{sampson_nonparametric_1992} extends the anisotropic stationary covariances, such as those described in \cite{cressie_statistics_2010}, by allowing for a non linear transformation to the space which creates a latent space where isotropy holds, \cite{sampson_nonparametric_1992}.
 The convolution approach proposed by \citeauthor{higdon_space_2002} uses a specific form of the covariance kernel which can be represented as a convolution between a convolution kernel and a white noise process.
 We discuss such an approach more in Chapter~\ref{cha:cpace}.
 The covariate based approach to constructing non stationary kernels tends to use an adaption to the convolution or deformation approaches with specific covariates, \citep{schmidt_flexible_2020}.
@@ -233,17 +233,18 @@ Finally the stochastic partial differential equation method proposed by \citeaut
 A natural extension to purely spatial modelling of spatio-temporal data is to include the temporal domain.
 Such models are known as spatio-temporal models.
 Spatio-temporal models are well discussed in the monograph \cite{cressie_statistics_2011} by \citeauthor{cressie_statistics_2011}.
-Spatio-temporal Kriging models are well suited to EO data; however such models are relatively scarce in the literature.
-\citeauthor{militino_introduction_2018} considers the application of such modelling in the satellite remote sensing literature and reasons the lack of such modelling is primarily due to the added complexity such models produce in specifying valid space-time covariance functions, \cite{militino_introduction_2018}.
+Spatio-temporal Kriging models are well suited to EO data; however these models are relatively scarce in the literature.
+\citeauthor{militino_introduction_2018} considers the application of such modelling in the satellite remote sensing literature and reasons the lack of them is primarily due to the added complexity these models produce in specifying valid space-time covariance functions, \cite{militino_introduction_2018}.
 As such, one particular direction spatio-temporal modelling has considered is the creation of spatio-temporal covariance functions.
 Spatio-temporal covariance functions are discussed in \citep{cressie_statistics_2011}.
-Separability between spatial and temporal correlations is often a key assumption in some methods due to the reduction in computational complexity such models offer.
-In particular for EO data, \cite{george_selecting_2015} consider such selection of separable covariances and \cite{deb_spatio-temporal_2017} consider such models for air pollution data. 
+Separability between spatial and temporal correlations is often a key assumption in some methods due to the reduction in computational complexity they provide.
+Separability assumption proposes that a space-time covariance function $k(\ve{s}, t, \ve{s}^\prime, t^\prime)$ can be factored into two separate covariance functions $k_{s}(\ve{s}, \ve{s}^\prime)$ and $k_t(t, t^\prime)$, one for the spatial and temporal dimensions. 
+In particular for EO data, \cite{george_selecting_2015} consider the selection of separable covariances and \cite{deb_spatio-temporal_2017} consider such models for air pollution data. 
 However, the separability assumption may be to restrictive for capturing complex spatio-temporal processes, \citep{cressie_statistics_2011}. 
-As such \citep{mitchell_likelihood_2006, fuentes_testing_2006, aston_tests_2017} considers tests for when such assumptions hold.
+As such \citep{mitchell_likelihood_2006, fuentes_testing_2006, aston_tests_2017} considers tests for when the separability assumptions hold.
 The work in \citep{cressie_classes_1999, gneiting_nonseparable_2002, iaco_nonseparable_2002} consider the construction of non separable covariance functions for when separability doesn't hold for use in spatio-temporal models.
 
-\section{\label{sec:summary_research}Summary of Research}
+\section{\label{sec:summary_research}Summary Of Research}
 The motivation of this work is to provide a model designed for EO data which provides an explanation of both the spatial and temporal process in a parsimonious way.
 We present a novel method named Correlated Principal Analysis through Conditional Expectation (CPACE), that is designed for modelling EO data.
 The model builds upon existing FDA techniques to extend modelling from independently observed functional data to functional data which exhibits spatial correlation.
@@ -251,17 +252,17 @@ The emphasis in this work is to utilise the FDA paradigm over the temporal domai
 Such a decomposition gives a parsimonious description of the data with respect to its temporal domain by describing its principal modes of variation.
 We then estimate a spatial correlation structure for each component using well known spatial statistical methods.
 The combination of the resulting estimated spatial covariance structures with the principal directions aims to capture the majority of temporal and spatial dependency observed in the data.
-We can then utilise the CPACE model to help predict response at unseen spatial and temporal locations, which is a keen area of interest in EO studies.
-We asses our model using various simulated data both with known correct data generating distribution and to simulations drawn from an incorrect data generating procedure.
-We apply our CPACE model to the select atmospheric variables from the CESM data set as an example application of the model to EO data.
+We can then utilise the CPACE model to help predict response at unseen spatial and temporal locations, which is an area of keen interest in EO studies.
+We assess our model using various simulated data both with known correct data generating distribution and to simulations drawn from an incorrect data generating procedure.
+We apply our CPACE model to selected atmospheric variables from the CESM data set as an example application of the model to EO data.
 
 In particular the work is structured as follows.
 In Chapter~\ref{cha:data} we describe our example data sets which we use to illustrate the performance of the model.
 In Chapter\ref{cha:background} we present the methodologies underpinning the CPACE models, these are typically well known FDA and spatio-temporal statistical methods.
 We also present the smoothing methodologies used to estimate the mean and covariance surfaces of our random functional variables.
 In Chapter~\ref{cha:dftsm} we present an interim model built on the combination of two well known existing methodologies in the FDA literature with a focus on application to an EO data set.
-Such a model proposes an novel approach to modelling EOn data but helps to highlight the need of including both spatial and temporal effects in modelling such data.
-In addition, the proposed model in Chapter~\ref{cha:dftsm} gives an opportunity to explore EO data where the functional domain is space rather than time.
+Such a model proposes an novel approach to modelling EO data but helps to highlight the need of including both spatial and temporal effects in modelling such data.
+In addition, the proposed model in Chapter~\ref{cha:ftsm} gives an opportunity to explore EO data where the functional domain is space rather than time.
 We present the benefits and limitations of such an approach in practice in this chapter.
 In Chapter~\ref{cha:cpace} we introduce the main contribution of this work; which is the CPACE model for correlated functional data.
 We describe the model in detail as well as providing asymptotic results for the model.
