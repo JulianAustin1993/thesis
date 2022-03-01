@@ -3,7 +3,7 @@
 %*********************************** Sixth Chapter *****************************
 %*******************************************************************************
 
-\chapter{Application of CPACE model \label{cha:application}}  %Title of the Sixth Chapter
+\chapter{Simulation study for  CPACE model \label{cha:application}}  %Title of the Sixth Chapter
 
 \ifpdf
     \graphicspath{{Chapter6/Figs/Raster/}{Chapter6/Figs/PDF/}{Chapter6/Figs/}}
@@ -14,8 +14,8 @@ The CPACE model as described in Chapter~\ref{cha:cpace} is designed to allow for
 Most often this may be a spatial dependence between neighbouring trajectories although the framework discussed isn't reliant on this.
 We have shown theoretically how we would reconstruct unobserved trajectories using our estimators. 
 However, we are yet to highlight in practice the ability of such estimators and their reconstruction ability.
-In the following chapter we present a series of simulated results designed to test the estimator capabilities, namely the ability to recover model hyper parameters. 
-Following this we present the application of the CPACE model to the CESM-LE dataset, as discussed in Chapter~\ref{cha:data}, and contrast this against the traditional FPCA PACE model which doesn't utilise the spatial information of the data.
+In the following chapter we present a series of simulated results designed to test the estimator capabilities, namely the ability to recover model hyper parameters and its reconstruction ability for unobserved locations.
+We contrast the CPACE models results against the traditional FPCA PACE model which doesn't utilise the spatial information of the functional data.
 
 \section{Simulation Study \label{sec:sim_study}}
 In the following section we present a simulation study based on the simulation study of \cite{yao_functional_2005}.
@@ -327,15 +327,449 @@ This may be because we have assumed a complex form of the length scale models in
  	\label{fig:val_ex_A}
  \end{figure}
 
+Finally another advantage of the CPACE model is the ability to refine estimation of the noise variance and the component kernel variances, $\sigma_\varepsilon^2$ and $\lambda_k$  respectively.
+While this, as shown in Table~\ref{tab:val_A}, may not gain much in reconstruction power this does indicate the CPACE frameworks ability to capture the true parameters of the model better. 
+Figure~\ref{fig:noise_param_A} shows the distribution of the estimated noise variance over all our models. 
+Notice that the models under the CPACE model tends to produce more consistent estimates than the standard PACE model.
+This is because the CPACE framework allows for refinement of these estimates using the PACE estimate as an initial value through the Gaussian process likelihood of observed data.
+Similar results are seen in the eigenvalue estimates (kernel variances).
+Figure~\ref{fig:lambda_1_param_A} and Figure~\ref{fig:lambda_2_param_A} show this for the first and second eigenvalues respectively.
+This is wanted and useful behaviour for modelling, as it provides assurance that the CPACE model can improve on the initial PACE estimates for both the noise parameter and variance parameters.
+This should lead to improved understanding of the possible data generation procedure when using these models on real world data sets.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{noise_param_A}
+	\caption{Estimated noise variance distribution for each of our models over the 50 simulations for scenario A. The true noise variance is given by the vertical black line for indication.}
+		\label{fig:noise_param_A}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+ 		\includegraphics[width=\textwidth]{lambda_1_param_A}
+ 		\caption{Estimated first eigenvalue (first kernel variance) for each of our models over the 50 simulations for scenario A. The true parameter is given by the vertical black line for indication.}
+ 		\label{fig:lambda_1_param_A}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+ 		\includegraphics[width=\textwidth]{lambda_2_param_A}
+ 		\caption{Estimated second eigenvalue (second kernel variance) for each of our models over the 50 simulations for scenario A. The true parameter is given by the vertical black line for indication.}
+ 		\label{fig:lambda_2_param_A}
+	\end{subfigure}
+\end{figure}
+
+Next we consider the test results for this scenario study.
+As described in Section~\ref{ssec:eval_metrics} the test results are metrics for the reconstruction ability on the test data set.
+This is locations in the domain $\mathcal{S}$ in which functional data are simulated but we assume we have no observations at these locations as all.
+Table~\ref{tab:test_A} displays the $MSE$ and $MAE$ results for all our models.
+As expected both the \verb*|fpca| and \verb*|fpca_gp| model produce similar results which are the best possible under our simulation study models.
+They are similar as both models will predict the mean function at unobserved locations, due to the structure of the White kernel upon which they depend.
+It is expected that these models will produce the best in class results as they most closely represent the simulated data generation. 
+Again, it is however worth noting that the other models have generalised well by estimation of their appropriate length scales.
+This bodes well, as supports the use of these models in the case where the model may have small spatial structure and it is unknown as to whether to use a spatial model or not.
+These simulation results suggests that you may loose out by not choosing a White kernel based CPACE model but that other kernels which have spatial dependence will approximate independently observed functional data well.
+It also worth noting, the comparatively poor performance of the \verb*|gibbs| model.
+This may be because the complexity of this model has lead to non-convergence of the length scale models, leading to spurious spatial dependence.
+This would then lead to less accurate forecast and giving higher test metrics. 
+We discuss the implementation we have used to minimise this in Chapter~\ref{cha:implementation}.
+
+\begin{table}
+	\caption[Simulation results for Scenario A on test data]{Simulation results for the models ability to estimate the functional data at locations with no observation across the whole temporal domain. Bold indicates best in class.}
+	\centering
+	\label{tab:test_A}
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Model} & \textbf{MSE} & \textbf{MAE} \\
+		\midrule
+		\verb*|pace| & \textbf{5.0105 (0.1234)} & \textbf{5.5143 (0.0645)} \\
+		\verb*|fpca_gp| & \textbf{5.0105 (0.1234)} & \textbf{5.5143 (0.0645)} \\
+		\verb*|matern_one| & 5.3783	(0.2622) & 5.7094 (0.1298) \\
+		\verb*|matern_three| & 5.5190 (0.4540) & 5.7824	(0.2262) \\
+		\verb*|gibbs| & 6.6118 (0.4765) & 6.2981 (0.1987)\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
 \section{Scenario B - Stationary Functional Data \label{sec:sim_B}}
+The next scenario we consider under our simulation study is the case of simulated data which exhibits spatial dependence.
+We assume for scenario B that we have stationary dependence.
+We induce this by considering that each component spatial covariance is given by the Mat\'ern One Half covariance model.
+For both components we assume the length scale for the Mat\'ern One Half covariance is 2.
+In essence, we are considering here a simple case of spatial dependence, as both components have the same spatial covariance structure.
+Figure~\ref{fig:ex_spa_B} gives an example of what the full simulated data looks like over space.
+This is for illustration only, to give the reader an idea on the scale of the spatial dependence induced.
+This corresponds to only one realisation of the data generating procedure for scenario B at a particular time point.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{ex_spa_B}
+	\caption{Example realisation of the spatial dependence under scenario B at a particular time point in domain $\mathcal{T}$. Here we show the full unobserved data across $\mathcal{S}$ with observed data being given by the less transparent pixels in the image.}
+	\label{fig:ex_spa_B}
+\end{figure}
+
+Again we compare the same models as in Scenario A, see Section~\ref{sec:sim_A} for a full description.
+Table~\ref{tab:train_B} reports the metric results for these models on Scenario B observed data.
+As expected our Mat\'ern One Half model performs best on the training data.
+Again, this is most probably because it closely resembles the data generating procedure for this scenario.
+It is also important to note the significant improvement any spatial dependence in the model kernel makes for reconstruction on the training data.
+Both the Mat\'ern One Half and Mat\'ern Three Halves models shows considerable improvements, but so does the Gibbs model although improvements are noticeable smaller.
+
+
+\begin{table}
+	\caption[Simulation results for Scenario B on observed data]{Simulation results for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
+	\centering
+	\label{tab:train_B}
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Model} & \textbf{MSE} & \textbf{MAE} \\
+		\midrule
+		\verb*|pace| & 0.0483 (0.0016) & 0.1738	(0.0029) \\
+		\verb*|fpca_gp| & 0.0482 (0.0016) & 0.1736 (0.0029) \\
+		\verb*|matern_one| & \textbf{0.0275	(0.0013)} & \textbf{0.1310	(0.0030)} \\
+		\verb*|matern_three| & 0.0352 (0.0019) & 0.1477	(0.0040) \\
+		\verb*|gibbs| & 0.0425 (0.0038) & 0.1613 (0.0071)\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+We note as in Scenario A we have refined estimates for the error variance and eigenvalues (kernel variances) than from the PACE model under the CPACE framework. 
+For Scenario B these estimates are displayed in Figures~\ref{fig:noise_param_B},~\ref{fig:lambda_1_param_B}, and~\ref{fig:lambda_2_param_B} respectively. 
+We see that the noise estimate is more precise for the CPACE models compared to the PACE model.
+However for the eigenvalue estimate we see the PACE model actually delivers more consistent results, however it is important to note that under spatial dependence it is possible for these to be biased away from the true values due to the correlation induced among functional observations.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{noise_param_B}
+	\caption{Estimated noise variance distribution for each of our models over the 50 simulations for scenario B. The true noise variance is given by the vertical black line for indication.}
+	\label{fig:noise_param_B}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{lambda_1_param_B}
+		\caption{Estimated first eigenvalue (first kernel variance) for each of our models over the 50 simulations for scenario B. The true parameter is given by the vertical black line for indication.}
+		\label{fig:lambda_1_param_B}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{lambda_2_param_B}
+		\caption{Estimated second eigenvalue (second kernel variance) for each of our models over the 50 simulations for scenario B. The true parameter is given by the vertical black line for indication.}
+		\label{fig:lambda_2_param_B}
+	\end{subfigure}
+\end{figure}
+
+In Scenario B we also can compare the length scale estimate from the Mat\'ern based models to that of the scenario for each component.
+As we can see in Figure~\ref{fig:rho_1_param_B} and Figure~\ref{fig:rho_2_param_B} the Mat\'ern One Half model manages to capture the true value in its distribution for each component, although it resides in the tail of the distribution.
+This may indicate that it hasn't quite captured the data generating procedure entirely, however coupled with the underestimate of the kernel variance, and underestimate of the kernel length scale does make sense.
+The Mat\'ern Three Halves model fails to capture the true length scale parameter in its model, but again as this model is inherently smoother over larger distances this makes sense that the length scale would be smaller when estimated on this scenario to account for this.
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{rho_1_param_B}
+		\caption{Estimated first kernel length scale parameter for the Mat\'ern models over the 50 simulations for scenario B. The true parameter is given by the vertical black line for indication.}
+		\label{fig:rho_1_param_B}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{rho_2_param_B}
+		\caption{Estimated second kernel length scale parameter for the Mat\'ern models over the 50 simulations for scenario B. The true parameter is given by the vertical black line for indication.}
+		\label{fig:rho_2_param_B}
+	\end{subfigure}
+\end{figure}
+
+We now consider the test metrics for these models.
+Table~\ref{tab:test_B} showcases these results.
+As expected these results highlight that the Mat\'ern One Half model succeeds in being the most accurate of the models for reconstructing completely unobserved functional data.
+As can also be seen the Mat\'ern Three Halves model comes surprisingly close to recreating the simulated data.
+This is again showcasing the ability of the CPACE framework to tailor the hyper parameters of the chosen kernel to suitably capture the data.
+In this case we have seen, from Figure~\ref{fig:rho_1_param_B}, that this corresponds to estimating the shorter length scale hyper parameter to compensate for the smoother kernel function.
+However, it doesn't quite compensate for having the correct kernel for the data generating procedure, which is why the Mat\'ern One Half kernel obtains the best metrics.
+As the standard deviation of the Mat\'ern One Half and Mat\'ern Three Halves metrics indicate that they may well infact be equally as powerful, we resort to the distribution of metric results to highlight why we highlight the Mat\'ern One Half model to be best in calss.
+Figure~\ref{fig:comp_test_B} highlights the distribution of metrics over the full 50 simulations bettween these two models.
+We can see a slightly more positive skew for the distribution of both $MAE$ and $MSE$ for the Mat\'ern One Half model, again indicating that this model is more consistent in reconstruction that the Mat\'ern Three Halves model.
+Hence we conclude that the Mat\'ern One Half model constitutes our best in class on the test data set for scenario B. 
+
+We can see quite clearly that the PACE and CPACE framework of the PACE model are not flexible enough to help on unobserved functional data, from Table~\ref{tab:test_B}.
+As due to their White kernel they only propose the mean for all unobserved data.
+While this was advantageous in Scenario A, under spatial correlation between functional data this becomes a hindrance. 
+
+\begin{table}
+	\caption[Simulation results for Scenario B on test data]{Simulation results for the models ability to estimate the functional data at locations with no observation across the whole temporal domain. Bold indicates best in class.}
+	\centering
+	\label{tab:test_B}
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Model} & \textbf{MSE} & \textbf{MAE} \\
+		\midrule
+		\verb*|pace| & 4.1851 (0.7638) & 5.0613	(0.4810) \\
+		\verb*|fpca_gp| & 4.1851 (0.7638) & 5.0613 (0.4810) \\
+		\verb*|matern_one| & \textbf{0.5848	(0.0215)} & \textbf{1.8926	(0.0333)} \\
+		\verb*|matern_three| & 0.5967 (0.0212) & 1.9100	(0.0323) \\
+		\verb*|gibbs| & 0.7413 (0.0505) & 2.1187 (0.0666)\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Finally, to highlight the abilities of the CPACE models, we display an example prediction of a test data location in Figure~\ref{fig:test_ex_B}.
+Here we clearly see not only the reconstruction ability of the CPACE framework, but also tthe higher confidence in the reconstruction.
+This is applicable to both the Mat\'ern One Half and Mat\'ern Three Halves models.
+We can also see the advantage of the Mat\'ern One Half model, as although the confidence band is much narrower than the PACE model under the CPACE framework it isn't as narrow as the Mat\'ern Three Halves model.
+This is advantageous as can be see in Figure~\ref{fig:test_ex_B}, unfortunately the actual functional data sometimes falls outside the Mat\'ern Three Halves confidence band but still resides in the Mat\'ern One Half model.
+This can be seen as an indicative example only, but may suggest the Mat\'ern Three Halves model may be over confident in its predictions on the test data, which stems from the fact that the kernel itself is too smooth for the data generating procedure. 
+The Mat\'ern One Half model has no such issues.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{test_ex_B}
+	\caption{An indicative example of the CPACE model performance on reconstruction of functional data. Example is taken from a test data point, so no observations were observed at this spatial location. The confidence band correspond to a 95\% simultaneous confidence interval for the predicted location.}
+	\label{fig:test_ex_B}
+\end{figure}
+
+
+From the above we can see an distinct advantage for using the CPACE framework when there is indeed simple spatial dependence, however this is as expected, and has been discussed in work by \citeauthor{liu_functional_2017}, \citep{liu_functional_2017}.
+In the following sections we consider the more challenging case when the spatial dependence is more complex.
 
 \section{Scenario C - Complex Stationary Functional Data \label{sec:sim_C}}
 
+In this scenario we consider modelling simulations which are generated with a more challenging spatial dependence.
+In particular, in this scenario we generate functional data as mentioned in Section~\ref{ssec:dgp_sim} but this time we place different spatial kernels on each component of the model.
+We use the Mat\'ern Three Halves kernel for both components but choose a length scale of $3$ for the first component and a length scale parameter of $1.5$ for the second component.
+In essence, we are now considering the case where there are two distinct covariance structures between the spatial components of the models.
+Previous scenarios we had the same spatial covariance for both components.
+This scenario is designed as a test for the CPACE framework, to see if it can accommodate for this added complexity.
+Figure~\ref{fig:sim_example_C} highlights an example of a realisation of each of these covariance components. 
+This is intended to highlight the spatial dependency present in such a simulation from each of the components.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sim_ex_zeta_C}
+	\caption{An indicative example of a realisation from the component spatial kernels in scenario C.}
+	\label{fig:sim_example_C}
+\end{figure}
+
+As in previous scenarios we first consider the resultant metrics from the training data.
+The results are displayed in Table~\ref{tab:train_C}.
+As with the other scenarios, all models provided reasonable reconstruction on observed data.
+This includes the PACE framework.
+However, we can see a clear improvement in the metrics for the CPACE framework on the training data.
+This is indicative that the CPACE models, through using the learned spatial dependence, can use this extra information to gain an advantage in reconstruction the fuunctional data from points of observation.
+Again, as expected the model which performs best is the \verb*|matern_three| model.
+As it closely relates to the data generating process. 
+We can see this from Figure~\ref{fig:rho_1_param_C} and Figure~\ref{fig:rho_2_param_C}. 
+These highlight that the \verb*|matern_three| model captures, although not perfectly, the true length scale parameters of the data generating process.
+Similarly, the \verb*|matern_one| also captures the true length scale parameter, all be it with less certainty.
+This is another indication that the CPACE frame for learning hyper parameters of the spatial kernels works well. 
+This will be discussed further in Chapter~\ref{cha:implementation}.
+
+\begin{table}
+	\caption[Simulation results for Scenario C on observed data]{Simulation results for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
+	\centering
+	\label{tab:train_C}
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Model} & \textbf{MSE} & \textbf{MAE} \\
+		\midrule
+		\verb*|pace| & 0.0479 (0.0021)& 0.1733	(0.0038)\\
+		\verb*|fpca_gp| & 0.0479 (0.0022) & 0.1731	(0.0039) \\
+		\verb*|matern_one| & 0.0132	(0.0013) & 0.0909 (0.0044) \\
+		\verb*|matern_three| & \textbf{0.0085 (0.0009)} & \textbf{ 0.0730	(0.0038)} \\
+		\verb*|gibbs| & 0.0094	(0.0009) & 0.0767 (0.0036)\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{rho_1_param_C}
+		\caption{Estimated first kernel length scale parameter for the Mat\'ern models over the 50 simulations for scenario C. The true parameter is given by the vertical black line for indication.}
+		\label{fig:rho_1_param_C}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{rho_2_param_C}
+		\caption{Estimated second kernel length scale parameter for the Mat\'ern models over the 50 simulations for scenario C. The true parameter is given by the vertical black line for indication.}
+		\label{fig:rho_2_param_C}
+	\end{subfigure}
+\end{figure}
+
+We can see an indicative example for reconstruction of the data using the best in class \verb*|matern_three| model and the \verb*|fpca_gp| model in Figure~\ref{fig:sim_val_recon_C}.
+This highlights the difference, not only in accuracy in reconstruction, but also the improved confidence of estimation of the best in class model.
+We note that in area's far away (in the temporal domain) from observation, the \verb*|fpca_gp| model tends to revert to the mean function, and its confidence interval expands.
+Whereas the Mat\'ern Three Halves model can use information about observations from other spatial locations to improve its estimation for these areas.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sim_val_recon_C}
+	\caption{An indicative example of model reconstructions for functional data with observed values.}
+	\label{fig:sim_val_recon_C}
+\end{figure}
+
+Next we consider the models comparative ability for reconstruction of completely unobserved functional data.
+Table~\ref{tab:test_C} displays our models results on the test data set for scenario C.
+Here, we see similar results to the training metrics, where the CPACE framework out performs the PACE models.
+It is interesting to note here that the \verb*|gibbs| model outperforms the \verb*|matern_one|, although very slightly.
+It again suggest the CPACE framework is capable of flexibly estimating kernel hyper parameters, even when the parameter space is relatively large as in the case of the Gibbs kernel.
+We note that we have highlighted the \verb*|matern_three| as best in class due slightly larger positive skew in distribution of metrics over the test data set versus the \verb*|gibbs| model. 
+This is evidenced in Figure~\ref{fig:test_met_C}.
+
+\begin{table}
+	\caption[Simulation results for Scenario C on test data]{Simulation results for the models ability to estimate the functional data at locations with no observations across the whole temporal domain. Bold indicates best in class.}
+	\centering
+	\label{tab:test_C}
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Model} & \textbf{MSE} & \textbf{MAE} \\
+		\midrule
+		\verb*|pace| & 3.3175 (0.9034) & 4.5480	(0.6234) \\
+		\verb*|fpca_gp| & 3.3175 (0.9034) & 4.5480	(0.6234)  \\
+		\verb*|matern_one| & 0.1109	(0.0112) & 0.8343 (0.0410) \\
+		\verb*|matern_three| & \textbf{0.0957 (0.0104)} & \textbf{0.7745 (0.0412)} \\
+		\verb*|gibbs| & 0.1053 (0.0106) & 0.8117 (0.0400)\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{test_met_C}
+	\caption{Test metric distribution over $50$ simulations for the Mat\'ern Three Halves and Gibbs model.}
+	\label{fig:test_met_C}
+\end{figure}
+
+Finally we give an indicative example of reconstruction using the best in class model and the \verb*|fpca_gp| model to highlight the improvement in reconstruction. 
+This is given in Figure~\ref{fig:sim_test_recon_C}. 
+We can clearly see the ability of the CPACE framework here to utilise the spatial dependency between observations, not only in reconstruction accuracy but in confidence of prediction.
+As can be seen, the CPACE framework has allowed for models which can handle quite complex spatial models. 
+This has a real advantage in terms of both prediction accuracy and confidence in prediction on both unobserved locations and locations with observation points. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sim_test_recon_C}
+	\caption{An indicative example of model reconstructions for functional data with  no observations.}
+	\label{fig:sim_test_recon_C}
+\end{figure}
+
+In the final scenario we consider one further step of complexity.
+That is we examine the CPACE frameworks ability to handle data which is simulated with a non-stationary spatial dependency. 
+
 \section{Scenario D - Non-Stationary Functional Data \label{sec:sim_D}}
+In the final scenario of the simulation study, we consider the case of data being generated which has non-stationary spatial dependency.
+We do so by simulating data for this scenario, following the data generation procedure given in Section~\ref{ssec:dgp_sim}, and use a Gibbs kernel for each component.
+We choose our length scale models for the scenario so that we create a non stationary spatial dependence.
+In particular, we choose a two component Gibbs kernel to simulate from. 
+The length scale model for each components is given by:
+
+\begin{eqnarray}
+	l_1(s) &=& \frac{1}{1 + \exp(-s)} \nonumber \\
+	l_2(s) &=& \frac{1}{1 +  \exp(s)} \nonumber \\
+\end{eqnarray}
+where, as mentioned before, the Gibbs kernel is extended to multiple dimensions by applying the Gibbs kernel over each separate dimension of the domain $\mathcal{S}$. 
+An indicative example of the scores that are generated from these kernels is given in Figure~\ref{fig:sim_ex_zeta_D}. 
+As can be seen, the realised scores for each kernel have a similar structure, but are clearly non-stationary, with the corners of the domain having least structure while the middle of the domain has fairly strong structure.
+A corresponding example realisation from this scenario is displayed in Figure~\ref{fig:sim_example_D}.
+This highlights how the non-stationary score processes manifest itself in the scenario simulations.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sim_ex_zeta_D}
+	\caption{Realisation from score processes corresponding to scenario D.}
+	\label{fig:sim_ex_zeta_D}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sim_example_D}
+	\caption{Spatial view of a particular time point in $\mathcal{T}$ from a realisation from scenario D. This realisation corresponds to the example score realisation in Figure~\ref{fig:sim_ex_zeta_D}. The darker pixels correspond to the noisy observations, with the lighter pixels representing unobserved locations at this time point.}
+	\label{fig:sim_example_D}
+\end{figure}
+
+For the study itself, we first present the training metrics of our various prospective models. 
+This is displayed in Table~\ref{tab:train_D}.
+As we can see the best in class model on the training metric is the Mat\'ern One Half model. 
+However, all the models perform comparatively as well as each other.
+The Mat\'ern One Half model is chosen as best in class based on its overall performance.
+If we look at the distribution of the metrics over the $50$ simulations, Figure~\ref{fig:train_D_dist}, we see that it is on average the best performer. 
+However we can see the Gibbs model  does have the optimal performance, but also the largest range in performance over the simulations of both metrics.
+We can see that the PACE and White kernel models also perform well on the training metrics.
+We account for this as although the simulations has spatial dependency, some of this spatial dependency is quite weak.
+For example at the corners of the domain $\mathcal{S}$ and so a reasonable approximation to the data generating procedure at these locations would be the White kernel CPACE models.
 
 
+\begin{table}[b]
+	\caption[Simulation results for Scenario D on observed data]{Simulation results for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
+	\centering
+	\label{tab:train_D}
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Model} & \textbf{MSE} & \textbf{MAE} \\
+		\midrule
+		\verb*|pace| & 0.0503 (0.0017)& 0.1772 (0.0030)\\
+		\verb*|fpca_gp| & 0.0501 (0.0017) & 0.1768	(0.0029) \\
+		\verb*|matern_one| & \textbf{0.0447	(0.0015)} & \textbf{0.1667 (0.0027)} \\
+		\verb*|matern_three| & 0.0532 (0.0052)& 0.1802 (0.0077) \\
+		\verb*|gibbs| & 0.0542 (0.0079) & 0.1785 (0.0109)\\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{train_D_dist}
+	\caption{Distribution of metrics, $MAE$ and $MSE$ over the training data for each simulation in Scenario D.}
+	\label{fig:train_D_test}
+\end{figure}
 
+We now consider the resulting metrics on the test data set for scenario D.
+Table~\ref{tab:test_D} displays these.
+Here we can see that on the test data, the Gibbs model becomes the best in class.
+We can see that the models with spatial dependency have an advantage over those who do not, which is as expected.
+The Gibbs model seems to have captured that added complexity in this scenario, by allowing for a non-stationary structure. 
+This has given the model the edge in the ability to reconstruct unobserved data.
+However, it is worth noting that the Gibbs model has the largest variance in metric results of the models with a non-White kernel.
+This probably indicates that there is a possibility that using the more complex kernel in the CPACE framework means the estimation of hyper parameters may not always converge at the optimum values.
+This is a common situation for models where the parameter space is large and optimising for the optimal parameters may sometimes land in a local optimum rather than a global optimum. 
+This issue, and how we attempted to minimise this issue, is discussed in Chapter~\ref{cha:implementation}.
+
+\begin{table}[b]
+	\caption[Simulation results for Scenario D on observed data]{Simulation results for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
+	\centering
+	\label{tab:test_D}
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Model} & \textbf{MSE} & \textbf{MAE} \\
+		\midrule
+		\verb*|pace| & 4.9249 (0.4543)& 5.4494 (0.2338)\\
+		\verb*|fpca_gp| & 4.9249 (0.4543)& 5.4494 (0.2338)\\
+		\verb*|matern_one| & 2.4335	(0.1310) & 3.7206 (0.0901) \\
+		\verb*|matern_three| & 2.6123 (0.1446)& 3.8147 (0.0952) \\
+		\verb*|gibbs| & \textbf{2.0135 (0.2170)} & \textbf{3.3181 (0.1806)}\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{Summary\label{sec:sim_summ}}
+In this chapter we have considered a simulation study to assess the ability of the CPACE model in various conditions.
+Our primary aim was to compare the CPACE model, which introduces explicitly modelling spatial dependence between functional observations, with the standard PACE modelling.
+We consider four different scenarios with various levels of spatial dependence, to assess how the CPACE framework behaves.
+In each of these scenario we considered using 4 different models under the CPACE framework, each utilising a different assumed form of the score processes.
+We have seen, from scenario A results, that regardless of the assumed form of the score process, the CPACE framework can effectively mimic the PACE framework.
+This is achieved by learning hyper parameters for the score processes that cause these to mimic the White kernel. 
+Further, we have seen through scenario B and C that the CPACE model can accommodate stationary spatial dependence between functional observations.
+Here we saw that choosing the assumed score process as close to the data generating procedure is obviously the preferred choice, but using a score process which is flexible enough to accommodate  stationary spatial dependency will give similar results.
+Finally, we tested the CPACE model on data which has a complex non-stationary spatial dependency between functional observations.
+Here, on training data the assumed score process chosen seemed not to mater too much. 
+However, when looking at metrics on the test data we saw clearly that the models which assumed only a stationary score process were out performed by the Gibbs model.
+This underlines a common theme. That is, assuming a slightly more complex form of the score process under the CPACE framework tends to work better for test data reconstruction.
+This is because the CPACE framework allows nicely for tuning of hyper parameters so that complex forms can estimate simpler forms, however the reverse is not true. 
+For example, one cannot choose hyper parameters of the Mat\'ern Kernel such that it becomes non-stationary.
+Whereas we can make the Gibbs kernel stationary by assuming the length scale model is constant over the spatial domain. 
+
+We have highlighted the pros and cons of the CPACE model, and contrasted this with the ability of the PACE model on simulated data.
+We proceed to discuss the CPACE model on our real world data, the CESM-LE dataset (see Chapter~\ref{cha:data} for an in-depth description), in Chapter~\ref{cha:real_application}.
+We discuss the implementation of the CPACE model, which mainly revolves around the hyper parameter estimation of the assumed scores processes in Chapter~\ref{cha:implementation}.
 
 
 
