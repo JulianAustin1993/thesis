@@ -64,6 +64,7 @@ The first eigenfunction represent periodic variation at the start and end of the
 		\label{fig:sim_eig2}
 	\end{subfigure}
 	\caption{An example of the variation due to the two eigenfunctions from the mean function. We choose to highlight the variation with variance $4$ and $1$ respectively, as this is the kernel variance chosen for the simulation study. This choice is discussed below. Again we highlight example functional data generated from this setup in grey.}
+	\label{fig:sim_eig}
 \end{figure}
 
 We propose to simulate observations on the spatial domain of $\mathcal{S} = \left[-5, 5\right] \times \left[-5, 5\right] \subset \mathbb{R}^2$.
@@ -253,8 +254,6 @@ The way in which we do so will be discussed in greater detail in Section~\ref{se
 \end{figure}
 
 Now we discuss the specific results of using the various kernels in our simulation studies. 
-
-
 
 \section{Scenario A - Independent Functional Data \label{sec:sim_A}}
 Our first simulation scenario considers the basic case when there is no spatial dependence between functional data.
@@ -501,7 +500,7 @@ This is again showcasing the ability of the CPACE framework to tailor the hyper 
 In this case we have seen, from Figure~\ref{fig:rho_1_param_B}, that this corresponds to estimating the shorter length scale hyper parameter to compensate for the smoother kernel function.
 However, it doesn't quite compensate for having the correct kernel for the data generating procedure, which is why the Mat\'ern One Half kernel obtains the best metrics.
 As the standard deviation of the Mat\'ern One Half and Mat\'ern Three Halves metrics indicate that they may well infact be equally as powerful, we resort to the distribution of metric results to highlight why we highlight the Mat\'ern One Half model to be best in calss.
-Figure~\ref{fig:comp_test_B} highlights the distribution of metrics over the full 50 simulations bettwen these two models.
+Figure~\ref{fig:test_comp_B} highlights the distribution of metrics over the full 50 simulations between these two models.
 We can see a slightly more positive skew for the distribution of both $MAE$ and $MSE$ for the Mat\'ern One Half model, again indicating that this model is more consistent in reconstruction that the Mat\'ern Three Halves model.
 Hence we conclude that the Mat\'ern One Half model constitutes our best in class on the test data set for scenario B. 
 
