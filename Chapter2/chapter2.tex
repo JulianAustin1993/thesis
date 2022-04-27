@@ -30,9 +30,9 @@ The CESM-LE data set provides a good example of EO data that is discussed in Sec
  The model used to run the forty member ensemble is the Community Earth System Model version 1, \citep{hurrell_community_2013}, with the Community Atmosphere model version 5, \citep{hurrell_community_2013}, as the atmospheric component.
  The model is a fully coupled climate model which consists of a model for each of land, ocean, atmosphere and sea ice components of the climate.
  These are brought together with a coupler model.
- Figure~\ref{fig:cesm} provides a simple overview as to how CESM model couples the various components.
- Such a model is capable of simulating various Land, Ocean, Atmosphere and Sea Ice variables of the climate, such as the wind speed, temperature or pressure.
- The CESM-LE produces simulations of such variables on the nominal $1\deg$ horizontal separation across the globe which induces our spatial resolution of the data.
+ Figure~\ref{fig:cesm} provides a simple overview as to how the CESM model couples the various components.
+ This  model is capable of simulating various Land, Ocean, Atmosphere and Sea Ice variables of the climate, such as the wind speed, temperature or pressure.
+ The CESM-LE produces simulations of variables on the nominal $1\deg$ horizontal separation across the globe which induces our spatial resolution of the data.
  The ensemble produces variables at three different levels of temporal resolution between the years 1920 and 2100 for non-control simulations. The ensemble is able to produce variables at 6-hourly, daily, and monthly intervals. 
  
  \begin{figure}[htbp!] 
@@ -53,7 +53,7 @@ The CESM-LE data set provides a good example of EO data that is discussed in Sec
  The next preprocessing step we use is a temporal cut.
  We consider only the output of the CESM-LE which occurs between December 2020 and January 2026. 
  These time points were chosen such that the length of time gave reasonable ability to capture periodic elements but that the size of the data did not become too large.
- By using monthly frequency observations and this five year time horizon we have a sixty temporal observations for each spatial grid point and for each of our four variables considered. 
+ By using monthly frequency observations and this five year time horizon we have sixty temporal observations for each spatial grid point and for each of our four variables considered. 
  
  The final step in our preprocessing pipeline is to reduce the spatial dimension.
  To do this we resample the model simulations to a smaller spatial grid for each variable of interest.
@@ -89,7 +89,7 @@ The CESM-LE data set provides a good example of EO data that is discussed in Sec
  These make such a data set a credible EO data set to test our proposed CPACE model on. 
 
 \subsubsection{Precipitation \label{sssec:precip}}
-The total (vertically integrated) precipitable water component abbreviated as TMQ is an atmospheric component output of the CESM-LE, \citep{kay_community_2015}.
+The total (vertically integrated) precipitable water component, abbreviated as TMQ, is an atmospheric component output of the CESM-LE, \citep{kay_community_2015}.
 The variable is given units of $\si{\kilogram\per\metre\squared} $ and is available monthly on the full spatial grid.
 The monthly precipitation is calculated as the average over time from the  CESM-LE model six hourly output. 
 
@@ -102,7 +102,7 @@ This indicates that precipitation is much more correlated over lines of latitude
 This may be an indicator of spatial anisotropy in the generating process.
 There is also a case of observing more complex, possibly non stationary, spatial processes as the correlation structure seems different between say North America and Indonesia. 
 We can similarly observe clear temporal correlations in the precipitation variable of the CESM model.
-In particular, Figure~\ref{fig:precip_temp} shows the time series of two locations; the United Kingdom (UK) and Colombia.
+Figure~\ref{fig:precip_temp} shows the time series of two locations; the United Kingdom (UK) and Colombia.
 Each exhibit clear periodic signals as wet seasons and dry seasons repeat each year.
 However, we can see a clear level difference between the UK and Colombia precipitation as well as differences in the range of precipitation.
 This highlights the fact that not only do we have temporal correlation but this correlation is dependent on location. 
@@ -124,7 +124,7 @@ This highlights the fact that not only do we have temporal correlation but this 
 \end{figure}
 
 \subsubsection{Pressure \label{sssec:pressure}}
-The surface pressure variable abbreviated as PS is another atmospheric component output of the CESM-LE, \citep{kay_community_2015}.
+The surface pressure variable, abbreviated as PS, is another atmospheric component output of the CESM-LE, \citep{kay_community_2015}.
 The component is given in Pascals ($\si{\pascal}$) and represents the surface pressure at a height of $2\si{\meter}$. It is available monthly on the full spatial grid and the monthly average is calculated as the average over time from the CESM-LE model six hourly output.
 
 Figure~\ref{fig:pressure_overview} gives a brief insight to this variable. 
@@ -154,14 +154,14 @@ Again, similar to the precipitation variable discussed in Section~\ref{sssec:pre
 \end{figure}
 
 \subsubsection{Temperature \label{sssec:temp}}
-The temperature variable abbreviated to TREFHT is an atmospheric component output of the CESM-LE, \citep{kay_community_2015}.
+The temperature variable, abbreviated to TREFHT, is an atmospheric component output of the CESM-LE, \citep{kay_community_2015}.
 The variable refers to the average temperature in Kelvin ($\si{\kelvin}$) at the model reference height which is $2\si{\meter}$ above sea level.
 The average is available monthly with said average being calculated from the model six hourly output over the month.
 
-Quite clearly the temperature exhibits spatial correlation across the globe and periodic signals through time the seasons unfold.
+Quite clearly the temperature exhibits spatial correlation across the globe and periodic signals through time as the seasons unfold.
 Figures~\ref{fig:temp_june},~\ref{fig:temp_temp} highlight this for the spatial and temporal correlation respectively.
-Clearly the temperature at June increases as we move closer to the equator and decreases at the poles. 
-Similarly to the precipitation, we observe that the spatial correlation structure is clearly anisotropic. 
+Clearly the temperature in June increases as we move closer to the equator and decreases at the poles. 
+Similarly to the precipitation variable, we observe that the spatial correlation structure is clearly anisotropic. 
 Correlation is much more pronounced over longitude than latitude. 
 Looking more deeply at Figure~\ref{fig:temp_overview} we can observe more complex correlation structures, as mentioned in Section~\ref{sec:eo}. 
 For example, Asia exhibits a localised area of low temperature right next to an area of relatively high temperature. 
@@ -189,7 +189,7 @@ This is again similar to the precipitation variable discussed in Section~\ref{ss
 \end{figure}
 
 \subsubsection{Wind speed \label{sssec:wind}}
-The wind speed variable  abbreviated to U10 is another atmospheric component output of the CESM-LE model.
+The wind speed variable, abbreviated to U10, is another atmospheric component output of the CESM-LE model.
 The variable refers to the average wind speed in $\si{\meter\per\second}$ at a height of $10\si{\meter}$ above sea level.
 Again the variable is available on the full spatial grid and is available as a monthly average over time.
 
@@ -227,7 +227,8 @@ For each variable discussed in Section~\ref{ssec:variables} the CESM-LE data pro
 We have illustrated the spatial and temporal correlations in the four variables in the Figures~\ref{fig:precip_overview},~\ref{fig:pressure_overview},~\ref{fig:temp_overview}, and~\ref{fig:wind_overview} for a single simulation.
 However we also have variability between replications and it is useful to illustrate this as it may provide insight into where we may expect difficulty in modelling.
 It is important that any model developed for such data should be able to account for this variability in the data generating process.
-Figure~\ref{fig:std_overview} displays a snap shot of the standard deviation of the respective variables in June 2021.
+Figure~\ref{fig:std_overview} displays a snap shot of the standard deviation of the respective variables at all sites in June 2021.
+Here the standard deviation is with respect to the $40$ replications of the CESM-LE data.
 
 \begin{figure}[htbp!] 
 	\centering
@@ -260,7 +261,7 @@ Figure~\ref{fig:std_overview} gives an indication of how drastically each simula
 We would like to propose a model that can accommodate all the different scenarios presented in the various replications. 
 Thus our model must be able to adapt to the regions of high standard deviation. 
 From Figure~\ref{fig:std_precip_june} we can see that each simulation varies significantly in the tropics, but mostly around Indonesia.
-As such we might be particularly interested in our model performance in this area for the precipitation variable.
+As such, we might be particularly interested in our model performance in this area for the precipitation variable.
 For the pressure variable there is an increase in standard deviation for the poles and particularly to the south west of Antarctica, see Figure\ref{fig:std_pressure_june}.
 There is a similar result for the temperature variable in Figure~\ref{fig:std_temp_june}.
 Therefore we will be interested in model performance in this area for these variables.
@@ -300,7 +301,7 @@ Figure~\ref{fig:std_overview_temp} highlights this variation over the $40$ repli
 
 We can see clearly from Figure~\ref{fig:std_temp_temp} that the temperature variable function over time shows little variation between replications. 
 However, variability does tend to increase in the troughs of these functions. 
-Such a phenomena is more pronounced for the Colombia location. 
+This phenomena is more pronounced for the Colombia location. 
 It may be interesting to assess performance of proposed models of the temperature variable with regard to this.
 The precipitation functions vary differently for the Colombia and UK locations.
 From the UK time series we see that although variability is high we can observe a periodic signal. 
@@ -309,9 +310,3 @@ Pressure similarly exhibits very different function variability between location
 Again this indicates that there is a clear spatial component to the process driving such replications. 
 
 The above illustration of variability in replications gives an indication about the difficulties that any model must overcome to describe such variables and gives testament to the use of such a data set to test our proposed model for EO data.
-
-
-
-
-
-

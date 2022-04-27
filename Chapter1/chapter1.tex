@@ -74,7 +74,7 @@ Understanding such a complex process motivates a model which must take into acco
 The CESM data is generated through simulations of a complex model of the Earth (see Section~\ref{sec:cesmle} for more detail).
 However, EO data is also becoming more frequently generated through remote sensing.
 Remote sensing is the monitoring of a physical characteristic of an area through measuring its reflected and emitted radiation at a distance. 
-Space borne remote sensing, typically achieved through the use of satellite based sensors, is becoming more prominent as a source of EO data and in particularly as a source of climatology data.
+Space borne remote sensing, typically achieved through the use of satellite based sensors, is becoming more prominent as a source of EO data and in particular as a source of climatology data.
 The three studies above, \citep{muro_short-term_2016, raspini_continuous_2018, khabbazan_crop_2019}, use space borne remote sensing to observe their process of interest. 
 This is largely due to the increase in satellites launched which have been designed to capture various processes of the earth.
 Figure~\ref{fig:sar_timeline} highlights the rise in availability of a single type of remote sensing satellite.
@@ -139,7 +139,7 @@ In Section~\ref{sec:fr} we make concrete our definition of functional data.
 
 \section{Functional Representation \label{sec:fr}}
 As mentioned in Section~\ref{sec:eo} EO data can be viewed as a collection of functional data.
-However there is a choice about how we interpret observations in this conversion.
+However, there is a choice about how we interpret observations in this conversion.
 We may consider the data as a collection of functional observations with time being our functional dimension and space our collection dimension.
 For example, we may consider each spatial location from Figure~\ref{fig:cesm_example} giving rise to a trajectory over time of which we have only observed 12 time points.
 Or we may consider the functional observations having a spatial domain and the collection dimension being time.
@@ -157,7 +157,7 @@ That is we consider the data as an observation from the continuous random proces
 We therefore propose as in \citep{ferraty_nonparametric_2006} and \citep{shi_gaussian_2011} the following definition of a \textit{functional variable}.
 
  \begin{definition}[Functional Variable]
-	A random variable $\mathcal{X}$ is called a functional variable if it takes values in an infinite dimensional space (or functional space). An observation $\chi$ of $\mathcal{X}$ is called a functional data.
+	A random variable $\mathcal{X}$ is called a functional variable if it takes values in an infinite dimensional space (or functional space). Observations $\chi$ of $\mathcal{X}$ are called a functional data.
 	\label{def:functional_variable}
 \end{definition}
 
@@ -207,9 +207,9 @@ In the statistical literature spatial and spatio-temporal models have been extre
 In the following we briefly review some of the most commonly observed spatial and spatio-temporal statistical models in the multivariate analysis literature. 
 
 The monograph of \cite{cressie_statistics_2010} and references within provide a succinct summary of traditional methodologies in spatial statistics; many of which are applicable to EO data.
-Generally speaking, spatial data can be split into one of three categories; geo-statistical, area and point process data, \citep{cressie_statistics_2010}.
+Generally speaking, spatial data can be split into one of three categories; geo-statistical, area, and point process data, \citep{cressie_statistics_2010}.
 In this work the EO data described in Section~\ref{sec:eo}  are most suitably modelled using geo-statistical models.
-The canonical model used in geo-statistical setting is the Kriging model.
+The canonical model used in geo-statistical settings is the Kriging model.
 The Kriging model is well described in \cite{stein_interpolation_1999}.
 Such models treat spatial data as samples from a random spatial process and that predictions for unknown values can be calculated from a weighted combination of known values in a neighbourhood of our unknown location utilising the correlation among neighbouring points.
 A prime example of the spatial Kriging model in use for EO data is given in \cite{rossi_kriging_1994}.
@@ -238,13 +238,13 @@ Spatio-temporal Kriging models are well suited to EO data; however these models 
 As such, one particular direction spatio-temporal modelling has considered is the creation of spatio-temporal covariance functions.
 Spatio-temporal covariance functions are discussed in \citep{cressie_statistics_2011}.
 Separability between spatial and temporal correlations is often a key assumption in some methods due to the reduction in computational complexity they provide.
-Separability assumption proposes that a space-time covariance function $k(\ve{s}, t, \ve{s}^\prime, t^\prime)$ can be factored into two separate covariance functions $k_{s}(\ve{s}, \ve{s}^\prime)$ and $k_t(t, t^\prime)$, one for the spatial and temporal dimensions. 
+The separability assumption proposes that a space-time covariance function $k(\ve{s}, t, \ve{s}^\prime, t^\prime)$ can be factored into two separate covariance functions $k_{s}(\ve{s}, \ve{s}^\prime)$ and $k_t(t, t^\prime)$, one for each of the spatial and temporal dimensions. 
 In particular for EO data, \cite{george_selecting_2015} consider the selection of separable covariances and \cite{deb_spatio-temporal_2017} consider such models for air pollution data. 
-However, the separability assumption may be to restrictive for capturing complex spatio-temporal processes, \citep{cressie_statistics_2011}. 
+However, the separability assumption may be too restrictive for capturing complex spatio-temporal processes, \citep{cressie_statistics_2011}. 
 As such \citep{mitchell_likelihood_2006, fuentes_testing_2006, aston_tests_2017} considers tests for when the separability assumptions hold.
 The work in \citep{cressie_classes_1999, gneiting_nonseparable_2002, iaco_nonseparable_2002} consider the construction of non separable covariance functions for when separability doesn't hold for use in spatio-temporal models.
 
-\section{\label{sec:summary_research}Summary Of Research}
+\section{\label{sec:summary_research}Summary of Research}
 The motivation of this work is to provide a model designed for EO data which provides an explanation of both the spatial and temporal process in a parsimonious way.
 We present a novel method named Correlated Principal Analysis through Conditional Expectation (CPACE), that is designed for modelling EO data.
 The model builds upon existing FDA techniques to extend modelling from independently observed functional data to functional data which exhibits spatial correlation.
@@ -252,20 +252,20 @@ The emphasis in this work is to utilise the FDA paradigm over the temporal domai
 Such a decomposition gives a parsimonious description of the data with respect to its temporal domain by describing its principal modes of variation.
 We then estimate a spatial correlation structure for each component using well known spatial statistical methods.
 The combination of the resulting estimated spatial covariance structures with the principal directions aims to capture the majority of temporal and spatial dependency observed in the data.
-We can then utilise the CPACE model to help predict response at unseen spatial and temporal locations, which is an area of keen interest in EO studies.
+We can then utilise the CPACE model to help predict responses at unseen spatial and temporal locations, which is an area of keen interest in EO studies.
 We assess our model using various simulated data both with known correct data generating distribution and to simulations drawn from an incorrect data generating procedure.
 We apply our CPACE model to selected atmospheric variables from the CESM data set as an example application of the model to EO data.
 
-In particular the work is structured as follows.
+The work is structured as follows.
 In Chapter~\ref{cha:data} we describe our example data sets which we use to illustrate the performance of the model.
-In Chapter\ref{cha:background} we present the methodologies underpinning the CPACE models, these are typically well known FDA and spatio-temporal statistical methods.
+In Chapter~\ref{cha:background} we present the methodologies underpinning the CPACE models, these are typically well known FDA and spatio-temporal statistical methods.
 We also present the smoothing methodologies used to estimate the mean and covariance surfaces of our random functional variables.
 In Chapter~\ref{cha:ftsm} we present an interim model built on the combination of two well known existing methodologies in the FDA literature with a focus on application to an EO data set.
-Such a model proposes an novel approach to modelling EO data but helps to highlight the need of including both spatial and temporal effects in modelling such data.
+Such a model proposes an novel approach to modelling EO data and helps to highlight the need of including both spatial and temporal effects in modelling such data.
 In addition, the proposed model in Chapter~\ref{cha:ftsm} gives an opportunity to explore EO data where the functional domain is space rather than time.
 We present the benefits and limitations of such an approach in practice in this chapter.
 In Chapter~\ref{cha:cpace} we introduce the main contribution of this work; which is the CPACE model for correlated functional data.
-We describe the model in detail as well as providing asymptotic results for the model.
+We describe the model in detail as well as providing asymptotic results.
 In Chapter~\ref{cha:application} we apply the CPACE model to simulated data and in Chapter~\ref{cha:real_application} to real world data sets.
 Simulation results are presented with comparisons to various existing models with a focus on comparative ability to recover known data generating parameters.
 Applied results to real world data sets are included with comparisons to existing techniques with a focus on interpolation and forecasting abilities of the model.
