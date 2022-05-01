@@ -17,7 +17,7 @@
 In the following chapter we consider the various statistical methodologies  upon which we build our CPACE model.
 This chapter is structured as follows.
 First we focus on common FDA techniques applicable to EO data.
-We follow this by discussing smoothing methodologies which are use in the FDA techniques. 
+We follow this by discussing smoothing methodologies which are of use in the FDA techniques. 
 Finally we discuss Gaussian processes that are used in the CPACE framework to model correlation. 
 
 \section{Functional Principal Components Analysis \label{sec:fpca}}
@@ -32,6 +32,12 @@ Such a representation is now known as the Karhunen-Lo\`{e}ve theorem after its d
 
 \subsection{Formulation}
 The formulation of FPCA begins by assuming that $\mathcal{X}(t)$, $t \in \mathcal{T}$ is a square integrable stochastic process over some domain $\mathcal{T}$.
+By square integrable we formally mean that:
+
+\begin{equation}
+	\mathcal{X} \text{is square integrable} \iff \int_{\mathcal{T}} \lvert \mathcal{X}(t) \rvert^2 dt < \infty
+\end{equation}
+
 Let the mean and the covariance of the stochastic process $\mathcal{X}$ be denoted by $\mu(t)$ and $G\left(s, t\right)$ respectively, where:
 \begin{align}
 	\mu(t) &= \E \left(\mathcal{X}(t)\right) \label{eqn:mean_fn}\\
@@ -43,6 +49,7 @@ Associated with the covariance surface $G\left(s, t\right)$ we have the linear o
 	T_G &: L^2\left(\mathcal{T}\right) \to L^2\left(\mathcal{T}\right) \\
 	T_G&:  f \mapsto T_G f = \int_{\mathcal{T}} G\left(s, \cdot \right) f(s) ds \label{eqn:t_op}
 \end{align}
+where $ L^2\left(\mathcal{T}\right)$ is the set of all square integrable functions over our domain $\mathcal{T}$. 
 
 As $T_G$ is a linear operator we can consider its eigenvalues and eigenfunctions which we will denote by $\lambda_k$ and $\phi_k$ respectively (following convention set out in \citep{yao_functional_2005}) for $k=1,2,\cdots$.
 These are defined as the solutions to the Fredholm integral equations of the second kind, \citep{yao_functional_2005}: 
@@ -63,7 +70,7 @@ The principal components are given by the following:
 	\xi_k= \langle \mathcal{X} - \mu, \phi_k \rangle 
 \end{equation}
 
-Further to this decomposition the Karhunen-Lo\`{e}ve theorem means we have that the principal components are independent from each other, centred, and have variance equal to their associated eigenvalue, \citep{karhunen_zur_1946, loeve_fonctions_1946}.
+Further to this decomposition the Karhunen-Lo\`{e}ve theorem means that the principal components are independent from each other, centred, and have variance equal to their associated eigenvalue, \citep{karhunen_zur_1946, loeve_fonctions_1946}.
 That is:
 \begin{align}
 	\E\left(\xi_k\right) &= 0 \\
@@ -81,7 +88,7 @@ The first eigenfunction $\phi_1(t)$ encapsulates the dominant mode of variation 
 Similarly, the $k^\text{th}$ eigenfunction is the dominant mode of variation which is orthogonal to the preceding $k-1$ components.
 Therefore exploring the first few eigenfunctions often gives a parsimonious way to view the variation in the data.
 Alike multivariate PCA, it is often that the structure of the eigenfunctions replicates some observed physical process.
-As such the FPCA decomposition is often used widely as a tool for data exploration. 
+As such, the FPCA decomposition is often used widely as a tool for data exploration. 
 
 In addition to this, we can use the fact that subsequent eigenfunctions capture less and less variation of the data as a form of dimensionality reduction, like PCA, \citep{wold_principal_1987}.
 In this sense we can consider truncating the full representation given in Equation~\eqref{eqn:fpca} to the $K$ leading eigenfunctions which gives an approximation to the full process which we will denote by $\mathcal{X}^K(t)$ where:
@@ -93,8 +100,8 @@ The approximation of $\mathcal{X}$ by $\mathcal{X}^K$ converges as:
 	\E \left( \langle  \mathcal{X} - \mathcal{X}^K, \mathcal{X} - \mathcal{X}^K \rangle \right)  =   \sum_{k > K}^{\infty} \lambda_k \to 0~\text{as}~K \to \infty
 \end{equation}
 
-As such using the leading principal components for reconstruction has the effect of capturing the main modes of variation of the data and ignoring smaller modes of variation.
-Choosing the number of principal components is then up to the practitioner as in multivariate PCA, \citep{wold_principal_1987}.
+Using the leading principal components for reconstruction has the effect of capturing the main modes of variation of the data and ignoring smaller modes of variation.
+Choosing the number of principal components is then up to the practitioner; as in multivariate PCA, \citep{wold_principal_1987}.
  \citeauthor{ramsay_functional_2010} discuss in length the comparison of PCA to FPCA including commentary on the optimal choice of the number of principal components, \cite[Chapter~8]{ramsay_functional_2010}.
  The practical implementation of FPCA then involves estimating various components.
  In particular estimation of;  the mean function $\mu(t)$, the covariance surface $G\left(s,t \right)$, the $K$ eigenfunctions and eigenvalues $\phi_k(t)$, $\lambda_k$ respectively, and the principal components $\xi_k$ for each realisation of the process $\mathcal{X}$ we observe.
@@ -102,18 +109,20 @@ Choosing the number of principal components is then up to the practitioner as in
 \section{Principal Analysis Through Conditional Expectation \label{sec:pace}}
 We will assume for now that we have a sufficient method for estimating the mean  and covariance surfaces which we will denote by $\hat{\mu}(t)$ and $\hat{G}\left(s, t \right)$ respectively.
 We discuss in more detail the estimation of these components in Section~\ref{sec:splines}.
-Prior to the introduction of the Principal Analysis through Conditional Expectation (PACE) methodology in \citep{yao_functional_2005} FPCA decomposition was restricted due to the need for approximating the integrals in Equations~\eqref{eqn:principal_comp}.
-As such it was often a requirement that the functional data were observed on a dense regular grid which meant that the principal components could be reliably estimated though some numerical integration scheme, \citep[Chapter~8]{ramsay_functional_2010}.
-This very much restricted the application of the FPCA technique, however \citeauthor{yao_functional_2005} introduced the PACE method for overcoming such an obstacle using conditional expectations for sparsely observed functional data, \citep{yao_functional_2005}.
+Prior to the introduction of the Principal Analysis through Conditional Expectation (PACE) methodology in \citep{yao_functional_2005} FPCA decomposition was restricted due to the need for approximating the integrals in Equation~\eqref{eqn:principal_comp}.
+As such, it was often a requirement that the functional data were observed on a dense regular grid which meant that the principal components could be reliably estimated though some numerical integration scheme, \citep[Chapter~8]{ramsay_functional_2010}.
+This very much restricted the application of the FPCA technique.
+However \citeauthor{yao_functional_2005} introduced the PACE method for overcoming such an obstacle using conditional expectations for sparsely observed functional data, \citep{yao_functional_2005}.
 At the same time the technique of \citep{yao_functional_2005} accommodates for observation error. 
 
 Traditionally Equation~\eqref{eqn:principal_comp}, used for estimating the principal component scores for the $i^\text{th}$ realisation, is approximated through sums.
 Substituting $y_{ij}$ for $\mathcal{X}(t_{ij})$, $\hat{\mu}(t_{ij})$ for $\mu(t_{ij})$, and $\hat{\phi}_k(t_{ij})$ for  $\phi_k(t_{ij})$ we obtain the estimate $\xi_i^{S} = \sum_1^{J_i}\left(y_{ij} - \hat{\mu}(t_{ij})\right)\hat{\phi}_k(t_{ij})\left(t_{ij} - t_{i(j-1)}\right)$, \citep{yao_functional_2005}, where $y_{ij}$ is as described in Equation~\eqref{eqn:fd_temporal} and setting $t_{i0}=0$.
-However such an estimate breaks for the case that observations are sparse. Similarly such an approximation will be biased when the error processes from Equation~\eqref{eqn:fd_temporal}, $\varepsilon_{ij}$, is non-zero.
+However, such an estimate breaks for the case that observations are sparse.
+Similarly this approximation will be biased when the error processes from Equation~\eqref{eqn:fd_temporal}, $\varepsilon_{ij}$, is non-zero.
 \citeauthor{yao_functional_2005} overcome this by first assuming that the model is as follows, \citep{yao_functional_2005}:
 
 \begin{align}
-	y_{ij} &= \chi_{i} + \varepsilon_{ij} \\
+	y_{ij} &= \chi_{i}(t_{ij}) + \varepsilon_{ij} \\
 	&= \mu(t_{ij}) + \sum_{k=1}^{\infty} \xi_{ik} \phi_k(t_{ij}) + \varepsilon_{ij} \label{eqn:fd_temporal_fpca}
 \end{align}
 with $\varepsilon_{ij}$ being jointly Gaussian with $\xi_{ik}$.
@@ -160,15 +169,16 @@ We discuss a particular method for estimating such surfaces in Section~\ref{sec:
  Typically, as described in Section~\ref{sec:fr}, data is only observed discretely.
  Therefore with most FDA methodology there must be a conversion from discretely observed data and the continuous functional variable that generates it.
  This is particularly the case for our EO data since we have discrete observations specified by our data model given in Equation~\eqref{eqn:observed_data} which we assume is generated by observations of continuous functions given by our models in Equation~\eqref{eqn:fd_temporal}.
- As such many models for obtaining such a smooth of the data have been studied, such as kernel smoothing, polynomial regression, and local linear smoothing, \citep[Chapter~4]{ramsay_functional_2010}. 
+ Many models for obtaining a smooth of the data have been studied, such as kernel smoothing, polynomial regression, and local linear smoothing, \citep[Chapter~4]{ramsay_functional_2010}. 
  In this section we consider the well studied technique of obtaining smooths of discrete data through penalised regression splines, \citep{ruppert_semiparametric_2003}.
  We will use such a method to estimate the mean and covariance surfaces present in the PACE methodology as described in Section~\ref{sec:pace}. 
- We first describe the components that form the foundations of a regression spline, the spline basis.
+ We first describe the components that form the foundations of a regression spline; the spline basis.
  
  \subsection{Basis splines  \label{ssec:basis_splines}}
  One of the components of a penalised regression splines is the basis functions used in the regression.
  As the name suggests regression splines uses spline functions as the regression basis.
- A spline function of order $d$,  which is well documented in the monograph of \citeauthor{de_boor_practical_2001}, is a piecewise polynomial function of degree $d-1$, \cite{de_boor_practical_2001}. In the case of a spline function of order $d$, $S: \mathcal{T} \to \mathbb{R}$, over a univariate domain $\mathcal{T} = \left[a, b\right] \subset \mathbb{R}$ we have: 
+ A spline function of order $d$,  which is well documented in the monograph of \citeauthor{de_boor_practical_2001}, is a piecewise polynomial function of degree $d-1$, \cite{de_boor_practical_2001}.
+ In the case of a spline function of order $d$ over a univariate domain $\mathcal{T} = \left[a, b\right] \subset \mathbb{R}$, which we denote by $S: \mathcal{T} \to \mathbb{R}$,  we have: 
  \begin{equation}
  	S: t \mapsto S(t) = \begin{cases}
  		P_0(t)~\text{if}~ \tau_0 < t  \leq \tau_1,\\
@@ -220,10 +230,10 @@ As discussed in Section~\ref{sec:pace} the PACE methodology requires estimation 
 Estimating such functions is a problem due to their infinite dimensional nature.
 A well studied and effective method for representing such functions is the use of a basis function expansion,  \cite{ramsay_functional_2010}.
 That is representing the target surface using a linear combination of known basis functions.
-In this work we will utilise the B-spline basis function as discussed in Section~\ref{ssec:basis_splines}.
+In this work we will utilise the B-spline basis function; as discussed in Section~\ref{ssec:basis_splines}.
 The B-spline system is exceptionally popular due to its ease of computation and ability to reconstruct many surfaces, \citep{de_boor_practical_2001}.
 Such ease of computation makes it feasible to not only create large basis systems but also alleviates many fitting procedures as we can re-evaluate the basis system at various points with ease.
-Such properties are very useful when using such a basis for regression models. 
+These properties are very useful when using such a basis for regression models. 
 Other common basis systems include the Fourier, Monomial, and Polynomial basis systems.
 See \citep{ramsay_functional_2010} for details of these basis systems in the functional framework.
 In the following we present the approach for estimating an arbitrary realisation of our functional random variable $\chi_i(t)$ over domain $\mathcal{T}$ and discuss how we extend the same concept to a two dimensional surface over $\mathcal{T} \times \mathcal{T}$.
@@ -234,11 +244,11 @@ We assume that our function  can be represented using an order $d$ B-spline basi
 	\chi_i(t) &= \sum_{q=1}^Q c_q B_{d, q}^{\ve{\tau}}(t) \\
 	&= \vesup{c}{\transpose} \vess{B}{d}{\ve{\tau}}(t) \label{eqn:basis_expansion}\\
 \end{align}
-where $\ve{c}=\left( c_1,\cdots, c_K \right)^\transpose$, $\vess{B}{d}{\ve{\tau}}(t) = \transpose{\left( B_{d, 1}^{\ve{\tau}}(t), B_{d, 2}^{\ve{\tau}}(t), \cdots, B_{d, Q}^{\ve{\tau}}(t) \right)}$, and $Q$ is the dimension of the expansion.
+where $\ve{c}=\left( c_1,\cdots, c_Q \right)^\transpose$, $\vess{B}{d}{\ve{\tau}}(t) = \left( B_{d, 1}^{\ve{\tau}}(t), B_{d, 2}^{\ve{\tau}}(t), \cdots, B_{d, Q}^{\ve{\tau}}(t) \right)$, and $Q$ is the dimension of the expansion.
 If such basis functions have nice properties like being easy to compute then such a representation for $\chi_i$ given by Equation~\eqref{eqn:basis_expansion} can be extremely useful since most problems can be reduced to involving only the finite dimensional vector $\ve{c} \in \mathbb{R}^Q$. 
 
-Our representation of $\chi_i$ using a basis system then becomes the problem of choosing the coefficients $\vesup{c}{\transpose}$ using only our set of observations of $\vesub{Y}{i}$ which are observed with error.
-The most common method for fitting a basis system to discretely observed data is by choosing the coefficients of the expansion $c_q$ given in Equation~\ref{eqn:basis_expansion} by minimising the criterion, \cite{bjorck_numerical_1996}:
+Our representation of $\chi_i$ using a basis system then becomes the problem of choosing the coefficients $\ve{c}$ using only our set of observations of $\vesub{Y}{i}$ which are observed with error.
+The most common method for fitting a basis system to discretely observed data is by choosing the coefficients of the expansion, $c_q$, given in Equation~\eqref{eqn:basis_expansion} by minimising the criterion, \cite{bjorck_numerical_1996}:
 \begin{equation}
 	\text{SSE}_{\vesub{Y}{i}}\left( \ve{c}\right) = \lVert \vesub{Y}{i} - \ve{B}\ve{c} \rVert^2
 	\label{eqn:sse}
@@ -249,11 +259,12 @@ where $\ve{B} = \left( \vess{B}{d}{\ve{\tau}}(t_{i1}),\vess{B}{d}{\ve{\tau}}(t_{
 	\label{eqn:hatc}
 \end{equation}
 
-The simple least squares approximation is a well studied and standard approach. See \citep{bjorck_numerical_1996} for a through introduction to the concept. 
+The simple least squares approximation is a well studied and standard approach.
+See \citep{bjorck_numerical_1996} for a thorough introduction to the concept. 
 Such a methodology is often suitable for situations where our error process $\varepsilon(t)$ is a white noise process.
-Such a process for the noise is often unrealistic; as such a simple adjustment to the least squares criterion in Equation~\ref{eqn:sse} can be used to allow for correlation among the observation errors: 
+This process for the noise is often unrealistic; as such a simple adjustment to the least squares criterion in Equation~\eqref{eqn:sse} can be used to allow for correlation among the observation errors: 
 \begin{equation}
-	\text{SSE}_{\vesub{Y}{i}, \ve{W}}(\ve{c}) = \lVert \ve{W}^\frac{1}{2}\left( \vesub{Y}{i} - \ve{B}\vesup{c}{\transpose} \right) \rVert^2
+	\text{SSE}_{\vesub{Y}{i}, \ve{W}}(\ve{c}) = \lVert \ve{W}^\frac{1}{2}\left( \vesub{Y}{i} - \ve{B}\ve{c} \right) \rVert^2
 	\label{eqn:wsse}
 \end{equation}
 where $\ve{W}$ is a weighting matrix for the observations. Ideally the matrix will be the inverse of the variance-covariance matrix of the observations. Minimising the adjusted criterion is given by, \cite{bjorck_numerical_1996}:
@@ -261,14 +272,14 @@ where $\ve{W}$ is a weighting matrix for the observations. Ideally the matrix wi
 	\hat{\ve{c}} = \left( \vesup{B}{\transpose} \ve{W} \ve{B} \right)^{-1}\vesup{B}{\transpose} \ve{W} \vesub{Y}{i}
 	\label{eqn:whatc}
 \end{equation}
-The estimate with least squares fitting can then be found by substituting $\hat{\ve{c}}$ for the $\ve{c}$ in Equation~\ref{eqn:basis_expansion}, \citep{bjorck_numerical_1996}. That is:
+The estimate with least squares fitting can then be found by substituting $\hat{\ve{c}}$ for the $\ve{c}$ in Equation~\eqref{eqn:basis_expansion}, \citep{bjorck_numerical_1996}. That is:
 \begin{equation}\label{eqn;hat_basis_expansion}
 	\hat{\chi}_i(t) = \vesup{\hat{c}}{\transpose} \vess{B}{d}{\ve{\tau}}(t)
 \end{equation}
 The selection of the knot vector is well studied and the classical choice is to choose a knot vector where knots are located at the sampling points, \citep{de_boor_practical_2001}. 
 
 An issue with the classical least squares fitting using a basis system expansion is the choice of number of basis functions, \cite{ramsay_functional_2010}.
-We are constrained to choose $Q$ to be less than or equal to the number of observations, $J_i$. This is because more than $J_i$ basis functions would results in Equation~\ref{eqn:whatc} being ill defined since the matrix $\ve{B}$ would have linearly dependent columns.
+We are constrained to choose $Q$ to be less than or equal to the number of observations, $J_i$. This is because more than $J_i$ basis functions would results in Equation~\eqref{eqn:whatc} being ill defined since the matrix $\ve{B}$ would have linearly dependent columns.
 However, we still have the choice to choose $Q$ between $1$ and $J_i$.
 Exactly which value for $Q$ to choose is unknown and results in bias - variance trade off in the estimator, \citep{ramsay_functional_2010}.
 A large number of basis functions reduces bias in the estimator $\hat{\chi}_i(t)$, but the variance of this estimator may be unacceptably high.
@@ -298,17 +309,18 @@ Analytically minimising the $\text{PSSE}$ criterion in Equation~\eqref{eqn:plss}
 	\label{eqn:phatc}
 \end{equation}
 
-Essentially such a penalisation term determines that there should be a trade off between the bias which corresponds to the first term in Equation~\eqref{eqn:plss} and the variance which is the second term.
+Essentially, such a penalisation term determines that there should be a trade off between the bias which corresponds to the first term in Equation~\eqref{eqn:plss} and the variance which is the second term.
 This trade off is controlled by the regularisation parameter $\omega$.
 The advantage of this method is that we can now let $Q$, our number of basis functions, be large without worrying of over fitting as the penalty term in Equation~\eqref{eqn:plss} will penalise functions with high variability in terms of the differential operator $L$.
 
-The choice of differential operator is a well studied problem also. A common choice is the first or second order differential, denoted by  $D^1$ and  $D^2$ respectively, as this specifies a reasonable level of smoothness in the target function, \cite{ruppert_semiparametric_2003}. However, often more complex terms are used to facilitate known properties of the target functions, such a letting $L$ be the harmonic acceleration operator which forces a periodic form of the target functions.
+The choice of differential operator is a well studied problem also. A common choice is the first or second order differential, denoted by  $D^1$ and  $D^2$ respectively, as this specifies a reasonable level of smoothness in the target function, \cite{ruppert_semiparametric_2003}.
+However, often more complex terms are used to facilitate known properties of the target functions, such as letting $L$ be the harmonic acceleration operator which forces a periodic form of the target functions.
 More care must be taken when extending the linear differential operator to higher dimensions which is discussed below.
 Additionally, in the case of B-spline basis system these penalty matrices are typically evaluated using a form of numerical integration, \cite{ramsay_functional_2010}.
 
 Penalised regression splines moves our problem of selecting $Q$ to choosing our regularisation parameter, $\omega$.
 Such a parameter influences the strictness with which we expect our target function to be smooth as defined by the operator $L$.
-Choosing such a parameter is a problem that is present not only in spline smoothing but other penalised regression approaches, \citep{lukas_robust_2006}.
+Choosing this parameter is a problem that is present not only in spline smoothing but other penalised regression approaches, \citep{lukas_robust_2006}.
 A popular method for choosing such a parameter is Generalised Cross Validation (GCV).
 GCV, introduced by \citeauthor{wahba_practical_1977} in \citep{wahba_practical_1977}, is a well studied method which has good asymptotic properties as the number of observations tends to infinity, \citep{wahba_spline_1990, wahba_comparison_1985}.
 GCV chooses $\omega$ as the minimiser of the GCV criterion $V(\omega)$ which is given by, \citep{wahba_spline_1990}:
@@ -336,8 +348,8 @@ However for multiple dimensions, particularly the case when we wish to smooth th
 \subsubsection{Extension to higher dimensions \label{sssec:spline_ext}}
 There are two issues when extending the penalised regression spline to higher dimensions; extending the basis system and extending the penalty specification.
 To alleviate the first we must specify a basis system which can cover multiple dimensions. In fact there are many such systems, \citep{wahba_spline_1990}.
-One such popular approach when we have regular data for FDA is using a tensor product B-spline system, \citep{xiao_asymptotic_2020}.
-We describe the extension to two dimensional surface, but the same extension will work for higher dimensional surfaces.
+One popular approach when we have regular data for FDA is using a tensor product B-spline system, \citep{xiao_asymptotic_2020}.
+We describe the extension to two dimensional surfaces, but the same extension will work for higher dimensional surfaces.
 Consider a two dimensional surface, $\sigma \left(s, t\right)$, which we represent by the tensor product spline given by, \citep{xiao_asymptotic_2020}:
 \begin{equation}\label{eqn:tensor_expansion}
 	\sigma \left(s,t\right) = \sum_{1 \le q_1, q_2 \le \bar{Q}} c_{q_1, q_2} \vess{B}{d_1}{\vesub{\tau}{1}}(s)\vess{B}{d_2}{\vesub{\tau}{2}}(t)
@@ -355,7 +367,7 @@ where $ \ve{\bar{B}}\left(s, t\right) = \vess{B}{d_2}{\vesub{\tau}{2}}(t) \otime
 The same methods now follow as in the non penalised univariate case with this Kronecker basis system, \citep{xiao_asymptotic_2020}.
 However, we must still adjust the penalty matrix in Equation~\eqref{eqn:phatc} to account for smoothness across multiple dimensions. 
 
-Using the tensor product basis system as described above one might consider specifying the smoothness of the function in each dimension.
+Using the tensor product basis system as described above; one might consider specifying the smoothness of the function in each dimension.
 Indeed, one such approach to extending the penalty specification which was introduced by \citeauthor{wood_low-rank_2006} is to consider setting penalties on the marginal basis separately and to combine them by a weighted sum, \cite{wood_low-rank_2006}.
 Such an approach known as tensor product penalties is well studied in the linear generalised additive model setting, \cite{wood_generalized_2006}. 
 A two dimensional penalty matrix $\bar{\ve{P}}$ may be described as follows: 
@@ -373,7 +385,7 @@ The discrete observations for the covariance surface to be smoothed are gathered
 \citeauthor{xiao_asymptotic_2020} provides asymptotic properties of such an approach to the covariance surface of independent functional data which are on par to the asymptotic results of other smoothers used in \citep{yao_functional_2005} for the PACE methodology, \citep{xiao_asymptotic_2020}.
 
 \section{Functional Time Series\label{sec:fts}}
-As discussed in Section~\ref{sec:eo} EO data is often both spatially and temporally correlated.
+As discussed in Section~\ref{sec:eo}; EO data is often both spatially and temporally correlated.
 The two types of correlation are often considered separately. 
 An area in FDA which has considered a similar case where functional data is observed and observations are correlated is functional time series, \citep{aguilera_forecasting_1999}. Typically, functional observations are naturally indexed by some time of observation and correlation may occur between observations.
 Hence we may build up a time series of functional observations.
@@ -404,10 +416,10 @@ The above section on functional time series shows there is scope for placing a m
 The natural progression to such work is to consider what options are available when we have more complex correlation structure or a higher dimensional domain. 
 For example, in the case of EO data discussed in Section~\ref{sec:eo}, we have functional observations over a spatial domain indexed by some coordinate, $\ve{s} \in \mathcal{S}$.
 For this the univariate time series methods discussed in \citep{hyndman_forecasting_2009} are not suitable and we look to Gaussian processes as one possible solution to model principal component scores which are indexed by space.
-A such we discuss the basic concept of a Gaussian process in the following. 
+As such, we discuss the basic concept of a Gaussian process in the following. 
 
 To describe a Gaussian process we first discuss the concept of a stochastic process.
-A real valued stochastic process is a collection of real random variables defined on the same probability space $\left(\Omega, \mathcal{F}, \mathcal{P}\right)$ where $\Omega$ is a sample space, $\mathcal{F}$ is a $\sigma$-algebra, and $\mathcal{P}$ is a probability measure; and the random variables, indexed by some set $\mathcal{S}$ are all real valued. More details of such constructions can be found in \citep{billingsley_probability_1995}. A stochastic process can then be written as the collection:
+A real valued stochastic process is a collection of real random variables defined on the same probability space $\left(\Omega, \mathcal{F}, \mathcal{P}\right)$ where $\Omega$ is a sample space, $\mathcal{F}$ is a $\sigma$-algebra, $\mathcal{P}$ is a probability measure, and the random variables (indexed by some set $\mathcal{S}$) are all real valued. More details of such constructions can be found in \citep{billingsley_probability_1995}. A stochastic process can then be written as the collection:
 \begin{equation*}
 	\{ \xi(\ve{s}, w)| \ve{s} \in \mathcal{S} \}
 \end{equation*}
@@ -435,7 +447,6 @@ Then conditioning on the joint Gaussian prior distribution on the observations g
 \end{equation}
 where $\vesub{\xi}{*}$ is our posterior process evaluated at the collection of prediction points, and $K(\cdot, \cdot)$ is the covariance matrix formed by evaluating the covariance function $K(\cdot, \cdot)$ at all pairs of inputs. This can be extended easily to noisy observations by adjusting the observed covariance $K(S, S)$ to include a diagonal component which is the effect of model observation error. See \citep{williams_gaussian_2006} for details.
 
-
 One key aspect of the Gaussian process is the covariance function $k(\cdot, \cdot)$.
 The covariance function characterises various smoothness properties such as the sample path continuity and its differentiability, \citep{williams_gaussian_2006}.
 As such the choice of $k(\cdot, \cdot)$ heavily influences the prediction mean and covariance as described in Equation~\eqref{eqn:gp_pred}.
@@ -443,13 +454,25 @@ There are various common forms of the covariance function but all must have the 
 The covariance function is of such importance in Gaussian process modelling and spatial statistics that it has been widely studied.
 See \citep[Chapter~4]{williams_gaussian_2006} for a detailed introduction to various covariance functions. We expand on Section~\ref{sec:st_methods} to briefly introduce the form of covariance function which we will consider throughout this work. 
 
-Of the many different covariance functions employed in Gaussian processes stationary covariance functions are most commonly employed due to their simplicity and ease of construction, \citep{cressie_statistics_2010}.
+Of the many different covariance functions employed in Gaussian processes, stationary covariance functions are most commonly employed due to their simplicity and ease of construction, \citep{cressie_statistics_2010}.
 One such commonly used covariance function is the Mat\`{e}rn covariance function which is given by, \citep{abramowitz_handbook_2013}: 
 \begin{equation}\label{eqn:mat}
 	C_\nu(d) = \sigma^2 \frac{2^{1-\nu}}{\Gamma(\nu)} \left(\sqrt{2\nu}d\right)^\nu K_\nu \left( \sqrt{2\nu}d \right) 
 \end{equation}
 where $\Gamma$ is the gamma function, $K_\nu$ is the modified Bessel function of the second kind, $\nu$ is a shape parameter of the kernel, and $d$ is the possibly anisotropic separation between two vectors $\ve{s}, \vesup{s}{\prime}$, \citep{abramowitz_handbook_2013}. 
-The covariance kernel $k(\ve{s}, \vesup{s}{\prime})$ is then simply $C_\nu(d(\ve{s}, \vesup{s}{\prime}))$. 
+The covariance kernel $k(\ve{s}, \vesup{s}{\prime})$ is then simply $C_\nu(d(\ve{s}, \vesup{s}{\prime}))$.
+Figure~\ref{fig:example_matern} gives an illustrative example of samples from a Gaussian process with the Mat\'ern covariance with varying $\nu$ values and fixed isotropic distance function $d$.
+For illustration, we consider realisations where the domain is one dimensional.
+We can see that $\nu$ controls the smoothness of the samples, with lower $\nu$ values resulting in less smooth realisations.
+One can see from this illustration how a simple change to the kernel can mimic a wide arrange of function, this is one of the reasons why Gaussian process are a powerful tool for representing functions.
+This concept extends to higher dimensions.
+
+\begin{figure}[htbp!] 
+	\centering    
+	\includegraphics[width=1.0\textwidth]{example_kernel}
+	\caption[Example realisations from Gaussian processes with the Mat\'ern covariance function with differing $\nu$ parameters.]{Example realisations from Gaussian processes with the Mat\'ern covariance function with differing $\nu$ parameters. We plot a single realisation from each of three processes with $m(s) = 0$ and $k(s) = C_\nu(d(s, s^\prime))$ for $\nu = 0.5, 1.5, 2.5$ over the domain of $\mathcal{S} = \left[0, 5\right] \subset \mathbb{R}$.}
+	\label{fig:example_matern}
+\end{figure}
 
 The issue with stationary covariance forms is that they are often quite restrictive in the sense that the correlation structure cannot vary across the domain.
 For example, this might be a too restrictive assumption in the case of climate data where correlation structure might be quite different in different parts of the globe. 
@@ -460,7 +483,13 @@ They provide a form of non-stationary covariance function $k^{NS}(\cdot, \cdot)$
 \begin{equation}\label{eqn:mat_ns}
 	k^{NS}(\ve{s}, \vesup{s}{\prime}) = \lvert \Sigma_{\ve{s}} \rvert ^{\frac{1}{4}} \lvert \Sigma_{\vesup{s}{\prime}} \rvert^{\frac{1}{4}} \lvert \frac{ \Sigma_{\ve{s}}  + \Sigma_{\vesup{s}{\prime}}}{2}\rvert^{-\frac{1}{2}} k^S(Q(\ve{s}, \vesup{s}{\prime}))
 \end{equation}
-where $Q(\ve{s}, \vesup{s}{\prime}) = \left(\ve{s} - \vesup{s}{\prime}\right)^\transpose \left( \frac{ \Sigma_{\ve{s}}  + \Sigma_{\vesup{s}{\prime}}}{2}\right)^{-1}  \left(\ve{s} - \vesup{s}{\prime}\right)$ and $\Sigma_{\ve{s}} = \Sigma(\ve{s})$ is the covariance matrix of the Gaussian kernel centred at $\ve{s}$. How $\Sigma_{\ve{s}}$ varies across the domain specifies how non-stationary the full covariance kernel is. 
+where $Q(\ve{s}, \vesup{s}{\prime}) = \left(\ve{s} - \vesup{s}{\prime}\right)^\transpose \left( \frac{ \Sigma_{\ve{s}}  + \Sigma_{\vesup{s}{\prime}}}{2}\right)^{-1}  \left(\ve{s} - \vesup{s}{\prime}\right)$ and $\Sigma_{\ve{s}} = \Sigma(\ve{s})$ is the covariance matrix of the Gaussian kernel centred at $\ve{s}$. How $\Sigma_{\ve{s}}$ varies across the domain specifies how non-stationary the full covariance kernel is.
+
+There have been other proposed approaches for introducing non-stationarity into the kernels of Gaussian processes.
+\citeauthor{sampson_nonparametric_1992} considers a non-parametric estimation procedure to model non-stationary kernels, \citep{sampson_nonparametric_1992}.
+Whilst non-stationary kernels have been consider by combining locally stationary kernels, \cite{genton_classes_2001}.
+Both of the above methods are interesting in their own right, however in this work we focus on the class of covariances formed through \citeauthor{paciorek_spatial_2006} methods; as described above.
+
 
 With almost all covariance functions and especially non-stationary covariances there are typically hyper parameters which must be estimated from the data.
 For example in the Mat\`{e}rn covariance we have the shape parameter $\nu$ and any length scale parameters defined in the distance function $d(\cdot, \cdot)$.
