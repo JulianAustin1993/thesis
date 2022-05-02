@@ -22,9 +22,9 @@
 
 EO data sets, as alluded to in Chapter~\ref{cha:Into}, are often the primary source of information relating to a large spatial range.
 They may often be used when in situ measurements are not physically possible, or that in person collection is to dangerous.
-EO data is then often used to provide assistance to some monitoring or response effort.
+EO data is then often used to provide assistance too some monitoring or response effort.
 For example, \citeauthor{singha_satellite_2013} uses such remotely sensed data to detect oil spills in oceans where in-situ measurements are not feasible, \citep{singha_satellite_2013}.
-In such a scenarios, a major draw back of EO data is often the limited acquisition times.
+In such a scenario, a major drawback of EO data is often the limited acquisition times.
 There are two main problems with having limited acquisition times for EO data.
 Firstly, we may be observing a process where we are interested in the values of our data in between acquisitions.
 Here, ideally, we would be able to capture another acquisition and thus increase our temporal resolution of the data.
@@ -32,11 +32,11 @@ However, this may not be possible.
 So the problem at hand is how can we artificially increase the temporal resolution of the data set.
 This is commonly referred to as interpolation, and our goal would be to interpolate the image that would be acquired say at a time between two observed images for the whole spatial domain.
 Secondly, we may be observing a process where we are interested in future values of our data. That is we are interested in the forecasted image based on our observations to date, and again we suppose we are interested in forecasting the imagery for the whole spatial domain.
-In this Chapter, we discuss one such approach to both the interpolation and forecasting problems mentioned. In particular, we consider treating our functional dimension as space and using a combination of functional decomposition and functional time series modelling to aid in the interpolation and forecasting. To the authors knowledge this application of functional techniques, as described below, to EO data with the focus on space as the functional domain  is a novel contribution. 
+In this chapter, we discuss one such approach to both the interpolation and forecasting problems mentioned. In particular, we consider treating our functional dimension as space and using a combination of functional decomposition and functional time series modelling to aid in the interpolation and forecasting. To the authors knowledge this application of functional techniques, as described below, to EO data with the focus on space as the functional domain  is a novel contribution. 
 
-\section{Change Of Representation \label{sec:representation}}
-To describe our proposed model in this Chapter, we make a change to our representation of EO data.
-In this Chapter we will focus on viewing the EO data as a collection of images over space where we will index the images over time.
+\section{Change of Representation \label{sec:representation}}
+To describe our proposed model in this chapter, we make a change to our representation of EO data.
+In this chapter we will focus on viewing the EO data as a collection of images over space where we will index the images over time.
 To make this concrete we propose the following representation of our data which is adjusted from the discussion in Section~\ref{sec:fr}.
 That is: 
 
@@ -57,7 +57,7 @@ As we will see this is an assumption for notational simplicity only and the mode
 The change of representation facilitates the model described below and helps to emphasise that in this chapter we are interested in interpolation and forecasting the whole spatial domain through time.
 We note that the methodology discussed in Chapter~\ref{cha:background} all equally applies in the setting of space being the functional domain with some extensions needed for penalised regression splines which have been discussed.
 
-Therefore, our goals of this Chapter is then to estimate $\bar{\chi}$ for some unobserved acquisition time $t_{j^*}$.
+Therefore, our goals of this chapter is then to estimate $\bar{\chi}$ for some unobserved acquisition time $t_{j^*}$.
 If $t_{j^*} \in \mathcal{T}$ this corresponds to interpolation, and likewise if $t_{j^*} \not \in \mathcal{T}$ this corresponds to forecasting.
 
 \section{Modelling \label{sec:ftsm_model}}
@@ -69,7 +69,7 @@ We first describe the approach taken to reduce the dimensionality of the imagery
 \subsection{Decomposition}
 As discussed in Chapter~\ref{cha:background}, a common form of functional decomposition is the functional principal components analysis (FPCA) (See Section~\ref{sec:fpca}).
 Re-framing this decomposition in the case of a spatial functional variable is simple, and extends in the natural way.
-That is we have the following representation of the centred functional process which is the equivalent to Equation~\ref{eqn:fpca} but for our functional random variable $\bar{\mathcal{X}}\left(\ve{s}\right)$ which is a surface over the spatial domain $\mathcal{S}$.
+That is we have the following representation of the centred functional process which is the equivalent to Equation~\eqref{eqn:fpca} but for our functional random variable $\bar{\mathcal{X}}\left(\ve{s}\right)$ which is a surface over the spatial domain $\mathcal{S}$.
 \begin{equation}
 	\bar{\mathcal{X}}\left(\ve{s}\right) -\bar{\mu}\left(\ve{s}\right) = \sum_{k=1}^{\infty} \bar{\zeta}_k \bar{\phi}_k \left( \ve{s} \right)
 	\label{eqn:space_fpca}
@@ -77,7 +77,7 @@ That is we have the following representation of the centred functional process w
 where $\bar{\mu}, \bar{\zeta}_k, \bar{\phi}\left(\ve{s}\right)$ are the natural extensions to the mean function, principal component score, and principal components respectively. 
 
 The determination of such components from our observed data $\bar{\ve{Y}}$ can be achieved in principal through the PACE framework as discussed in Section~\ref{sec:pace}.
-However, one runs into difficulty in this setting as we would have to form a variety of spatial covariance matrices to estimate the covariance function $G: \mathcal{S} \times \mathcal{S} \to \mathbb{R}$ and perform matrix inversion of these matrices to estimate the principal component scores, as can be seen through Equation~\ref{eqn:fpc_est} in the one dimensional case.
+However, one runs into difficulty in this setting as we would have to form a variety of spatial covariance matrices to estimate the covariance function $G: \mathcal{S} \times \mathcal{S} \to \mathbb{R}$ and perform matrix inversion of these matrices to estimate the principal component scores, as can be seen through Equation~\eqref{eqn:fpc_est} in the one dimensional case.
 This can quickly become prohibitive in the spatial setting where even a small observed grid can lead to relatively large covariance matrices. 
 
 One method for overcoming such an obstacle is to estimate the functional variables $\bar{\chi}_j\left(\ve{s}\right), j=1,2,...,J$ directly though a basis expansion.
@@ -89,7 +89,7 @@ That is we assume the following form for $\bar{\chi}_j\left(\ve{s}\right)$:
 where $\ve{\bar{B}}$ is the known basis system over two dimensions and $ \bar{\ve{c}}_j$ corresponds to the coefficient matrix that is to be estimated directly. 
 
 We have discussed an approach to estimating the coefficients using penalised regression splines in Section~\ref{ssec:spline_reg} where the basis system formed of a Kronecker product of B-spline bases over each dimension.
-The form of Equation~\ref{eqn:basis_expansion_space} is comparable to that given in Equation~\ref{eqn:kron_expansion} but we now include an explicit form $\bar{c}$ of the vectorised coefficient matrix of Equation~\ref{eqn:kron_expansion}.
+The form of Equation~\eqref{eqn:basis_expansion_space} is comparable to that given in Equation~\eqref{eqn:kron_expansion} but we now include an explicit form $\bar{c}$ of the vectorised coefficient matrix of Equation~\eqref{eqn:kron_expansion}.
 
 We can then use an appropriate method for estimating $\bar{\vesub{c}{j}}$ from our observed data $\bar{\ve{Y}}$ for each $j=1, 2, \cdots, J$ such as penalised regression splines as discussed in Section~\ref{ssec:spline_reg}.
 The approach described above; discussed in detail in \citep{ramsay_functional_2010}, is a single step in estimating the FPCA decomposition.
@@ -122,7 +122,7 @@ The form of these are simplified by the basis expansion as:
 		\label{eqn:eigeneqn}
 \end{equation}
 where $\ve{W} = \int_\mathcal{S} \ve{\bar{B}}(\vesup{s}{\prime}) \vesup{\bar{B}}{\transpose}(\ve{s}) d\ve{s}$ is the symmetric matrix of pairwise inner products of the basis functions in our basis system.
-Since Equation~\ref{eqn:eigeneqn} must hold for all $\ve{s} \in \mathcal{S}$ it implies a purely matrix equation of: 
+Since Equation~\eqref{eqn:eigeneqn} must hold for all $\ve{s} \in \mathcal{S}$ it implies a purely matrix equation of: 
 \begin{equation}
 	J^{-1} \vesup{C}{\transpose}\ve{C} \ve{W} \ve{b} = \lambda \bar{\ve{b}}
 	\label{eqn:eigeneqn_matrix} 
@@ -133,10 +133,10 @@ The associated score to the $k^\text{th}$ principal components $\bar{\phi}_k(\ve
 \begin{equation}
 	\bar{\zeta}_{jk} = \left(\vesub{c}{j} - \vesub{c}{\mu}\right) W \vesub{b}{k}
 \end{equation}
-where $\vesub{c}{\mu}$ is the coefficient vector of the mean function in its basis expansion, or simply the mean of the coefficient matrix $\ve{C}$ in Equation~\ref{eqn:simul_exp}.
+where $\vesub{c}{\mu}$ is the coefficient vector of the mean function in its basis expansion, or simply the mean of the coefficient matrix $\ve{C}$ in Equation~\eqref{eqn:simul_exp}.
 
 The above FPCA using basis expansion, as proposed in \citep[Chapter~8]{ramsay_functional_2010}, gives a reduced dimension representation of our observed functional variables where we have overcome the issue of high spatial resolution making the PACE analysis unfeasible.
-As discussed in Section~\ref{sec:fpca} these principal components will describe a maximum amount of variation in the data set, however the aim of our modelling in this Chapter is to achieve good interpolation and forecasting to unobserved time points.
+As discussed in Section~\ref{sec:fpca} these principal components will describe a maximum amount of variation in the data set, however the aim of our modelling in this chapter is to achieve good interpolation and forecasting to unobserved time points.
 We note that the score process in our above representation encodes the temporal evolution of the observed imagery. 
 Hence we would ideally like to produce a decomposition of our observed data that makes the score process as easy to interpolate and forecast as possible. 
 There is no reason to believe therefore that the FPCA decomposition is the best for achieving this aim.
@@ -147,13 +147,13 @@ Rotations to multivariate principal component analysis have long been studied.
 Most often rotations are designed to emphasise a particular quality of the principal components. 
 For example the Varimax rotation, \citep{kaiser_varimax_1958}, was established in \citeyear{kaiser_varimax_1958} by \citeauthor{kaiser_varimax_1958}.
 It places an emphasis on producing components which focus on particular ranges of the domain which often aids interpretability of the resulting components.
-Similar approaches to helping the interpretability of functional principal components have been studies.
-\citeauthor{ramsay_functional_2010} considers the extension of the Varimax rotation for FPCA, \citep{ramsay_functional_2010}. 
+Similar approaches to helping the interpretability of functional principal components have been studied.
+\citeauthor{ramsay_functional_2010} consider the extension of the Varimax rotation for FPCA, \citep{ramsay_functional_2010}. 
 
 MAFR was proposed by \citeauthor{hooker_maximal_2015} and developed in relation to functional observation with time as the functional domain in \citep{hooker_maximal_2016}.
 Here, they build on top of the multivariate rotation known as Maximum Autocorrelation Factors (MAF), \citep{switzer_minmax_1984}.
 MAF focused on finding a rotation which selects components which have minimum autocorrelation. 
-\citeauthor{hooker_maximal_2016} shows that this can be extended to the functional domain by considering searching for components that have smallest integrated first derivative, \citep{hooker_maximal_2016}. 
+\citeauthor{hooker_maximal_2016} show that this can be extended to the functional domain by considering searching for components that have smallest integrated first derivative, \citep{hooker_maximal_2016}. 
 They then highlight that this can be extended to any notion of smoothness given by some linear differential operator, such as those discussed in Section~\ref{ssec:spline_reg}. 
 
 We detail the calculation of such MAFR rotations following the methodology proposed in \citep{hooker_maximal_2016}.
@@ -166,8 +166,9 @@ The MAFR rotation corresponds to, \citep{hooker_maximal_2016}:
 	\argmin_{\ve{u}} \vesup{u}{\transpose} \langle L\bar{\ve{\phi}}, L\bar{\ve{\phi}} \rangle \ve{u}
 	\label{eqn:mafr_min}
 \end{equation}
-subject to $\vesup{u}{\transpose}\ve{u} = 1$. Defining successive rotations in the standard way by minimising Equation~\ref{eqn:mafr_min} whilst being orthogonal to proceeding rotations.
-By standard arguments these can be found by the succeeding columns of $U$ in the Eigen-decomposition of $P$. 
+subject to $\vesup{u}{\transpose}\ve{u} = 1$ where $L$ is some linear differential operator.
+Defining successive rotations in the standard way by minimising Equation~\eqref{eqn:mafr_min} whilst being orthogonal to proceeding rotations.
+These can be found by the succeeding columns of $U$ in the Eigen-decomposition of $P = \langle L\bar{\ve{\phi}}, L\bar{\ve{\phi}} \rangle$. 
 That is:
 \begin{equation}
 	P = \ve{U} \ve{D} \vesup{U}{\transpose}
@@ -177,9 +178,10 @@ The new rotated principal components are given by:
 \begin{equation}
  \vesup{U}{\transpose} \ve{\bar{\phi}}(\ve{s})
 \end{equation} 
-As noted in \citep{hooker_maximal_2016} if the diagonal matrix $D$ is ordered from largest to smallest eigenvalues, the final components of $\vesub{\bar{\phi}}{\text{MAFR}}$ will be the smoothest with respect to the operator $L$. A similar rotation to the scores gives the mafr scores. 
+As noted in \citep{hooker_maximal_2016} if the diagonal matrix $D$ is ordered from largest to smallest eigenvalues, the final components of $\vesub{\bar{\phi}}{\text{MAFR}}$ will be the smoothest with respect to the operator $L$.
+A similar rotation to the scores gives the MAFR scores. 
 
-Both FPCA decomposition and the MAFR decomposition give principal components which are orthonormal and can seeming be used interchangeably in the following. The idea is that the MAFR rotation will result in a score processes that is easier to interpolate and forecast as it has been encourage to be smooth by the operator $L$.
+Both FPCA decomposition and the MAFR decomposition give principal components which are orthonormal and can seeming be used interchangeably in the following. The idea is that the MAFR rotation will result in a score processes that is easier to interpolate and forecast as it has been encouraged to be smooth by the operator $L$.
 
 \subsection{Interpolation and forecasting \label{sec:ftsm_forecast}}
 
@@ -191,9 +193,9 @@ This is exactly the same setup as formulated for functional time series methodol
 We have previously discussed the approach to forecasting using functional time series methodology in Section~\ref{sec:fts} and we use the same methodology as previously discussed for interpolation and forecasting in this scenario.
 That is this methodology treats each principal component score as a univariate time series independently of the others.
 However, the MAFR scores will in fact be correlated by the rotation matrix $U$ which would lend itself to possibly introducing a more complex modelling of the multivariate score processes.
-We choose not too and apply the same independent forecasting methodology for both FPCA and MAFR decompositions. 
+We choose not to and apply the same independent forecasting methodology for both FPCA and MAFR decompositions. 
 
-As mentioned in \citep{hyndman_forecasting_2009} any univariate time series model could be used for forecasting and interpolation. 
+As mentioned in \citep{hyndman_forecasting_2009}; any univariate time series model could be used for forecasting and interpolation. 
 For our model we choose to model each score process $\zeta_{jk}(t)$ by a Gaussian process for $j=1,2,\cdots, J, k=1,2,\cdots,K$.
 We have discussed Gaussian process regression in the general sense in Section~\ref{sec:gp} where are domain of interest in space.
 In this case we have a univariate temporal domain. 
@@ -210,7 +212,7 @@ That is:
 	m(t) = at + b
 \end{equation}
 for all $t \in \mathcal{T}$, where $a, b$ are unknown hyper parameters to be estimated for the mean function.
-The value of $a$ and $b$ are chosen through maximum likelihood estimation of the Gaussian process on the observed score process. 
+The values of $a$ and $b$ are chosen through maximum likelihood estimation of the Gaussian process on the observed score process. 
 We choose a non-zero mean to act as an aid in forecasting so that the Gaussian process will not be reverting back to zero at large forecast steps but will revert to the value of the mean function, \citep{williams_gaussian_2006}. 
 
 As we choose a simple mean function for our model of the score process, we encode the possible complexity in the time series with a covariance kernel which is designed for pattern discovery. 
@@ -234,27 +236,27 @@ We specify the data generating process for our simulations below.
 
 \subsection{Data generating process \label{ftsm_sim_dgp}}
 We propose simulating data on a spatio-temporal grid.
-We do so as this is typically how EO data observed (See Section~\ref{sec:eo}).
+We do so as this is typically how EO data are observed (See Section~\ref{sec:eo}).
 We define the grid by specifying the spatial domain as $\mathcal{S} = \left[0, 1\right] \times \left[0, 1\right]$ and assume we have $64 \times 96$ spatial locations arranged in a grid as our observation locations.
 The temporal domain we define simply as $\mathcal{T} = \left[0, 1\right]$ with possible $60$ possible temporal observations evenly spaced within $\mathcal{T}$. 
 This gives a full simulated data dimension of $64 \times 96 \times 60$. 
 
-To generate data on such a grid we assume our functional variables are generated as Equation~\ref{eqn:space_fpca} where we truncate to only $3$ principal components.
+To generate data on such a grid we assume our functional variables are generated as Equation~\eqref{eqn:space_fpca} with only $3$ principal components.
 These correspond to three different modes of variation which captures the spatial variation in our observed process.
 The corresponding score processes will capture the temporal variation of each principal component in the observed process.
 Finally, the sum-product of the score process with the principal components will then result in a fully spatial-temporal process. 
 
 We therefore need to simulate the $3$ principal components which are two dimensional surfaces over the grid of our domain $\mathcal{S}$ and the $3$ score proecesses which are one dimensional surfaces over our temporal grid $\mathcal{T}$.
 To do so we utilise a Gaussian process simulation for both.
-For simplicity we restrict our simulations to coming from a zero mean Gaussian processes.
+For simplicity, we restrict our simulations to coming from a zero mean Gaussian processes.
 We simulate the principal components using an isotropic stationary Mat\`{e}rn covariance function and we generate the scores from a Gaussian covariance function.
 Both of which are standard covariance functions used in Gaussian process regression, more details of which can be found in \citep{williams_gaussian_2006} and the references within.
-The form of the Mat\`{e}rn covariance function is given in Equation~\ref{eqn:mat}. 
+The form of the Mat\`{e}rn covariance function is given in Equation~\eqref{eqn:mat}. 
 
-To simulate our $3$ principal components we specify separate length scale hyper parameters for each component. 
+To simulate our $3$ principal components, we specify separate length scale hyper parameters for each component. 
 We keep the shape parameter for the Mat\`{e}rn covariance function fixed for all three components at $2.5$. 
 We do so because we wish to simulate data which is smooth across space and we can adequately adjust the amount of spatial variation by changing the length scale of the process whilst maintaining this smoothness by keeping the shape parameter fixed.
-We also note that the principal component variances parameters are fixed to 1.0, this is because the scale is set in the score process as described in Equation~\ref{eqn:space_fpca}.
+We also note that the principal component variances parameters are fixed to 1.0, this is because the scale is set in the score process as described in Equation~\eqref{eqn:space_fpca}.
 The length scale parameters used in the simulation study are given in Table~\ref{tab:fpc_params}.
 
 \begin{table}[htbp!] 
@@ -274,7 +276,7 @@ The length scale parameters used in the simulation study are given in Table~\ref
 \end{table}
 
 An example of the $3$ functional principal components simulated is given in Figure~\ref{fig:ftsm_example_fpc}.
-As can be noted from the decreasing length scales for the each component, the succeeding components are increasingly spatially variable.
+As can be noted from the decreasing length scales, the succeeding components are increasingly spatially variable.
 
 \begin{figure}[htbp!] 
 	\centering    
@@ -314,7 +316,7 @@ This highlights the decreasing correlation and the impact of the variance parame
 	\label{fig:ftsm_example_zeta}
 \end{figure}
 
-Combining the simulated principal components with their appropriate weightings given by the simulated principal component scores then gives us a simulation from a truncated version of the model given in Equation~\ref{eqn:space_fpca}.
+Combining the simulated principal components with their appropriate weightings given by the simulated principal component scores then gives us a simulation from a truncated version of the model given in Equation~\eqref{eqn:space_fpca}.
 Figure~\ref{fig:ftsm_chi_example} displays a selection of time points of the corresponding functional variable simulations from the components and scores displayed in Figures~\ref{fig:ftsm_example_fpc},~\ref{fig:ftsm_example_zeta} respectively. 
 
 \begin{figure}
@@ -350,12 +352,12 @@ Figure~\ref{fig:ftsm_chi_example} displays a selection of time points of the cor
 	\label{fig:ftsm_chi_example}
 \end{figure}
 
-As given in Equation~\ref{eqn:space_obs} we do not observe the simulated functional variable directly but rather with an additive noise process $\bar{\varepsilon_{ij}}$ for $i=1,2,\cdots, N$, $j=1,2,\cdots, J$.
+As given in Equation~\eqref{eqn:space_obs} we do not observe the simulated functional variable directly but rather with an additive noise process $\bar{\varepsilon_{ij}}$ for $i=1,2,\cdots, N$, $j=1,2,\cdots, J$.
 For our simulation experiments we will consider 4 different types of observational noise; low variance independent noise (LN), high variance independent noise (HN), low variance isotropic spatially correlated noise with short range (LSN), and low variance isotropic spatially correlated noise with long range (HSN).
 In all cases we assume the noise process is independent over time. 
 We consider the first two (LN and HS) as corresponding to experiments to discuss how the model deals with typical measurement error. 
 The second two noise models (LSN and HSN) correspond to an additional challenge to our models by testing their ability to recover the imagery even when there is spatially correlated noise which may look similar to that of a single functional variable. 
-This is of especially importance in some EO data, such as satellite imagery, where often noise corresponds to atmospheric interference which is spatially correlated, \citep{oliver_understanding_2004}. 
+This is of special importance in some EO data, such as satellite imagery, where often noise corresponds to atmospheric interference which is spatially correlated, \citep{oliver_understanding_2004}. 
 We consider two cases where the range of the spatial correlation changes, between short range in the LSN noise and long range
  dependency in the HSN noise. 
 In these two noise process they correspond to the noise process being spatially similar to the last and first functional principal component respectively.
@@ -407,12 +409,12 @@ The impact of such noise can be see in Figure~\ref{fig:ftsm_noise_example} which
 \end{figure}
 
 \subsection{Model parameters \label{ssec:sim_params}}
-The model described in Section~\ref{sec:ftsm_model} has various hyper-parameter which control exactly how the model acts.
-We specify these in the below, along with justification for such choices where needed.
+The model described in Section~\ref{sec:ftsm_model} has various hyper-parameters which control exactly how the model acts.
+We specify these  below, along with justification for such choices where needed.
 
 The first set of hyper-parameters correspond to those of the basis system used for the basis expansion of the functional variables.
-In our case we limit ourselves to B-spline basis system of order $4$, as described in Section~\ref{ssec:basis_splines}.
-We choose order $4$ b-spline functions as cubic functions are the standard in many applications, \citep{de_boor_practical_2001}. 
+In our case we limit ourselves to B-spline basis systems of order $4$, as described in Section~\ref{ssec:basis_splines}.
+We choose order $4$ B-spline functions as cubic functions are the standard in many applications, \citep{de_boor_practical_2001}. 
 We choose $16$ basis functions across each dimension of our surfaces, giving a total number of $256$ basis functions for the tensor product basis system, as described in Section~\ref{ssec:spline_reg}. 
 This is chosen as a trade off between flexibility to fit the surface and computational constraints. 
 Obviously the higher number of basis functions the closer we can recreate the observed data, however the additional computational cost in estimating these coefficients quickly grows as the number of basis functions in each dimension is increased.
@@ -439,7 +441,7 @@ Any observation before this point becomes our training data with any point after
 This gives a possibility of testing long range forecasting whilst maintaining enough training data to possibly infer patterns using the score process models.
 
 \subsection{Results \label{ssec:ftsm_sim_res}}
-We present the results for interpolation and forecasting the simulated data in this Section separately, as they correspond to two separate objectives.
+We present the results for interpolation and forecasting the simulated data in this section separately, as they correspond to two separate objectives.
 We repeat the simulation $100$ times for both interpolation and forecasting.
 The simulation results are presented separately for each of our proposed models named FPCA and MAFR.
 The details of such models are described in Section~\ref{sec:ftsm_model} and the references within.
@@ -459,14 +461,27 @@ To compare these models we use four metrics.
 We use two standard measure of mean square error (RMSE) and mean absolute error (MAE).
 These two are chosen to contrast the influence of any particularly large discrepancies between reconstruction and actual functional variables. 
 The next metric we use is the structure similarity index (SSIM), \citep{wang_image_2004}.
-The SSIM metric introduce by \citeauthor{wang_image_2004} in \citeyear{wang_image_2004} and enhanced in \citeyear{wang_mean_2009} considers the case that standard metrics such as RMSE and MAE are not indicative of perceived similarity.
-For example taking an grey-scale image and adding a constant value to the whole image will increase its RMSE and MAE however to the observer the image will only look brighter. 
+The SSIM metric introduced by \citeauthor{wang_image_2004} in \citeyear{wang_image_2004} and enhanced in \citeyear{wang_mean_2009} considers the case that standard metrics such as RMSE and MAE are not indicative of perceived similarity.
+For example taking a grey-scale image and adding a constant value to the whole image will increase its RMSE and MAE however to the observer the image will only look brighter. 
 SSIM tries to incorporate structural similarity when comparing imagery to highlight perceived similarity, \citep{wang_mean_2009}. 
-For the SSIM metric a value of $1$ represents perfect similarity, the value of $-1$ represent perfect negative similarity, hence the close to $1$ the better for this metric.
-For implementation details of such a metric we refer the reader to \citep{wang_mean_2009}. 
-The final metric we employ is the Peak Signal to Noise Ration (PSNR). 
+The SSIM metric is calculated over various windows of an image.
+The SSIM between two windows x and y of common size is given by:
+
+\begin{equation}
+	\text{SSIM}\left(x, y\right) = \frac{(2 \mu_x \mu_y + c_1)(2\sigma_{xy} + c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2 + c_2)}
+\end{equation}
+where $\mu_x, \mu_y$ are the respective means of the windows, $\sigma_x, \sigma_y$ are the respective standard deviation of the windows, $\sigma_{xy}$ is the covariance of $x$ and $y$, and $c_1, c_2$ are two constants which are calculated based on the dynamic range of the two images under comparison.
+For further details we refer the reader to \citep{wang_mean_2009}.
+For the SSIM metric a value of $1$ represents perfect similarity, the value of $-1$ represent perfect negative similarity, hence the closer to $1$ the better for this metric.
+The final metric we employ is the Peak Signal to Noise Ratio (PSNR). 
 PSNR is commonly used to quantify image reconstruction quality. 
 It has been used extensively in medical imaging applications.
+The metric is commonly defined using the MSE between images two images $x$ and $y$ say.
+Then the value is given by:
+\begin{equation}
+	\text{PSNR}(x, y) = 10 \log_{10}\left(\frac{\text{MAX}^2_x}{MSE(x,y)}\right)
+\end{equation}
+where $\text{MAX}_x$ is the maximum possible value in image $x$, and $MSE(x,y)$ is the mean square error between $x$ and $y$.  
 For the PSNR metric a higher value is better. 
 
 \subsubsection{Interpolation results}
@@ -486,11 +501,11 @@ Discussion of these results can be found in Section~\ref{ssec:ftsm_sim_disc}.
 		& & \multicolumn{4}{c}{Metric} \\ 
 		Noise & Model & RMSE & MAE & SSIM & PSNR \\
 		\midrule
-		\multirow{3}{*}{LIN}& PACE & 0.25 (0.05) & 0.20 (0.04) & 0.80 (0.07) & 28.15 (3.37) \\
+		\multirow{3}{*}{LN}& PACE & 0.25 (0.05) & 0.20 (0.04) & 0.80 (0.07) & 28.15 (3.37) \\
 		& FPCA  & \textbf{0.10 (0.05)} & \textbf{0.08 (0.04)} & \textbf{0.98 (0.02)} & \textbf{35.27 (4.59)} \\
 		& MAFR  & 0.12 (0.10) & 0.10 (0.08) & 0.97 (0.02)  & 34.66 (5.08) \\
 		\midrule
-		\multirow{3}{*}{HIN} & PACE & 0.40 (0.06) & 0.32 (0.05) & 0.58 (0.09) & 24.26 (2.93) \\
+		\multirow{3}{*}{HN} & PACE & 0.40 (0.06) & 0.32 (0.05) & 0.58 (0.09) & 24.26 (2.93) \\
 		& FPCA  & \textbf{0.16 (0.05)} & \textbf{0.13 (0.04)} & \textbf{0.95 (0.03)} & \textbf{31.78 (4.23)} \\
 		& MAFR  & 0.19 (0.07) & 0.15 (0.06) & 0.94 (0.03)  & 31.06 (4.30) \\
 		\midrule
@@ -529,11 +544,11 @@ Discussion of these results can be found in Section~\ref{ssec:ftsm_sim_disc}.
 		 & & \multicolumn{3}{c}{RMSE} &  \multicolumn{3}{c}{MAE} &  \multicolumn{3}{c}{SSIM} &  \multicolumn{3}{c}{PSNR} \\
 		Noise & Model & $h=1$ & $h=3$ & $h=6$ & $h=1$ & $h=3$ & $h=6$ & $h=1$ & $h=3$ & $h=6$ & $h=1$ & $h=3$ & $h=6$\\
 		\midrule
-		\multirow{3}{*}{LIN} & PACE & 0.35 (0.12) & 0.68 (0.27) & 1.14 (0.49)) & 0.28 (0.09) & 0.54 (0.22) & 0.92 (0.40) & 0.60 (0.14) & 0.41 (0.17) & 0.29 (0.19) & 20.21 (3.60) & 19.18 (2.98) & 17.28 (4.03)  \\
+		\multirow{3}{*}{LN} & PACE & 0.35 (0.12) & 0.68 (0.27) & 1.14 (0.49)) & 0.28 (0.09) & 0.54 (0.22) & 0.92 (0.40) & 0.60 (0.14) & 0.41 (0.17) & 0.29 (0.19) & 20.21 (3.60) & 19.18 (2.98) & 17.28 (4.03)  \\
 		& FPCA  & 0.10 (0.05) & 0.28 (0.17) & \textbf{0.59 (0.33)} & \textbf{0.08 (0.04)} & 0.23 (0.14) & \textbf{0.48 (0.27)} & \textbf{0.94 (0.06)} & \textbf{0.90 (0.14)} & \textbf{0.74 (0.27)} & \textbf{28.42 (7.01)} & \textbf{25.72 (5.97)} & \textbf{20.38 (6.07)} \\
 		& MAFR  & \textbf{0.10 (0.05)} & \textbf{0.28 (0.16)} & 0.60 (0.36) & \textbf{0.08 (0.04)} & \textbf{0.23 (0.13)} & 0.49 (0.29) & \textbf{0.94 (0.06)} & 0.88 (0.15) & 0.73 (0.27) & 28.04 (6.46) & 25.39 (5.60) & 20.21 (5.74) \\
 		\midrule
-		\multirow{3}{*}{HIN} & PACE& 0.53 (0.18) & 0.90 (0.35) & 1.36 (0.54) & 0.43 (0.14) & 0.72 (0.28) & 1.09 (0.43) & 0.44 (0.11) & 0.29 (0.12) & 0.19 (0.13)  & 18.37 (2.76) & 17.62 (2.36) & 16.17 (3.28) \\
+		\multirow{3}{*}{HN} & PACE& 0.53 (0.18) & 0.90 (0.35) & 1.36 (0.54) & 0.43 (0.14) & 0.72 (0.28) & 1.09 (0.43) & 0.44 (0.11) & 0.29 (0.12) & 0.19 (0.13)  & 18.37 (2.76) & 17.62 (2.36) & 16.17 (3.28) \\
 		& FPCA  & \textbf{0.17 (0.08)} & \textbf{0.34 (0.19)} & \textbf{0.63 (0.32)} & \textbf{0.14 (0.06)} & \textbf{0.28 (0.16)} & \textbf{0.52 (0.27)} & \textbf{0.90 (0.11)} & \textbf{0.86 (0.15)} & \textbf{0.72 (0.27)} & \textbf{25.62 (5.60)} & \textbf{23.81 (5.34)} & \textbf{19.47 (5.58)}  \\
 		& MAFR  & \textbf{0.17 (0.08)} & 0.36 (0.19) & 0.69 (0.37) & 0.14 (0.07) & 0.29 (0.15) & 0.57 (0.31) & 0.88 (0.12) & 0.83 (0.17) & 0.70 (0.25) & 24.72 (5.61) & 22.64 (4.88) & 18.68 (5.42)  \\
 		\midrule
@@ -556,7 +571,7 @@ We discuss the results relative to the PACE model as described in Section~\ref{s
 
 Table~\ref{tab:ftsm_sim_interp} states the mean and standard deviations of the estimation error under the various metrics discussed in Section~\ref{ssec:ftsm_sim_res} for the interpolation metric.
 We can see clearly an advantage of using the FPCA model over the PACE model under most metrics in nearly all noise process scenarios.
-The only exception to this being nuder the highly structured spatial noise process, denoted by HSN, where the FPCA model is inferior to the MAFR and PACE models. 
+The only exception to this being under the highly structured spatial noise process, denoted by HSN, where the FPCA model is inferior to the MAFR and PACE models; though only slightly.
 This advantage is most prominent under the independent noise scenarios where it seems that the additional spatial smoothness constraints that the model enforces nullifies the impact of the spatially independent noise.
 Similarly, the relative deterioration in the FPCA model under structured noise agrees with this effect.
 In fact it is possible that due to the noise process being highly similar to the leading functional principal components in the HSN scenario that the FPCA model may conflate the two, hence giving reduced performance.
@@ -583,7 +598,7 @@ The actual functional principal components for this simulation are given in Figu
 \end{figure}
 
 In addition, this rotation has caused the score processes to be correlated to the point that leading components will have smoother scores, aiding in removing the noise process which will have random walk like behaviour in the scores process due to it being independent over time.
-This is illustrated in Figure~\ref{fig:ftsm_res_example_zeta} where we can see hat although both score processes aren't particularly smooth the MAFR process exhibits less variation. 
+This is illustrated in Figure~\ref{fig:ftsm_res_example_zeta} where we can see that although both score processes aren't particularly smooth the MAFR process exhibits less variation. 
 
 \begin{figure}[htbp!] 
 	\centering    
@@ -599,7 +614,7 @@ Similarly to the interpolation results we see the most improvement under spatial
 Again, this is due to the added ability of the FPCA and MAFR models to filter out any process which isn't particularly smooth over space. 
 Interestingly, we also see a greater improvement in reconstruction for the long term forecast rather than the one step ahead short term forecast relative to the PACE model.
 This is good as it suggests that the FPCA and MAFR approaches capture the spatio-temporal process in such a way that is easier to forecast. 
-Figure~\ref{fig:ftsm_res_recon} highlights this ability by illustrating the unobserved surface and estimated surfaces for each model under the LIN noise scenario at three time steps ahead.
+Figure~\ref{fig:ftsm_res_recon} highlights this ability by illustrating the unobserved surface and estimated surfaces for each model under the LN noise scenario at three time steps ahead.
 
 \begin{figure}
 	\centering
@@ -778,6 +793,7 @@ However, here we see the increasing impact of the FPCA and MAFR models.
 Especially in the atmospheric variables of TMQ and TREFHT we see an advantage in using the FPCA and MAFR models.
 Here we see, slightly inverse to the interpolation results, that although the PACE model can deal with small scale spatial variation it struggles to model coherence through time using the spline extrapolation.
 Whereas, the FPCA and MAFR models produce score processes which can evidently be more easily forecast using the Gaussian process methodology outlined in Section~\ref{sec:ftsm_forecast}.
+Additionally, we see that the RMSE and MAE metrics get worse for the PACE methodology as $h$ increases whereas the FPCA and MAFR methodology is more consistent.
 Again, we see little difference between the FPCA and MAFR models in both the interpolation and forecasting objectives. 
 
 \section{Summary \label{sec:ftsm_summary}}
@@ -789,19 +805,21 @@ This is compared against standard techniques that treat the data as a collection
 
 We have seen in Section~\ref{ssec:ftsm_sim_res} that on simulated data sets this technique works well.
 We have compared these techniques under a variety of noise processes, including spatially structured noise which is often more realistic than independent noise processes in EO data.
-We find on the whole they work equally well as the standard methodology which ignores spatial dependency between observations for interpolation, and outperforms this technique when forecasting.
+We find on the whole they work at least equally well as the standard methodology which ignores spatial dependency between observations for interpolation, and outperforms this technique when forecasting.
 
 However, on the CESM-LE data this technique falls down due to its difficulty in recreating small spatial scale variation.
-As discussed in Section~\ref{ssec:ftsm_eo_disc} this is due to our smoothing methodology to represent each observed surface using b-spline basis functions.
+As discussed in Section~\ref{ssec:ftsm_eo_disc} this is due to our smoothing methodology to represent each observed surface using B-spline basis functions.
 Given ample computation time this can be relieved by extending the dimension of this basis system.
 However this is not always possible, and represents a real limitation of such methodologies.
 
 A final advantage of such FTSM techniques for EO data is their ability to reduce the data set dimension by introducing functional principal components which have a spatial domain.
 These components can help to inform about modes of variation that are occurring over space.
-Such dissections of the data can be incredibly useful in understanding the processes under examination. 
-For example, Figure~\ref{fig:ftsm_res_TREFHT_fpc} gives the first two components for the TREFHT atmospheric variable of the CESM-LE data set.
+Such dissections of the data can be useful in understanding the processes under examination. 
+For example, Figure~\ref{fig:ftsm_res_TREFHT_fpc} gives the first three components for the TREFHT atmospheric variable of the CESM-LE data set.
 We can see clearly how the first corresponds to large scale variation between regions in the northern hemisphere whilst the second contains more localised areas of variation. 
 We have further seen how the MAFR rotation can help to promote smooth functional principal components which may aide interpretability. 
+Another example,which shows similar results for the pressure variable is given in Figure~\ref{fig:ftsm_res_PS_fpc}.
+Here, one can see clearly how the first component focuses on various regions across the globe excluding the poles, whereas the second and third components focus mainly on the polar regions.
 
 \begin{figure}
 	\centering
@@ -809,17 +827,45 @@ We have further seen how the MAFR rotation can help to promote smooth functional
 		\includegraphics[width=\textwidth]{ftsm_res_TREFHT_fpc_0}
 		\caption{$\vesub{\bar{\phi}}{1}$}
 		\label{fig:ftsm_res_TREFHT_fpc_1}
-	\end{subfigure}             
+	\end{subfigure}
+	\vfill       
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{ftsm_res_TREFHT_fpc_1}
 		\caption{$\vesub{\bar{\phi}}{2}$}
 		\label{fig:ftsm_res_TREFHT_fpc_2}
 	\end{subfigure}
-	\caption[Example of the functional principal components generated by the FPCA model with the TREFHT variable.]{Example of the functional principal components generated by the FPCA model with the TREFHT variable of the CESM-LE data set. Notice how each component shows a different mode of spatial variation present in the process. Such decompositions like these can be incredibly useful to understanding the process as a whole.}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{ftsm_res_TREFHT_fpc_2}
+		\caption{$\vesub{\bar{\phi}}{3}$}
+		\label{fig:ftsm_res_TREFHT_fpc_3}
+	\end{subfigure}
+	\caption[Example of the functional principal components generated by the FPCA model with the TREFHT variable.]{Example of the functional principal components generated by the FPCA model with the TREFHT variable of the CESM-LE data set. Notice how each component shows a different mode of spatial variation present in the process. Such decompositions like these can be useful to understanding the process as a whole.}
 	\label{fig:ftsm_res_TREFHT_fpc}
 \end{figure}
 
-The standard PACE methodology can be seen to do well on real world EO data set due to its ability to capture small scale variations.
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{ftsm_res_PS_fpc_0}
+		\caption{$\vesub{\bar{\phi}}{1}$}
+		\label{fig:ftsm_res_PS_fpc_1}
+	\end{subfigure}
+	\vfill       
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{ftsm_res_PS_fpc_1}
+		\caption{$\vesub{\bar{\phi}}{2}$}
+		\label{fig:ftsm_res_PS_fpc_2}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{ftsm_res_PS_fpc_2}
+		\caption{$\vesub{\bar{\phi}}{3}$}
+		\label{fig:ftsm_res_PS_fpc_3}
+	\end{subfigure}
+	\caption[Example of the functional principal components generated by the FPCA model with the PS variable.]{Example of the functional principal components generated by the FPCA model with the PS variable of the CESM-LE data set. Notice how each component shows a different mode of spatial variation present in the process. Such decompositions like these can be useful to understanding the process as a whole.}
+	\label{fig:ftsm_res_PS_fpc}
+\end{figure}
+
+The standard PACE methodology can be seen to do well on the real world EO data set due to its ability to capture small scale variations.
 This occurs essentially because we treat each spatial location independently.
 However, we have seen from both the FPCA and MAFR models that incorporating spatial information can be useful in recovering unobserved surfaces.
 Utilising spatial dependency also has the added benefit of helping to ignore unstructured noise processes. 
