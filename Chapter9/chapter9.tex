@@ -3,10 +3,117 @@
 %*********************************** Ninth Chapter *****************************
 %*******************************************************************************
 
-\chapter{Conclusions and further work \label{cha:conclusions}}  %Title of the Ninth Chapter
+\chapter{Conclusion and Future Work\label{cha:conclusions}}  %Title of the Ninth Chapter
 
 \ifpdf
     \graphicspath{{Chapter9/Figs/Raster/}{Chapter9/Figs/PDF/}{Chapter9/Figs/}}
 \else
     \graphicspath{{Chapter9/Figs/Vector/}{Chapter9/Figs/}}
 \fi
+The aim of this thesis has been to consider the role that models based on functional data analysis techniques can be used to represent earth observation data.
+In particular, we have focused on developing methods which can help explain the dataset's spatial and temporal variation in a parsimonious way.
+We have provided a novel methodology, CPACE, which achieves this through building upon a functional principal components decomposition of the data to inform the temporal component of the spatial-temporal covariance function under a Gaussian process framework.
+We have highlighted this frameworks p erformance through a simulation study and in application to the CESM-LE dataset. 
+
+In Chapter~\ref{cha:Into} we have detailed the specific subtleties of earth observation data; namely their inherent spatial and temporal dependency, and lattice like collection over the spatial domain.
+We have provided a description of such a data set by viewing it as a collection of partially observed functional data.
+There are two such possible representations; the first being where the functional domain is time, the second being space.
+We have reviewed the literature regarding spatio-temporal methods applicable to EO data; where we highlight the need to often specify a parametric form of spatial-temporal covariance.
+We argue that this is often a complex task and often the parametric covariance function can obscure the model from being parsimonious; this motivates the use of a principal components analysis in our proposed CPACE methodology.
+
+In Chapter~\ref{cha:data} we have introduced our study dataset.
+The CESM-LE dataset is extremely well studied in the EO field, with many publications using this dataset as a study.
+We have shown the key characteristics of our variables of interest; namely pressure, temperature, wind speed and precipitation.
+We have detailed the necessary preprocessing to utilise this data which, in the most, was to scale down the dataset size to be more manageable.
+We have highlighted the various spatial and temporal correlations present in the variables which motivates the use of this dataset as a study of interest.
+In addition, we have $40$ realisations of this dataset for each variable of interest.
+This makes this an ideal dataset to compare proposed models against as we have repeated studies.
+
+In Chapter~\ref{cha:ftsm} we have considered our first approach for handling EO data in a functional data framework; namely considering the data as a collection of surfaces indexed over time.
+This is typically not the canonical form for functional data, since the functional domain considered is space.
+However we have found that this approach works well when our objective is to forecast the functional time series.
+We have considered this approach on a number of simulated scenarios, with the functional time series approach performing at least as well a standard analysis which uses time as the functional domain and ignores spatial dependency.
+We have found that this increase in performance was most noticeable during forecasting results, which suggest this technique may be preferable to standard analysis when this is our objective.
+However, under application to the CESM-LE data set this technique is less successful.
+We reason this is due to the representation of our functional surfaces being over simplistic.
+That is; our use of smoothing splines to represent the functional principal component surfaces in our functional time series methodology was too restrictive when trying to recreate the complex surfaces of the CESM-LE data set.
+In particular, we had difficulties representing small scale spatial variation.
+This resulted in overly smooth forecasts.
+This motivates our creation of the CPACE framework which aimed to overcome this.
+
+We have presented the CPACE framework in Chapter~\ref{cha:cpace}. 
+This framework considers the canonical form of functional data with time as the functional domain and introduces spatial dependency between functional observations.
+Here we have highlighted how to introduce spatial dependency between functional principal components; that can capture the spatial variation observed in the data.
+This builds on the PACE, \citep{yao_functional_2005}, and SPACE ,\citep{liu_functional_2017}, frameworks by considering the model as a larger Gaussian process where the covariance function is informed by the functional principal components.
+The advantage of this formulation is that we can utilise the nice properties of Gaussian process regression to both estimate hyper parameters and obtain predictive distributions rather than just a mean prediction. 
+We have shown under certain assumptions that both the mean function and covariance surfaces can be estimated consistently with penalised spline regression.
+These assumptions essentially require a limit to the spatial dependency that can be observed in the data set for these estimators to remain consistent.
+These assumption; whilst strong, are often common in spatial statistics, \citep{cressie_statistics_2010}.
+
+We have tested the CPACE framework against a variety of simulated scenarios; where it performs at least as well as the PACE framework.
+We have shown that the CPACE framework gives the flexibility to accommodate a range of spatial dependencies through the use of standard spatial covariance kernels.
+Additionally it has the capability of allowing for more complex spatial kernels where appropriate.
+We have considered the use of a non-stationary Gibbs kernel as an example of such a kernel; and have shown the advantage that this can have on data simulated with non-stationary spatial dependency.
+
+Finally; we have applied the CPACE framework to the CESM-LE dataset; in two studies.
+One across a large spatial scale with a high degree of sparsity in our observations and another across a smaller spatial scale with less sparsity.
+We have seen that the CPACE framework performs well and have exhibited its use with three different spatial kernels, the Mat\'ern One Half, Mat\'ern Three Halves, and the Gibbs kernel.
+We have found the estimation procedure for the model, detailed in Chapters~\ref{cha:cpace},~\ref{cha:implementation}, works well to find reasonable models for the spatial dependency. 
+As well as this; the framework gives interpretable eigenfunctions which means the framework gives us an explanatory view of our chosen variables from the CESM-LE dataset.
+Coupled together with the good results for interpolation on relatively sparse data; the CPACE framework is a promising model for application to EO data.
+
+Interestingly in our application to the CESM-LE; the CPACE framework performs better on the pressure (PS) and temperature (TREFHT) variables.
+This we have reasoned is due to the smoother spatial variation of these variables compared to the wind speed (U10) and precipitation (TMQ) variables.
+The pressure and temperature variables exhibit some non-constant spatial variation over time; which is something the CPACE framework cannot capture as it assumes the spatial dependency is constant over time for each component.
+It may be possible to capture such variation by increasing the number of components of the model however  this increases the computational complexity of the model and thus the time taken for estimating the model. 
+
+\section{Future Work\label{sec:future_work}}
+There are a number of interesting research directions that have not been explored in this thesis.
+
+Considering first our initial attempt of modelling functional data through functional time series type models. 
+An avenue of possible future work would be to consider differing spatial smoothing methodologies other than the penalised regression used in the functional time series methodology in Chapter~\ref{cha:ftsm}. 
+This may be through the use of local linear smoothers; such as those used in the estimation of the covariance surface in \citep{yao_functional_2005} or something more sophisticated.
+Since we found that the over smoothing of the eigenfunctions in the functional time series methodology was the major limiting factor; it would be of interest to see if this can be overcome through a differing methodology.
+This may then make such modelling more appealing to EO applications.
+This would be advantageous as we noted the appeal of this approach for forecasting rather than interpolation. 
+
+Another clear avenue for future work is to study our CPACE framework under new real world applications. 
+We have limited our study of the CPACE framework to a variety of simulation studies and the application of the CESM-LE data.
+An interesting future application would be to apply this framework for image reconstruction of satellite imagery; for example those studied in \citep{meraner_cloud_2020} where the aim would be to reconstruct imagery obscured by clouds.
+This is a large growth area of EO data, \citep{aschbacher_european_2012}, and thus the desire for interpretable models which can handle this data is increasing.
+Such future applications may require extra attention to the implementation of the model as described in Chapter~\ref{cha:implementation}.
+
+Similarly, one may consider differing spatial kernels; or possibly introduce kernels which include extra covariate information in our CPACE framework.
+This could be achieved through appropriate extension of the spatial domain to be the spatial/covariate domain and introducing an appropriate kernel for such a domain.
+Whilst this isn't necessarily an extension of the CPACE framework such extensions may well help in modelling EO data as the additional covariate information could be used to create differing covariance for certain areas of interest.
+The added difficulty here would be the creation of valid spatial/covariate based kernels.
+
+A particularly interesting future direction for the CPACE framework would be to consider extending it to allow for correlation between eigenfunctions.	
+Currently; the framework assumes $K$ independent score processes, $\zeta_k(\ve{s})$, which are then combined to form the full covariance model given in Equation~\eqref{eqn:cpace_k_fn_form}.
+Adjusting this to allow for correlation between the score processes may allow the model to capture additional variation which is specific to certain locations of the spatial domain without having to increase the number of principal components, $K$.
+In essence this would be adjusting Equation~\ref{eqn:cpace_score} to: 
+\begin{equation}
+	\text{cov}\left(\zeta_p, \zeta_q \right) = a_{pq}
+\end{equation}
+where $a_{pq}$ is some covariance kernel for $p, q = 1, 2, \dots, K$.
+This full structure would be extremely flexible, and is mentioned in \citep{liu_functional_2017} in the context of their SPACE framework, however they note that this may be subject to unreliable estimation.
+Additionally there will be some difficulties in this approach as we would lose the diagonal structure of the full covariance; which may hinder the quick evaluation of the kernel, and the calculation of the log marginal likelihood which has been discussed in Chapter~\ref{cha:implementation}.
+
+Similarly, one may consider how to extend the CPACE framework so that the spatial dependency can change over time. 
+As we saw in the CESM-LE study in Chapter~\ref{cha:real_application} the lack of this ability caused relatively poor performance in interpolating the wind speed variable. 
+It would be interesting to consider capturing this by modifying the assumption that the spatial dependency for a single principal component is constant through time. 
+
+Another approach for future development of the CPACE framework is the extension to modelling multiple variables together.
+That is essentially having a multivariate response variable, and considering the relationship between these response variables by extending the CPACE framework.
+Similar work has been derived for Gaussian process regression of multivariate responses, \citep{chen_multivariate_2020}.
+This would allow the joint modelling of multiple variables; and possibly using one to help inform the other for interpolation or forecasting.
+This again would have application to EO data, in particular satellite remote sensing, where often another source of imagery is used to infer missing observations of another, \citep{meraner_cloud_2020}.
+
+Finally; an interesting future direction for the implementation of the CPACE framework would be the refinement of the estimation procedure.
+The current implementation works well for data sets of similar size to those discussed in this thesis.
+However; the estimation procedure still uses the full log marginal likelihood calculation, albeit with some dimensionality reduction using the Woodbury identity.
+One could easily consider how to extend this procedure to utilise some of the more recent advances in scaleable Gaussian process modelling.
+One could consider the use of Global approximations such as subset of regressors or variational sparse approximations, \citep{liu_when_2019}, and intertwine this with the CPACE framework to make this more scaleable.
+Additionally, one could consider implementing the model with a desire to utilise GPU's rather than CPU's.
+This would specifically allow for more complex non-stationary kernels such as the Gibbs kernel built upon neural network models for the length scale components.
+This would certainly allow the model to be more applicable to a range of large datasets, which are becoming more common in the EO space.
