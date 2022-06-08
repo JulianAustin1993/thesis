@@ -130,7 +130,7 @@ That is:
 \end{equation}
 where $\hat{\lambda}_k(\vesub{s}{i}, \vesub{s}{j})$ is the $k^\text{th}$ eigenvalue estimate from the decomposition of cross covariance $G_{ij}$.
 A series of empirical correlation factors $\hat{\rho}_{ijk}$ can then be used to estimate the hyper parameters in any parametric form of the correlation structure as needed. 
-In \citep{liu_functional_2017} they use a quasi-Newton method (BFGS, \citep{fletcher_practical_1987}) to estimate hyper parameters by minimising the sum of squared differences between empirical and fitted correlations.
+In \citep{liu_functional_2017} they use a quasi-Newton method (BFGS, \citep{fletcher_practical_2008}) to estimate hyper parameters by minimising the sum of squared differences between empirical and fitted correlations.
 
 The SPACE model is shown to be effective, identifiable, and outperforms the PACE model in \citep{liu_functional_2017}.
 In particular, it performs more accurate gap filling for unobserved trajectories on real world data sets.
@@ -958,7 +958,7 @@ That is:
 	\ve{\hat{\theta}} = \argmax_{\ve{\theta}} \text{log}~p(\ve{Y} | \ve{X}, \ve{\theta}) 
 \end{equation}
 There are numerous minimisation routines that can be possibly used for such high dimensional minimisation.
-A good reference for these routines is \citep{fletcher_practical_1987}.
+A good reference for these routines is \citep{fletcher_practical_2008}.
 As can be seen such optimisation requires the evaluation of possibly large matrices which can be computationally intensive.
 Fortunately, the structure of our model alleviates this issue somewhat, but other methods can be utilised to speed up computation. 
 Details on the practical implementation of hyper parameter optimisation and these methods can be found in Chapter~\ref{cha:implementation}. 

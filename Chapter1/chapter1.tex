@@ -26,7 +26,7 @@
 \nomenclature[a-X]{$\mathcal{X}$}{Functional random variable.}
 \nomenclature[a-N]{N}{Number of spatial observations.}
 \nomenclature[a-Ji]{$J_i$}{Number of temporal observations for $i^\text{th}$ functional observation.}
-\nomenclature[a-y]{$y_{ij}$}{Observed response at time $t_j$ for $i^\text{th}$ functional observation. See Equation~\ref{eqn:fd_temporal}.}
+\nomenclature[a-y]{$y_{ij}$}{Observed response at time $t_j$ for $i^\text{th}$ functional observation.}
 \nomenclature[a-Y]{Y}{Observed data set.}
 \nomenclature[g-chi]{$\chi$}{Functional data (observation of $\mathcal{X}$).}
 \nomenclature[g-epsilon]{$\varepsilon_{ij}$}{Noise process at time $t_j$ for $i^\text{th}$ functional observation.}
@@ -206,8 +206,8 @@ An area where such spatial dependency has been long studied is multivariate spat
 In the statistical literature spatial and spatio-temporal models have been extremely well studied, especially due to the prevalence of geo-statistical applications.
 In the following we briefly review some of the most commonly observed spatial and spatio-temporal statistical models in the multivariate analysis literature. 
 
-The monograph of \cite{cressie_statistics_2010} and references within provide a succinct summary of traditional methodologies in spatial statistics; many of which are applicable to EO data.
-Generally speaking, spatial data can be split into one of three categories; geo-statistical, area, and point process data, \citep{cressie_statistics_2010}.
+The monograph of \cite{cressie_statistics_2015} and references within provide a succinct summary of traditional methodologies in spatial statistics; many of which are applicable to EO data.
+Generally speaking, spatial data can be split into one of three categories; geo-statistical, area, and point process data, \citep{cressie_statistics_2015}.
 In this work the EO data described in Section~\ref{sec:eo}  are most suitably modelled using geo-statistical models.
 The canonical model used in geo-statistical settings is the Kriging model.
 The Kriging model is well described in \cite{stein_interpolation_1999}.
@@ -217,14 +217,14 @@ Extensions to the basic Kriging technique have also been employed across a numbe
 Kriging is well known in many fields through various names, in the FDA literature it is most often referred to as Gaussian processes regression.
 \citeauthor{shi_gaussian_2011} describe in detail the concept of Gaussian processes in the context of functional regression, \citep{shi_gaussian_2011}, and we discuss them more in Section~\ref{sec:gp}. 
 
-As is detailed in \cite{cressie_statistics_2010} a key aspect to geo-statistical modelling is the specification of spatial dependency in the observed data.
+As is detailed in \cite{cressie_statistics_2015} a key aspect to geo-statistical modelling is the specification of spatial dependency in the observed data.
 A common way for such specification is through parametric covariance or kernel functions.
-Traditional stationary parametric functions such as the Mat\`{e}rn covariance are discussed in detail in \cite{cressie_statistics_2010}.
+Traditional stationary parametric functions such as the Mat\`{e}rn covariance are discussed in detail in \cite{cressie_statistics_2015}.
 These commonly rely on the assumption of isotropy and stationarity in modelling which rarely holds in practice.
 Further literature has considered extensions of these and is in fact an active area of research.
 \citeauthor{schmidt_flexible_2020} compare a variety of methods for producing non stationary and heterogeneous covariance structures for the goal of spatial interpolation, \citep{schmidt_flexible_2020}.
 They group the various methods of creating such structures into four categories; deformation, convolution, covariate, and stochastic partial differential equations.
-The deformation approach proposed by \citeauthor{sampson_nonparametric_1992} extends the anisotropic stationary covariances, such as those described in \cite{cressie_statistics_2010}, by allowing for a non linear transformation to the space which creates a latent space where isotropy holds, \cite{sampson_nonparametric_1992}.
+The deformation approach proposed by \citeauthor{sampson_nonparametric_1992} extends the anisotropic stationary covariances, such as those described in \cite{cressie_statistics_2015}, by allowing for a non linear transformation to the space which creates a latent space where isotropy holds, \cite{sampson_nonparametric_1992}.
 The convolution approach proposed by \citeauthor{higdon_space_2002} uses a specific form of the covariance kernel which can be represented as a convolution between a convolution kernel and a white noise process.
 We discuss such an approach more in Chapter~\ref{cha:cpace}.
 The covariate based approach to constructing non stationary kernels tends to use an adaption to the convolution or deformation approaches with specific covariates, \citep{schmidt_flexible_2020}.
@@ -239,7 +239,7 @@ As such, one particular direction spatio-temporal modelling has considered is th
 Spatio-temporal covariance functions are discussed in \citep{cressie_statistics_2011}.
 Separability between spatial and temporal correlations is often a key assumption in some methods due to the reduction in computational complexity they provide.
 The separability assumption proposes that a space-time covariance function $k(\ve{s}, t, \ve{s}^\prime, t^\prime)$ can be factored into two separate covariance functions $k_{s}(\ve{s}, \ve{s}^\prime)$ and $k_t(t, t^\prime)$, one for each of the spatial and temporal dimensions. 
-In particular for EO data, \cite{george_selecting_2015} consider the selection of separable covariances and \cite{deb_spatio-temporal_2017} consider such models for air pollution data. 
+In particular for EO data, \cite{george_selecting_2015} consider the selection of separable covariances and \cite{deb_spatio-temporal_2019} consider such models for air pollution data. 
 However, the separability assumption may be too restrictive for capturing complex spatio-temporal processes, \citep{cressie_statistics_2011}. 
 As such \citep{mitchell_likelihood_2006, fuentes_testing_2006, aston_tests_2017} considers tests for when the separability assumptions hold.
 The work in \citep{cressie_classes_1999, gneiting_nonseparable_2002, iaco_nonseparable_2002} consider the construction of non separable covariance functions for when separability doesn't hold for use in spatio-temporal models.

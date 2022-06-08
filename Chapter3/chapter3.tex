@@ -403,10 +403,10 @@ Then, conditioning on the observed data $\ve{Y}$ given in Equation~\eqref{eqn:ob
 	\hat{\chi}_{i+h | i} = \E\left(\chi_{i+h}(t) | \ve{Y}, \ve{\phi}\right) = \hat{\mu}(t) + \sum_{k=1}^K \hat{\xi}_{i+h | i, k} \phi_k(t) 
 \end{equation}
 where $\hat{\xi}_{i+h | i, k}$ denotes the $h$-step ahead forecast of the $k^\text{th}$ principal component score.
-The method for which $\hat{\xi}_{i+h | i, k}$ is obtained can be any univariate time series method. Such methods are extremely well studied and discussed in the monograph of \citeauthor{hyndman_forecasting_2018} in \citep{hyndman_forecasting_2018}.
+The method for which $\hat{\xi}_{i+h | i, k}$ is obtained can be any univariate time series method. Such methods are extremely well studied and discussed in the monograph of \citeauthor{hyndman_forecasting_2021} in \citep{hyndman_forecasting_2021}.
 \citeauthor{hyndman_stochastic_2008} highlight that the forecast, given by Equation~\eqref{eqn:forecast}, is relatively insensitive to the choice of number of components in the principal decomposition provided it is sufficiently large.
 The variance of such a method can also easily be obtained through the sum of the component variances, \citep{hyndman_stochastic_2008}.
-The component variance of the forecast principal component scores are generally readily available from many time series models, \citep{hyndman_forecasting_2018}. 
+The component variance of the forecast principal component scores are generally readily available from many time series models, \citep{hyndman_forecasting_2021}. 
 The above forecasting methodology initially described in \citep{hyndman_robust_2007} used normal FPCA procedure with outliers weighted to zero, however this was reconsidered in \citep{hyndman_forecasting_2009} to include a geometric weighting to the principal components to allow for changes in the function over time. 
 
 Such a methodology motivates the construction of the CPACE model described in Chapter~\ref{cha:cpace} for correlated functional data by considering the case where the principal components scores obey univariate correlated models not just time series. To describe some of these such models we use the concept of a Gaussian Process. We give background to this in the following section. 
@@ -454,7 +454,7 @@ There are various common forms of the covariance function but all must have the 
 The covariance function is of such importance in Gaussian process modelling and spatial statistics that it has been widely studied.
 See \citep[Chapter~4]{williams_gaussian_2006} for a detailed introduction to various covariance functions. We expand on Section~\ref{sec:st_methods} to briefly introduce the form of covariance function which we will consider throughout this work. 
 
-Of the many different covariance functions employed in Gaussian processes, stationary covariance functions are most commonly employed due to their simplicity and ease of construction, \citep{cressie_statistics_2010}.
+Of the many different covariance functions employed in Gaussian processes, stationary covariance functions are most commonly employed due to their simplicity and ease of construction, \citep{cressie_statistics_2015}.
 One such commonly used covariance function is the Mat\`{e}rn covariance function which is given by, \citep{abramowitz_handbook_2013}: 
 \begin{equation}\label{eqn:mat}
 	C_\nu(d) = \sigma^2 \frac{2^{1-\nu}}{\Gamma(\nu)} \left(\sqrt{2\nu}d\right)^\nu K_\nu \left( \sqrt{2\nu}d \right) 

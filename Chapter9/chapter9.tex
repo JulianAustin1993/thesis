@@ -13,7 +13,7 @@
 The aim of this thesis has been to consider the role that models based on functional data analysis techniques can be used to represent earth observation data.
 In particular, we have focused on developing methods which can help explain the dataset's spatial and temporal variation in a parsimonious way.
 We have provided a novel methodology, CPACE, which achieves this through building upon a functional principal components decomposition of the data to inform the temporal component of the spatial-temporal covariance function under a Gaussian process framework.
-We have highlighted this frameworks p erformance through a simulation study and in application to the CESM-LE dataset. 
+We have highlighted this frameworks performance through a simulation study and in application to the CESM-LE dataset. 
 
 In Chapter~\ref{cha:Into} we have detailed the specific subtleties of earth observation data; namely their inherent spatial and temporal dependency, and lattice like collection over the spatial domain.
 We have provided a description of such a data set by viewing it as a collection of partially observed functional data.
@@ -48,7 +48,7 @@ This builds on the PACE, \citep{yao_functional_2005}, and SPACE ,\citep{liu_func
 The advantage of this formulation is that we can utilise the nice properties of Gaussian process regression to both estimate hyper parameters and obtain predictive distributions rather than just a mean prediction. 
 We have shown under certain assumptions that both the mean function and covariance surfaces can be estimated consistently with penalised spline regression.
 These assumptions essentially require a limit to the spatial dependency that can be observed in the data set for these estimators to remain consistent.
-These assumption; whilst strong, are often common in spatial statistics, \citep{cressie_statistics_2010}.
+These assumptions; whilst strong, are often common in spatial statistics, \citep{cressie_statistics_2015}.
 
 We have tested the CPACE framework against a variety of simulated scenarios; where it performs at least as well as the PACE framework.
 We have shown that the CPACE framework gives the flexibility to accommodate a range of spatial dependencies through the use of standard spatial covariance kernels.
@@ -113,7 +113,7 @@ Finally; an interesting future direction for the implementation of the CPACE fra
 The current implementation works well for data sets of similar size to those discussed in this thesis.
 However; the estimation procedure still uses the full log marginal likelihood calculation, albeit with some dimensionality reduction using the Woodbury identity.
 One could easily consider how to extend this procedure to utilise some of the more recent advances in scaleable Gaussian process modelling.
-One could consider the use of Global approximations such as subset of regressors or variational sparse approximations, \citep{liu_when_2019}, and intertwine this with the CPACE framework to make this more scaleable.
+One could consider the use of Global approximations such as subset of regressors or variational sparse approximations, \citep{liu_when_2020}, and intertwine this with the CPACE framework to make this more scaleable.
 Additionally, one could consider implementing the model with a desire to utilise GPU's rather than CPU's.
 This would specifically allow for more complex non-stationary kernels such as the Gibbs kernel built upon neural network models for the length scale components.
 This would certainly allow the model to be more applicable to a range of large datasets, which are becoming more common in the EO space.
