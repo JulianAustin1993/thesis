@@ -283,7 +283,7 @@ However, it is interesting to note that on observed training data all the models
 This is encouraging as it suggests, that we don't lose anything by considering a more complex model, as the CPACE framework can adapt to independently observed data as the kernel parameters are estimated such that the kernel becomes close to the White kernel.
 
 \begin{table}
-	\caption[Simulation results for Scenario A on training data]{Simulation results for spatially independent data (Scenario A) for the model's ability to estimate the functional values at points of observation. Bold indicates best in class.}
+	\caption[Simulation results for Scenario A on training data.]{Simulation results for spatially independent data (Scenario A) for the model's ability to estimate the functional values at points of observation. Bold indicates best in class.}
 	\centering
 	\label{tab:train_A}
 	\begin{tabular}{lcc}
@@ -304,7 +304,7 @@ This is akin to the combination of the validation and the training data sets as 
 Table~\ref{tab:val_A} shows the metrics on these data points.
 
 \begin{table}
-	\caption[Simulation results for Scenario A on validation data]{Simulation results for spatially independent data (Scenario A) for the model's ability to estimate the functional data at locations of observation across the whole temporal domain. Bold indicates best in class.}
+	\caption[Simulation results for Scenario A on validation data.]{Simulation results for spatially independent data (Scenario A) for the model's ability to estimate the functional data at locations of observation across the whole temporal domain. Bold indicates best in class.}
 	\centering
 	\label{tab:val_A}
 	\begin{tabular}{lcc}
@@ -388,7 +388,7 @@ We discuss the implementation we have used to minimise this in Chapter~\ref{cha:
 This issue wasn't present CPACE models using the Mat\'ern based kernels.
 
 \begin{table}
-	\caption[Simulation results for Scenario A on test data]{Simulation results for Scenario A on the model's ability to estimate the functional data at locations with no observation across the whole temporal domain. Bold indicates best in class.}
+	\caption[Simulation results for Scenario A on test data.]{Simulation results for Scenario A on the model's ability to estimate the functional data at locations with no observation across the whole temporal domain. Bold indicates best in class.}
 	\centering
 	\label{tab:test_A}
 	\begin{tabular}{lcc}
@@ -430,7 +430,7 @@ Both the Mat\'ern One Half and Mat\'ern Three Halves models shows considerable i
 
 
 \begin{table}
-	\caption[Simulation results for Scenario B on observed data]{Simulation results for Scenario B for the model`s ability to estimate the functional data at points of observation. Bold indicates best in class.}
+	\caption[Simulation results for Scenario B on observed data.]{Simulation results for Scenario B for the model`s ability to estimate the functional data at points of observation. Bold indicates best in class.}
 	\centering
 	\label{tab:train_B}
 	\begin{tabular}{lcc}
@@ -515,7 +515,7 @@ As due to their White kernel they only propose the mean for all unobserved data.
 While this was advantageous in Scenario A, under spatial correlation between functional data this becomes a hindrance. 
 
 \begin{table}
-	\caption[Simulation results for Scenario B on test data]{Simulation results for Scenario B for the model`s ability to estimate the functional data at locations with no observation across the whole temporal domain. Bold indicates best in class.}
+	\caption[Simulation results for Scenario B on test data.]{Simulation results for Scenario B for the model`s ability to estimate the functional data at locations with no observation across the whole temporal domain. Bold indicates best in class.}
 	\centering
 	\label{tab:test_B}
 	\begin{tabular}{lcc}
@@ -589,7 +589,7 @@ This is another indication that the CPACE frame for learning hyper parameters of
 This will be discussed further in Chapter~\ref{cha:implementation}.
 
 \begin{table}
-	\caption[Simulation results for Scenario C on observed data]{Simulation results for Scenario C for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
+	\caption[Simulation results for Scenario C on observed data.]{Simulation results for Scenario C for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
 	\centering
 	\label{tab:train_C}
 	\begin{tabular}{lcc}
@@ -645,7 +645,7 @@ In Figure~\ref{fig:test_met_C} we compare only the \verb*|fpca_gp| and \verb*|ma
 We note that the \verb*|matern_one| and \verb*|gibbs| models produce similar reconstructions to that of \verb*|matern_three|.
 
 \begin{table}
-	\caption[Simulation results for Scenario C on test data]{Simulation results for the models ability to estimate the functional data at locations with no observations across the whole temporal domain. Bold indicates best in class.}
+	\caption[Simulation results for Scenario C on test data.]{Simulation results for the models ability to estimate the functional data at locations with no observations across the whole temporal domain. Bold indicates best in class.}
 	\centering
 	\label{tab:test_C}
 	\begin{tabular}{lcc}
@@ -728,7 +728,7 @@ For example at the corners of the domain $\mathcal{S}$ and so a reasonable appro
 
 
 \begin{table}[b]
-	\caption[Simulation results for Scenario D on observed data]{Simulation results for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
+	\caption[Simulation results for Scenario D on observed data.]{Simulation results for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
 	\centering
 	\label{tab:train_D}
 	\begin{tabular}{lcc}
@@ -772,7 +772,7 @@ Here we can clearly see the improvement in prediction from using the CPACE frame
 \end{figure}
 
 \begin{table}[b]
-	\caption[Simulation results for Scenario D on test data]{Simulation results for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
+	\caption[Simulation results for Scenario D on test data.]{Simulation results for the models ability to estimate the functional data at points of observation. Bold indicates best in class.}
 	\centering
 	\label{tab:test_D}
 	\begin{tabular}{lcc}

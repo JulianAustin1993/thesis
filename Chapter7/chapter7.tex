@@ -266,7 +266,7 @@ This can be alleviated in the models which use spatial dependency as they can ut
 It is alleviated in \verb*|fpca_gp| model since the CPACE framework allows for further estimation of the White kernel variances in accordance with the Gaussian process structure, something which the \verb*|pace| model doesn't allow for. 
 
 \begin{table}
-	\caption[Results for PS variable on validation data in the Global study]{Results for reconstruction of the validation data for the PS variable in the global study from the CESM-LE dataset. Bold indicates best in class. We give the mean  and standard deviation of the metrics over the $40$  realisations.}
+	\caption[Results for the PS variable on validation data in the Global study.]{Results for reconstruction of the validation data for the PS variable in the global study from the CESM-LE dataset. Bold indicates best in class. We give the mean  and standard deviation of the metrics over the $40$  realisations.}
 	\centering
 	\label{tab:train_cesm_ps_globe}
 	\begin{tabular}{lcc}
@@ -301,7 +301,7 @@ As can be seen the models miss any periodic elements due to the fact that the ma
 
 
 \begin{table}
-	\caption[Results for PS variable on test data in the Global study]{Results for reconstruction of the test data for the PS variable in the global study from the CESM-LE dataset. Bold indicates best in class. Scale of $e+03$.}
+	\caption[Results for the PS variable on test data in the Global study.]{Results for reconstruction of the test data for the PS variable in the global study from the CESM-LE dataset. Bold indicates best in class. Scale of $e+03$.}
 	\centering
 	\label{tab:test_cesm_ps_globe}
 	\begin{tabular}{lcc}
@@ -343,7 +343,7 @@ We can see clearly the impact of utilising the spatial dependency but note we do
 Similarly we can see the Gibbs model captures some more intricate  spatial details but fails to match the Mat\'ern kernel in overall performance as it doesn't capture the scale of the changes as well. 
 
 \begin{table}
-	\caption[Results for PS variable on full data in the Globe study]{Results for reconstruction of the full data for the PS variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the PS variable on full data in the Globe study.]{Results for reconstruction of the full data for the PS variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_ps_globe}
 	\begin{tabular}{lcc}
@@ -385,7 +385,7 @@ This causes the \verb*|pace| and \verb*|fpca_gp| model are comparable.
 This is expected as they essentially are equivalent models, albeiit the \verb*|fpca_gp| model uses our CPACE framework so has the ability to refine the eigenvalue estimates.
 
 \begin{table}
-	\caption[Results for TREFHT variable on validation data in the Global study]{Results for reconstruction of the validation data for the TREFHT variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on validation data in the Global study.]{Results for reconstruction of the validation data for the TREFHT variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_trefht_globe}
 	\begin{tabular}{lcc}
@@ -423,7 +423,7 @@ In Table~\ref{tab:full_cesm_trefht_globe} we can see clearly the difference in t
 For illustration, we display an example reconstruction using the various models in Figure~\ref{fig:full_ex_trefht_globe}.
 
 \begin{table}
-	\caption[Results for TREFHT variable on test data in the Global study]{Results for reconstruction of the test data for the TREFHT variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on test data in the Global study.]{Results for reconstruction of the test data for the TREFHT variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_trefht_globe}
 	\begin{tabular}{lcc}
@@ -439,7 +439,7 @@ For illustration, we display an example reconstruction using the various models 
 \end{table}
 
 \begin{table}
-	\caption[Results for TREFHT variable on full data in the Global study]{Results for reconstruction of the full data for the TREFHT variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on full data in the Global study.]{Results for reconstruction of the full data for the TREFHT variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_trefht_globe}
 	\begin{tabular}{lcc}
@@ -519,7 +519,7 @@ This is probably an effect of over fitting the complex non-stationary model whic
 Whereas the Mat\'ern model has a relatively simpler kernel, and thus estimating its hyper parameters is less prone to error.
 
 \begin{table}
-	\caption[Results for TMQ variable on training data in the Global study]{Results for reconstruction of the training data for the TMQ variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TMQ variable on training data in the Global study.]{Results for reconstruction of the training data for the TMQ variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_tmq_globe}
 	\begin{tabular}{lcc}
@@ -535,7 +535,7 @@ Whereas the Mat\'ern model has a relatively simpler kernel, and thus estimating 
 \end{table}
 
 \begin{table}
-	\caption[Results for TMQ variable on test data in the Global study]{Results for reconstruction of the test data for the TMQ variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TMQ variable on test data in the Global study.]{Results for reconstruction of the test data for the TMQ variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_tmq_globe}
 	\begin{tabular}{lcc}
@@ -586,7 +586,7 @@ This also identifies that we seem to have missed again the periodicity in the mo
 Again, similar to the previous variables, this is down to the models focusing on the level shift as their main mode of variation.
 
 \begin{table}
-	\caption[Results for U10 variable on validation data in the Globe study]{Results for reconstruction of the validation data for the U10 variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on validation data in the Globe study.]{Results for reconstruction of the validation data for the U10 variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_u10_globe}
 	\begin{tabular}{lcc}
@@ -621,7 +621,7 @@ Hence, the poorer performance on average.
 
 
 \begin{table}
-	\caption[Results for U10 variable on test data in the Global study]{Results for reconstruction of the training data for the U10 variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on test data in the Global study.]{Results for reconstruction of the training data for the U10 variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_u10_globe}
 	\begin{tabular}{lcc}
@@ -637,7 +637,7 @@ Hence, the poorer performance on average.
 \end{table}
 
 \begin{table}
-	\caption[Results for U10 variable on training data in the Global study]{Results for reconstruction of the test data for the U10 variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on training data in the Global study.]{Results for reconstruction of the test data for the U10 variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_u10_globe}
 	\begin{tabular}{lcc}
@@ -758,7 +758,7 @@ An indicative example of model reconstruction is given in Figure~\ref{fig:train_
 It highlights how similar the models predict partially observed functions. 
 
 \begin{table}
-	\caption[Results for PS variable on validation data in the European study]{Results for reconstruction of the validation data for the PS variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the PS variable on validation data in the European study.]{Results for reconstruction of the validation data for the PS variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_ps_eur}
 	\begin{tabular}{lcc}
@@ -789,7 +789,7 @@ This is probably due to the added complexity in estimating the kernel hyper para
 We discuss our approach to minimising this effect in Chapter~\ref{cha:implementation}.
 
 \begin{table}
-	\caption[Results for PS variable on test data in the European study]{Results for reconstruction of the test data for the PS variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the PS variable on test data in the European study.]{Results for reconstruction of the test data for the PS variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_ps_eur}
 	\begin{tabular}{lcc}
@@ -822,7 +822,7 @@ Interestingly, the performance increase over the non-spatial kernel models is le
 This is a function of the less varied data and the increase in observations, which gives the non-spatial models more points at which the functions have some observations which is where they perform best.
 
 \begin{table}
-	\caption[Results for PS variable on full data in the European study]{Results for reconstruction of the full data for the PS variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the PS variable on full data in the European study.]{Results for reconstruction of the full data for the PS variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_ps_eur}
 	\begin{tabular}{lcc}
@@ -884,7 +884,7 @@ This is expected as the PACE and CPACE methodology will utilise the observed val
 It so happens in this study that the CPACE models don't gain much additional information from neighbouring curves. 
 
 \begin{table}
-	\caption[Results for TREFHT variable on validation data in the European study]{Results for reconstruction of the validation data for the TREFHT variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on validation data in the European study.]{Results for reconstruction of the validation data for the TREFHT variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_trefht_eur}
 	\begin{tabular}{lcc}
@@ -910,7 +910,7 @@ This might suggest that while the Mat\'ern model performs best in mean, the Gibb
 
 
 \begin{table}
-	\caption[Results for TREFHT variable on test data in the European study]{Results for reconstruction of the test data for the TREFHT variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on test data in the European study.]{Results for reconstruction of the test data for the TREFHT variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_trefht_eur}
 	\begin{tabular}{lcc}
@@ -943,7 +943,7 @@ We might expect the Gibbs kernel to be able to predict such spatial variation, h
 We reason this will be because there is insufficient evidence in the training data to suggest such non-stationary dependency. 
 
 \begin{table}
-	\caption[Results for TREFHT variable on full data in the European study]{Results for reconstruction of the full data for the TREFHT variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on full data in the European study.]{Results for reconstruction of the full data for the TREFHT variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_trefht_eur}
 	\begin{tabular}{lcc}
@@ -1016,7 +1016,7 @@ This can occur due to numerical issues when estimating the hyper parameters of t
 This is discussed more in Chapter~\ref{cha:implementation}.
 
 \begin{table}
-	\caption[Results for TMQ variable on validation data in the European study]{Results for reconstruction of the validation data for the TMQ variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TMQ variable on validation data in the European study.]{Results for reconstruction of the validation data for the TMQ variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_tmq_eur}
 	\begin{tabular}{lcc}
@@ -1044,7 +1044,7 @@ As mentioned in Section~\ref{ssec:eval_metrics}, this corresponds to functional 
 Table~\ref{tab:test_cesm_tmq_eur} presents these results.
 
 \begin{table}
-	\caption[Results for TMQ variable on test data in the European study]{Results for reconstruction of the test data for the TMQ variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TMQ variable on test data in the European study.]{Results for reconstruction of the test data for the TMQ variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_tmq_eur}
 	\begin{tabular}{lcc}
@@ -1088,7 +1088,7 @@ We can see that while the Gibbs model performs worse on average, it occasionally
 This indicates it might not be a clear cut decision that the Mat\'ern model is always the correct kernel to choose for this study.
 
 \begin{table}
-	\caption[Results for TMQ variable on full data in the European study]{Results for reconstruction of the full data for the TMQ variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TMQ variable on full data in the European study.]{Results for reconstruction of the full data for the TMQ variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_tmq_eur}
 	\begin{tabular}{lcc}
@@ -1143,7 +1143,7 @@ We can see that on the whole the models captures the periodic nature well, but s
 This isn't an unusual sight for models with a periodic temporal component.
  
 \begin{table}
-	\caption[Results for U10 variable on validation data in the European study]{Results for reconstruction of the validation data for the U10 variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on validation data in the European study.]{Results for reconstruction of the validation data for the U10 variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_u10_eur}
 	\begin{tabular}{lcc}
@@ -1174,7 +1174,7 @@ We can see clearly that they all fail to capture the variation in the peak in th
 The Mat\'ern model seems to slightly outperform the Gibbs kernel in this one example in this area also. 
 
 \begin{table}
-	\caption[Results for U10 variable on test data in the European study]{Results for reconstruction of the test data for the U10 variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on test data in the European study.]{Results for reconstruction of the test data for the U10 variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_u10_eur}
 	\begin{tabular}{lcc}
@@ -1209,7 +1209,7 @@ One way to capture this would be to let $K$, the number of components of the mod
 However, in these studies we have not considered how to choose $K$, a discussion on this is presented in Chapter~\ref{cha:implementation}.
 
 \begin{table}
-	\caption[Results for U10 variable on full data in the European study]{Results for reconstruction of the full data for the U10 variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on full data in the European study.]{Results for reconstruction of the full data for the U10 variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_u10_eur}
 	\begin{tabular}{lcc}
