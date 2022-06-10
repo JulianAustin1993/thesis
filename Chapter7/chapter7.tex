@@ -71,7 +71,7 @@ As we can see this is an extreme case of sparsity, which should provide a good c
 		\includegraphics[width=\textwidth]{globe_sparse_train}
 		\caption{Observed data.}
 	\end{subfigure}
-	\caption{An example of the sparsity induced from the  generating procedure in Section~\ref{ssec:cesm_globe} for the TREFHT variable of the CESM-LE dataset. Sparsity observed from the spatial view point.}
+	\caption[An example of the sparsity induced from the  generating procedure in Section~\ref{ssec:cesm_globe} for the TREFHT variable of the CESM-LE dataset.]{An example of the sparsity induced from the  generating procedure in Section~\ref{ssec:cesm_globe} for the TREFHT variable of the CESM-LE dataset. Sparsity observed from the spatial view point.}
 	\label{fig:cesm_sparsity}
 \end{figure}
 
@@ -84,7 +84,7 @@ This corresponds roughly to European continent, and is indicated in Figure~\ref{
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{cesm_eur_bbox}
-	\caption{Area of interest in the Europe study in blue. This is fixed and the same for each variable of interest in the CESM-LE dataset.}
+	\caption[The area of interest in the European study.]{Area of interest in the European study in blue. This is fixed and the same for each variable of interest in the CESM-LE dataset.}
 	\label{fig:cesm_eur_bbox}
 \end{figure}
 
@@ -121,7 +121,7 @@ As can be seen this sparsity is less severe than that of the globe study, but st
 		\includegraphics[width=\textwidth]{eur_sparse_train}
 		\caption{Observed data.}
 	\end{subfigure}
-	\caption{An example of the sparsity induced from the  generating procedure in Section~\ref{ssec:cesm_eur} for the TREFHT variable of the CESM-LE dataset. Sparsity observed from the spatial view point.}
+	\caption[An example of the sparsity induced from the  generating procedure in Section~\ref{ssec:cesm_eur} for the TREFHT variable of the CESM-LE dataset.]{An example of the sparsity induced from the  generating procedure in Section~\ref{ssec:cesm_eur} for the TREFHT variable of the CESM-LE dataset. Sparsity observed from the spatial view point.}
 	\label{fig:cesm_sparsity_eur}
 \end{figure}
 
@@ -164,7 +164,7 @@ Here we have reduced the dimension for ease of illustration but the same concept
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{spatial_projection}
-	\caption[Difference in great circle distance and the Euclidean distance in $\mathbb{R}^2$ ]{Difference in great circle distance and the Euclidean distance between point A and point B on the unit circle.}
+	\caption[Difference in great circle distance and the Euclidean distance in $\mathbb{R}^2$.]{Difference in great circle distance and the Euclidean distance between point A and point B on the unit circle.}
 	\label{fig:spatial_projection}
 \end{figure}
 
@@ -202,7 +202,7 @@ The anisotropy should allow the spatial kernel to capture difference in correlat
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{matern_aniso_ex}
-	\caption{An example covariance structure with anisotropic Mat\'ern Three kernel.}
+	\caption[An example of the covariance structure with the anisotropic Mat\'ern Three kernel.]{An example of the covariance structure with the anisotropic Mat\'ern Three kernel.}
 	\label{fig:matern_aniso}
 \end{figure}
 
@@ -320,14 +320,14 @@ As can be seen the models miss any periodic elements due to the fact that the ma
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{phi_ps_globe}
-	\caption{The first eigenfunction from the FPCA decomposition used in all models for the PS variable in the global study.  Example true curves in light grey given for context.}
+	\caption[The first eigenfunction from the FPCA decomposition used in all models for the PS variable in the global study.]{The first eigenfunction from the FPCA decomposition used in all models for the PS variable in the global study.  Example true curves in light grey given for context.}
 	\label{fig:phi_ps_globe}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{train_ex_ps_globe}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE pressure variable from the validation dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE pressure variable from the validation dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE pressure variable from the validation dataset.}
 	\label{fig:train_ex_ps_globe}
 \end{figure}
 
@@ -361,7 +361,7 @@ Similarly we can see the Gibbs model captures some more intricate  spatial detai
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_ps_globe}
-	\caption{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE PS variable using the various models in the Global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE PS variable using the various models in the Global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE PS variable using the various models in the Global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_ps_globe}
 \end{figure}
 
@@ -407,7 +407,7 @@ An example of such reconstructions for our models considered is given in Figure~
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_trefht_globe}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the global study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the global study from the test dataset.}
 	\label{fig:test_ex_trefht_globe}
 \end{figure}
 
@@ -457,7 +457,7 @@ For illustration, we display an example reconstruction using the various models 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_trefht_globe}
-	\caption{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TREFHT variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TREFHT variable using the various models in the global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TREFHT variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_trefht_globe}
 \end{figure}
 
@@ -472,7 +472,7 @@ Occasionally it will, and in those scenarios will capture more of the complex na
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{cesm_trefht_dist}
-	\caption{Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the TREFHT variable.}
+	\caption[Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the TREFHT variable.]{Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the TREFHT variable.}
 	\label{fig:cesm_trefht_dist}
 \end{figure}
 
@@ -506,7 +506,7 @@ This is most likely due to the sparsity of observations used for training meanin
 		\caption{Second eigenfunction.}
 		\label{fig:phi_2_tmq_globe}
 	\end{subfigure}
-	\caption{The first two eigenfunctions impact on the mean function from the PACE and CPACE framework of the TMQ variable in the global study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
+	\caption[The first two eigenfunctions impact on the mean function from the PACE and CPACE framework of the TMQ variable in the global study.]{The first two eigenfunctions impact on the mean function from the PACE and CPACE framework of the TMQ variable in the global study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
 	\label{fig:phi_tmq_globe}
 \end{figure}
 
@@ -561,14 +561,14 @@ We can see that although the Gibbs model has some areas of correct structure it 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_tmq_globe}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the global study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the global study from the test dataset.}
 	\label{fig:test_ex_tmq_globe}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_tmq_globe}
-	\caption{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TMQ variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TMQ variable using the various models in the global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TMQ variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_tmq_globe}
 \end{figure}
 
@@ -604,7 +604,7 @@ Again, similar to the previous variables, this is down to the models focusing on
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{train_ex_u10_globe}
-\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the validation dataset.}
+\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the validation dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the validation dataset.}
 \label{fig:train_ex_u10_globe}
 \end{figure}
 
@@ -655,7 +655,7 @@ Hence, the poorer performance on average.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{cesm_u10_dist}
-	\caption{Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the U10 variable from the global study.}
+	\caption[Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the U10 variable from the global study.]{Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the U10 variable from the global study.}
 	\label{fig:cesm_u10_dist}
 \end{figure}
 
@@ -666,14 +666,14 @@ As mentioned before, this is likely because we just don't have enough evidence f
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{test_ex_u10_globe}
-\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the test dataset.}
+\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the test dataset.}
 \label{fig:test_ex_u10_globe}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{full_ex_u10_globe}
-\caption{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE U10 variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE U10 variable using the various models in the global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE U10 variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 \label{fig:full_ex_u10_globe}
 \end{figure}
 
@@ -743,7 +743,7 @@ This is a result of the denser observations and the smaller spatial scale in thi
 		\caption{Second eigenfunction.}
 		\label{fig:phi_2_ps_eur}
 	\end{subfigure}
-	\caption{The first two eigenfunctions impact on the mean function from the PACE and CPACE framework for the PS variable in the European study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
+	\caption[The first two eigenfunctions impact on the mean function from the PACE and CPACE framework for the PS variable in the European study.]{The first two eigenfunctions impact on the mean function from the PACE and CPACE framework for the PS variable in the European study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
 	\label{fig:phi_ps_eur}
 \end{figure}
 
@@ -776,7 +776,7 @@ It highlights how similar the models predict partially observed functions.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{train_ex_ps_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE PS variable in the European study from the validation dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE PS variable in the European study from the validation dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE PS variable in the European study from the validation dataset.}
 	\label{fig:train_ex_ps_eur}
 \end{figure}
 
@@ -810,7 +810,7 @@ This shows how the spatial models can adapt using the location of the spatial do
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_ps_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE PS variable in the European study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE PS variable in the European study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE PS variable in the European study from the test dataset.}
 	\label{fig:test_ex_ps_eur}
 \end{figure}
 
@@ -847,7 +847,7 @@ It confirms,  in an illustrative way, the advantage of the CPACE framework.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_ps_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE PS variable using the various models in the European study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE PS variable using the various models in the European study.]{An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE PS variable using the various models in the European study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_ps_eur}
 \end{figure}
 
@@ -873,7 +873,7 @@ It is reasonable to assume that as we move south the contribution of the first w
 		\caption{Second eigenfunction.}
 		\label{fig:phi_2_trefht_eur}
 	\end{subfigure}
-	\caption{The first two eigenfunctions impact on the mean function from the PACE and CPACE framework for the TREFHT variable in the European study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
+	\caption[The first two eigenfunctions impact on the mean function from the PACE and CPACE framework for the TREFHT variable in the European study.]{The first two eigenfunctions impact on the mean function from the PACE and CPACE framework for the TREFHT variable in the European study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
 	\label{fig:phi_trefht_eur}
 \end{figure}
 
@@ -928,7 +928,7 @@ This might suggest that while the Mat\'ern model performs best in mean, the Gibb
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_trefht_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the European study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the European study from the test dataset]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the European study from the test dataset.}
 	\label{fig:test_ex_trefht_eur}
 \end{figure}
 
@@ -961,7 +961,7 @@ We reason this will be because there is insufficient evidence in the training da
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_trefht_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE TREFHT variable using the various models in the European study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE TREFHT variable using the various models in the European study.]{An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE TREFHT variable using the various models in the European study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_trefht_eur}
 \end{figure}
 
@@ -1000,7 +1000,7 @@ Again this provides confidence in the PACE and CPACE methodologies as they seem 
 		\caption{Second eigenfunction.}
 		\label{fig:phi_2_tmq_eur}
 	\end{subfigure}
-	\caption{The first two eigenfunctions impact on the mean function from the PACE and CPACE decomposition framework for the TMQ variable in the European study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
+	\caption[The first two eigenfunctions impact on the mean function from the PACE and CPACE decomposition framework for the TMQ variable in the European study.]{The first two eigenfunctions impact on the mean function from the PACE and CPACE decomposition framework for the TMQ variable in the European study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
 	\label{fig:phi_tmq_eur}
 \end{figure}
 
@@ -1035,7 +1035,7 @@ This is discussed more in Chapter~\ref{cha:implementation}.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{cesm_tmq_eur_dist}
-	\caption{Distribution plot of the RMSE and MAE metrics on validation data for the TMQ variable in the European study.}
+	\caption[Distribution plot of the RMSE and MAE metrics on validation data for the TMQ variable in the European study.]{Distribution plot of the RMSE and MAE metrics on validation data for the TMQ variable in the European study.}
 	\label{fig:cesm_tmq_eur_dist}
 \end{figure}
 
@@ -1071,7 +1071,7 @@ However, in this case the Gibbs model confidence band for the prediction seems m
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_tmq_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the European study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the European study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the European study from the test dataset.}
 	\label{fig:test_ex_tmq_eur}
 \end{figure}
 
@@ -1106,7 +1106,7 @@ This indicates it might not be a clear cut decision that the Mat\'ern model is a
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_tmq_eur_dist}
-	\caption{Distribution plot of the SSIM metric on full data for the TMQ variable in the European study for the Mat\'ern and Gibbs kernel.}
+	\caption[Distribution plot of the SSIM metric on full data for the TMQ variable in the European study for the Mat\'ern and Gibbs kernel.]{Distribution plot of the SSIM metric on full data for the TMQ variable in the European study for the Mat\'ern and Gibbs kernel.}
 	\label{fig:full_tmq_eur_dist}
 \end{figure}
 
@@ -1125,7 +1125,7 @@ More modest variation across space is well captured however since this tends to 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_tmq_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE TMQ variable using the various models in the European study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE TMQ variable using the various models in the European study.]{An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE TMQ variable using the various models in the European study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_tmq_eur}
 \end{figure}
 
@@ -1161,7 +1161,7 @@ This isn't an unusual sight for models with a periodic temporal component.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{train_ex_u10_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the European study from the validation dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the European study from the validation dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the European study from the validation dataset.}
 	\label{fig:train_ex_u10_eur}
 \end{figure}
 
@@ -1192,7 +1192,7 @@ The Mat\'ern model seems to slightly outperform the Gibbs kernel in this one exa
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_u10_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the European study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the European study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the European study from the test dataset.}
 	\label{fig:test_ex_u10_eur}
 \end{figure}
 
@@ -1227,7 +1227,7 @@ However, in these studies we have not considered how to choose $K$, a discussion
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_u10_eur}
-	\caption{An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE U10 variable using the various models. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE U10 variable using the various models.]{An indicative example of the CPACE model performance on reconstruction for the European study of the CESM-LE U10 variable using the various models. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_u10_eur}
 \end{figure}
 

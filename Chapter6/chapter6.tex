@@ -46,7 +46,7 @@ The first eigenfunction represent periodic variation at the start and end of the
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{mean_sim}
-	\caption{The mean function chosen for the simulation study over the temporal domain. We have illustrated example functional data simulated using this mean function in grey.}
+	\caption[The simulation studies mean function.]{The mean function chosen for the simulation study over the temporal domain. We have illustrated example functional data simulated using this mean function in grey.}
 	\label{fig:sim_mean}
 \end{figure}
 
@@ -84,7 +84,7 @@ Figure~\ref{fig:sim_example} highlights an example of the sparsity and observati
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{sim_ex}
-	\caption{An example functional data with observation points. This example is taken from Scenario A and highlights the sparsity of observation as well as the impact of the noise variance on observations.}
+	\caption[An example simulated functional data from Scenario A.]{An example functional data with observation points. This example is taken from Scenario A and highlights the sparsity of observation as well as the impact of the noise variance on observations.}
 	\label{fig:sim_example}
 \end{figure}
 
@@ -179,7 +179,7 @@ Figure~\ref{fig:ex_mat_1} shows the covariance on our spatial domain $S$ with le
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{ex_mat_1}
-	\caption[Example Mat\'ern One Half covariance]{The covariance between all points in out spatial domain $\mathcal{S}$ with the Mat\'ern One Half covariance function with $\rho=1.5$ and $\lambda=1$. Each index on the axis corresponds to a point $\ve{s}_i$ in $\mathcal{S}$ in our discretised grid.}
+	\caption[An example Mat\'ern One Half covariance function evaluated between all points in the spatial grid.]{The covariance between all points in out spatial domain $\mathcal{S}$ with the Mat\'ern One Half covariance function with $\rho=1.5$ and $\lambda=1$. Each index on the axis corresponds to a point $\ve{s}_i$ in $\mathcal{S}$ in our discretised grid.}
 	\label{fig:ex_mat_1}
 \end{figure}
 
@@ -204,7 +204,7 @@ We note that comparing this to Figure~\ref{fig:ex_mat_1} that the covariance mod
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{ex_mat_3}
-	\caption]Example Matern Three Halves covariance]{The covariance between all points in out spatial domain $\mathcal{S}$ with the Mat\'ern Three Halves covariance function with $\rho=1.5$ and $\lambda=1$. Each index on the axis corresponds to a point $\ve{s}_i$ in $\mathcal{S}$ in our discretised grid.}
+	\caption[An example Matern Three Halves covariance function evaluated between all spatial grid points.]{The covariance between all points in out spatial domain $\mathcal{S}$ with the Mat\'ern Three Halves covariance function with $\rho=1.5$ and $\lambda=1$. Each index on the axis corresponds to a point $\ve{s}_i$ in $\mathcal{S}$ in our discretised grid.}
 	\label{fig:ex_mat_3}
 \end{figure}
 
@@ -244,7 +244,7 @@ The way in which we do so will be discussed in greater detail in Section~\ref{se
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{ex_gibbs}
-	\caption{The covariance between all points in out spatial domain $\mathcal{S}$ with the above covariance function. Each index on the axis corresponds to a point $\ve{s}_i$ in $\mathcal{S}$ in our discretised grid.}
+	\caption[An example Gibbs covariance function evaluated between all spatial grid points.]{The covariance between all points in out spatial domain $\mathcal{S}$ with the above Gibbs covariance function. Each index on the axis corresponds to a point $\ve{s}_i$ in $\mathcal{S}$ in our discretised grid.}
 	\label{fig:ex_gibbs}
 \end{figure}
 
@@ -330,7 +330,7 @@ This may be because we have assumed a complex form of the length scale models in
  \begin{figure}
  	\centering
  	\includegraphics[width=\textwidth]{ex_val_A}
- 	\caption[Example reconstruction using the CPACE model for Scenario A in our simulation study.]{An indicative example of the CPACE model performance on reconstruction of functional data where noisy observations have been made for Scenario A. The shaded regions represent our confidence interval of prediction and corresponds to two standard deviations from our mean predictions.}
+ 	\caption[An example reconstruction using the CPACE model for Scenario A in our simulation study.]{An indicative example of the CPACE model performance on reconstruction of functional data where noisy observations have been made for Scenario A. The shaded regions represent our confidence interval of prediction and corresponds to two standard deviations from our mean predictions.}
  	\label{fig:val_ex_A}
  \end{figure}
 
@@ -348,7 +348,7 @@ This should lead to improved understanding of the possible data generation proce
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{noise_param_A}
-	\caption{Estimated noise variance distribution for each of our models over the 50 simulations for scenario A. The true noise variance is given by the vertical black line for indication.}
+	\caption[Estimated noise variance distribution for each of our models over the 50 simulations for scenario A.]{Estimated noise variance distribution for each of our models over the 50 simulations for scenario A. The true noise variance is given by the vertical black line for indication.}
 		\label{fig:noise_param_A}
 \end{figure}
 
@@ -365,7 +365,7 @@ This should lead to improved understanding of the possible data generation proce
  		\caption{Estimated second eigenvalue (second kernel variance) for each of our models over the 50 simulations for scenario A. The true parameter is given by the vertical black line for indication.}
  		\label{fig:lambda_2_param_A}
 	\end{subfigure}
-	\caption{Distributions of the estimated first and second eigenvalues for each model in Scenario A.}
+	\caption[Distributions of the estimated first and second eigenvalues for each model in Scenario A.]{Distributions of the estimated first and second eigenvalues for each model in Scenario A.}
 	\label{fig:lambda_param_A}
 \end{figure}
 
@@ -417,7 +417,7 @@ This corresponds to only one realisation of the data generating procedure for sc
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{ex_spa_B}
-	\caption{Example realisation of the spatial dependence under scenario B at a particular time point in domain $\mathcal{T}$. Here we show the full unobserved data across $\mathcal{S}$ with observed data being given by the less transparent pixels in the image.}
+	\caption[An example realisation of the spatial dependence under Scenario B at a particular time point.]{Example realisation of the spatial dependence under scenario B at a particular time point in domain $\mathcal{T}$. Here we show the full unobserved data across $\mathcal{S}$ with observed data being given by the less transparent pixels in the image.}
 	\label{fig:ex_spa_B}
 \end{figure}
 
@@ -455,7 +455,7 @@ It is important to note that under spatial dependence it is possible for these t
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{noise_param_B}
-	\caption{Estimated noise variance distribution for each of our models over the 50 simulations for Scenario B. The true noise variance is given by the vertical black line for indication.}
+	\caption[Estimated noise variance distribution for each of our models over the 50 simulations for Scenario B.]{Estimated noise variance distribution for each of our models over the 50 simulations for Scenario B. The true noise variance is given by the vertical black line for indication.}
 	\label{fig:noise_param_B}
 \end{figure}
 
@@ -472,7 +472,7 @@ It is important to note that under spatial dependence it is possible for these t
 		\caption{Estimated second eigenvalue (second kernel variance) for each of our models over the 50 simulations for Scenario B. The true parameter is given by the vertical black line for indication.}
 		\label{fig:lambda_2_param_B}
 	\end{subfigure}
-	\caption{Distributions of the estimated first and second eigenvalues for each model in Scenario B.}
+	\caption[Distributions of the estimated first and second eigenvalues for each model in Scenario B.]{Distributions of the estimated first and second eigenvalues for each model in Scenario B.}
 	\label{fig:lambda_param_B}
 \end{figure}
 
@@ -493,7 +493,7 @@ The Mat\'ern Three Halves model fails to capture the true length scale parameter
 		\caption{Estimated second kernel length scale parameter for the Mat\'ern models over the 50 simulations for Scenario B. The true parameter is given by the vertical black line for indication.}
 		\label{fig:rho_2_param_B}
 	\end{subfigure}
-	\caption{Distributions of the estimated first and second length scale parameters for each model in Scenario B.}
+	\caption[Distributions of the estimated first and second length scale parameters for each model in Scenario B.]{Distributions of the estimated first and second length scale parameters for each model in Scenario B.}
 	\label{fig:rho_param_B}
 \end{figure}
 
@@ -571,7 +571,7 @@ This is intended to highlight the spatial dependency present in such a simulatio
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{sim_ex_zeta_C}
-	\caption{An indicative example of a realisation from the component spatial kernels in scenario C.}
+	\caption[An indicative example of a realisation from the component spatial kernels in scenario C.]{An indicative example of a realisation from the component spatial kernels in scenario C.}
 	\label{fig:sim_example_C}
 \end{figure}
 
@@ -618,7 +618,7 @@ This will be discussed further in Chapter~\ref{cha:implementation}.
 		\caption{Estimated second kernel length scale parameter for the Mat\'ern models over the 50 simulations for scenario C. The true parameter is given by the vertical black line for indication.}
 		\label{fig:rho_2_param_C}
 	\end{subfigure}
-	\caption{Distributions of the estimated first and second length scale parameters for each model in Scenario C.}
+	\caption[Distributions of the estimated first and second length scale parameters for each model in Scenario C.]{Distributions of the estimated first and second length scale parameters for each model in Scenario C.}
 	\label{fig:rho_param_C}
 \end{figure}
 
@@ -704,14 +704,14 @@ This highlights how the non-stationary score processes manifest in the scenario 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{sim_ex_zeta_D}
-	\caption{Realisation from score processes corresponding to scenario D.}
+	\caption[Realisation from score processes corresponding to scenario D.]{Realisation from score processes corresponding to scenario D.}
 	\label{fig:sim_ex_zeta_D}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{sim_example_D}
-	\caption[Spatial view of a particular time point in $\mathcal{T}$ from a realisation from scenario D.]{Spatial view of a particular time point in $\mathcal{T}$ from a realisation from scenario D. This realisation corresponds to the example score realisation in Figure~\ref{fig:sim_ex_zeta_D}. The darker pixels correspond to the noisy observations, with the lighter pixels representing unobserved locations at this time point.}
+	\caption[A spatial view of a particular time point in $\mathcal{T}$ from a realisation from scenario D.]{Spatial view of a particular time point in $\mathcal{T}$ from a realisation from scenario D. This realisation corresponds to the example score realisation in Figure~\ref{fig:sim_ex_zeta_D}. The darker pixels correspond to the noisy observations, with the lighter pixels representing unobserved locations at this time point.}
 	\label{fig:sim_example_D}
 \end{figure}
 
@@ -747,7 +747,7 @@ For example at the corners of the domain $\mathcal{S}$ and so a reasonable appro
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{train_D_dist}
-	\caption{Distribution of metrics, $MAE$ and $MSE$ over the training data for each simulation in Scenario D.}
+	\caption[Distribution of metrics, $MAE$ and $MSE$ over the training data for each simulation in Scenario D.]{Distribution of metrics, $MAE$ and $MSE$ over the training data for each simulation in Scenario D.}
 	\label{fig:train_D_dist}
 \end{figure}
 

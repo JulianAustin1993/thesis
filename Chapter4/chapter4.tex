@@ -281,7 +281,7 @@ As can be noted from the decreasing length scales, the succeeding components are
 \begin{figure}[htbp!] 
 	\centering    
 	\includegraphics[width=1.0\textwidth]{sim_fpc_example}
-	\caption[Example functional principle component simulation]{Example of the 3 simulated principal component surfaces from the isotropic stationary Mat\`{e}rn covariance function. Notice the reduced spatial correlation in succeeding components. The simulation study is designed this way to provide difficulty for recovering the true functional principal components. }
+	\caption[An example of the simulated functional principle components.]{Example of the 3 simulated principal component surfaces from the isotropic stationary Mat\`{e}rn covariance function. Notice the reduced spatial correlation in succeeding components. The simulation study is designed this way to provide difficulty for recovering the true functional principal components. }
 	\label{fig:ftsm_example_fpc}
 \end{figure}
 
@@ -312,7 +312,7 @@ This highlights the decreasing correlation and the impact of the variance parame
 \begin{figure}[htbp!] 
 	\centering    
 	\includegraphics[width=1.0\textwidth]{sim_zeta_example}
-	\caption[Example functional principle component score simulation]{Example of the 3 simulated principal component score functions from the stationary Mat\`{e}rn covariance function. Notice the reduced temporal correlation in succeeding components. The simulation study is designed this way to provide difficulty for interpolation and forecasting such components. }
+	\caption[An example of the simulated functional principle component scores.]{Example of the 3 simulated principal component score functions from the stationary Mat\`{e}rn covariance function. Notice the reduced temporal correlation in succeeding components. The simulation study is designed this way to provide difficulty for interpolation and forecasting such components. }
 	\label{fig:ftsm_example_zeta}
 \end{figure}
 
@@ -348,7 +348,7 @@ Figure~\ref{fig:ftsm_chi_example} displays a selection of time points of the cor
 		\includegraphics[width=\textwidth]{sim_chi_example_006}
 		\caption{$t=0.85$}
 	\end{subfigure}
-	\caption{Example simulated functional variables $\bar{\chi}_j$ for various time points, $t_j$. These correspond to the simulated functional components and scores in Figures~\ref{fig:ftsm_example_fpc},~\ref{fig:ftsm_example_zeta} respectively. Notice how we see the third principal component prominently at the beginning then fade and reappear in line with its associated score, whereas the first two components are more consistent over time.}
+	\caption[An example simulated functional variables at various times.]{An example simulated functional variables, $\bar{\chi}_j$. for various time points, $t_j$. These correspond to the simulated functional components and scores in Figures~\ref{fig:ftsm_example_fpc},~\ref{fig:ftsm_example_zeta} respectively. Notice how we see the third principal component prominently at the beginning then fade and reappear in line with its associated score, whereas the first two components are more consistent over time.}
 	\label{fig:ftsm_chi_example}
 \end{figure}
 
@@ -404,7 +404,7 @@ The impact of such noise can be see in Figure~\ref{fig:ftsm_noise_example} which
 		\includegraphics[width=\textwidth]{sim_noise_example_hsn}
 		\caption{$HSN$}
 	\end{subfigure}  
-	\caption{Example of the impact of the various noise structures to the observed simulated data. Each figure highlights adding a noise process to the unobserved functional variable displayed in Figure~\ref{fig:ftsm_chi_example_0}.}
+	\caption[An example of the impact of noise to observed simulated data.]{An example of the impact of the various noise structures to the observed simulated data. Each figure highlights adding a noise process to the unobserved functional variable displayed in Figure~\ref{fig:ftsm_chi_example_0}.}
 	\label{fig:ftsm_noise_example}
 \end{figure}
 
@@ -603,7 +603,7 @@ This is illustrated in Figure~\ref{fig:ftsm_res_example_zeta} where we can see t
 \begin{figure}[htbp!] 
 	\centering    
 	\includegraphics[width=1.0\textwidth]{ftsm_res_zeta_example}
-	\caption{Comparison of the second score process corresponding to the second functional principal component given in Figure~\ref{fig:ftsm_res_example_fpc}. Notice how the MAFR score process exhibits less variation over time compared to the FPCA process.}
+	\caption[Comparison of the second score process under FPCA and MAFR models.]{Comparison of the second score process corresponding to the second functional principal component given in Figure~\ref{fig:ftsm_res_example_fpc}. Notice how the MAFR score process exhibits less variation over time compared to the FPCA process.}
 	\label{fig:ftsm_res_example_zeta}
 \end{figure}
 
@@ -639,7 +639,7 @@ Figure~\ref{fig:ftsm_res_recon} highlights this ability by illustrating the unob
 		\caption{$MAFR$}
 		\label{fig:ftsm_res_recon_mafr}
 	\end{subfigure}  
-	\caption[Example of the impact of the various models to reconstruct the unobserved surface at three steps ahead.]{Example of the impact of the various models to reconstruct the unobserved surface at three steps ahead. The observed process was corrupted by the LN noise process. We note how the PACE model is easily overfitting to the independent noise process whereas the FPCA and MAFR models do not suffer this effect.}
+	\caption[Example of the impact of the various models to reconstruct the unobserved surface at three steps ahead.]{Example of the impact of the various models to reconstruct the unobserved surface at three steps ahead. The observed process was corrupted by the LN noise process. We note how the PACE model is easily over fitting to the independent noise process whereas the FPCA and MAFR models do not suffer this effect.}
 	\label{fig:ftsm_res_recon}
 \end{figure}
 
@@ -784,7 +784,7 @@ In fact, as the FPCA and MAFR metric values tend to vary less than those of the 
  		\caption{$MAFR$}
  		\label{fig:ftsm_res_ps_mafr}
  	\end{subfigure}  
- 	\caption[Example of the reconstruction ability of the various models for the PS atmospheric variable component of the CESM-LE data set.]{Example of the reconstruction ability of the various models for the PS atmospheric variable component of the CESM-LE data set. Notice how the FPCA and MAFR models miss the small scale spatial variation present in the unobserved surface. They have particular issue in recreating the abrupt changes at the sea-land boundary.}
+ 	\caption[Example of the reconstruction ability of the various models for the PS atmospheric variable component of the CESM-LE dataset.]{Example of the reconstruction ability of the various models for the PS atmospheric variable component of the CESM-LE dataset. Notice how the FPCA and MAFR models miss the small scale spatial variation present in the unobserved surface. They have particular issue in recreating the abrupt changes at the sea-land boundary.}
  	\label{fig:ftsm_res_ps}
  \end{figure}
 
@@ -839,7 +839,7 @@ Here, one can see clearly how the first component focuses on various regions acr
 		\caption{$\vesub{\bar{\phi}}{3}$}
 		\label{fig:ftsm_res_TREFHT_fpc_3}
 	\end{subfigure}
-	\caption[Example of the functional principal components generated by the FPCA model with the TREFHT variable.]{Example of the functional principal components generated by the FPCA model with the TREFHT variable of the CESM-LE data set. Notice how each component shows a different mode of spatial variation present in the process. Such decompositions like these can be useful to understanding the process as a whole.}
+	\caption[Example of the functional principal components generated by the FPCA model with the TREFHT variable of the CESM-LE dataset.]{Example of the functional principal components generated by the FPCA model with the TREFHT variable of the CESM-LE dataset. Notice how each component shows a different mode of spatial variation present in the process. Such decompositions like these can be useful to understanding the process as a whole.}
 	\label{fig:ftsm_res_TREFHT_fpc}
 \end{figure}
 
