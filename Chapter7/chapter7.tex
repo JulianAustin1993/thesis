@@ -12,28 +12,28 @@
 \fi
 
 \nomenclature[z-WGS84]{WGS84}{World Geodetic System 84.}
-\nomenclature[z-CRS]{CRS}{Coordinate Reference System}
+\nomenclature[z-CRS]{CRS}{Coordinate Reference System.}
 
 We have described the CPACE model in Chapter~\ref{cha:cpace}, in which we essentially model our observations as a noisy realisation from a Gaussian process with both a spatial and temporal domain.
 The kernel of the CPACE model is designed to have a temporal component which is constructed through the data's principal components and a spatial component which is chosen to accurately reflect observed spatial dependency between functional observations.
 In Chapter~\ref{cha:application} we studied this model on simulated data where the simulated data arose from the same data generating procedure which the model is designed on.
-In this chapter we consider the model's ability to reconstruct unobserved data from the CESM-LE data set, as described in Chapter~\ref{cha:data}, and compare to the FPCA model which considers no spatial dependency.
+In this chapter we consider the model's ability to reconstruct unobserved data from the CESM-LE dataset, as described in Chapter~\ref{cha:data}, and compare to the FPCA model which considers no spatial dependency.
 This data has not come from our model's data generating procedure and this analysis will give us an understanding of the CPACE models' ability to capture phenomenon in a real world setting. 
 
 We begin by setting out two studies for this data; one which considers the globe at a reduced resolution, and one which considers only the continent of Europe.
 Following this we describe the spatial kernels we will consider in this study.
 Finally, we present the results of these studies for each of the four variables considered; Pressure (PS), Temperature (TREFHT), Wind speed (U10), and Precipitation (TMQ).
-More details on these variables and the CESM-LE data set in general is given in Chapter~\ref{cha:data}.
+More details on these variables and the CESM-LE dataset in general is given in Chapter~\ref{cha:data}.
 
 \section{Studies \label{sec:cesm_study}}
 In the following we set out our studies on the CESM-LE data used to examine the CPACE models' reconstruction ability.
 This dataset is widely used, and often as a case study for an application of a new predictive methodology.
 For example, see \citep{hu_stochastic_2022}.
-We use two separate study area, which are the same across our variables of interest.
+We use two separate study areas, which are the same across our variables of interest.
 These correspond to a whole globe study, designed to see the CPACE ability at large spatial distances, and a Europe specific study which is designed to see if the framework can pick out more intricate details in reconstruction. 
 In both cases our main priority is to reconstruct unobserved functional data, hoping to utilise observed data in neighbouring regions to help inform our reconstructions.
 
-In both studies we assume we only observe sparse functional data, which we have enforced like our simulation study in Section~\ref{sec:sim_study}, by only observing a selection of locations and a selection of time points from the full data set.
+In both studies we assume we only observe sparse functional data, which we have enforced like our simulation study in Section~\ref{sec:sim_study}, by only observing a selection of locations and a selection of time points from the full dataset.
 We could consider this scenario occurring in a real world study from perhaps a defective monitoring station which either fails to capture any readings at all, or only partially captures the variable of interest over our study period.
 Another situation where sparsely observed data across space may occur is when it is practically difficult or impossible to place monitoring stations at locations of interest and thus you can only collect observations at few points in your domain.
 \citeauthor{shen_missing_2015} gives an overview of the areas in satellite image reconstruction where this occurs, \citep{shen_missing_2015}.
@@ -41,7 +41,7 @@ We specify the details of this sparsity and the study area for each study in Sec
 
 \subsection{Global Study \label{ssec:cesm_globe}}
 We consider the data from the CESM-LE dataset for the whole globe.
-That is our spatial domain consists of the surface of the earth. In latitude, longitude coordinate system this would correspond to setting $\mathcal{S} = \left[-90, 90\right] \times \left[-180, 180\right]$.
+That is, our spatial domain consists of the surface of the earth. In the latitude, longitude coordinate system this would correspond to setting $\mathcal{S} = \left[-90, 90\right] \times \left[-180, 180\right]$.
 As mentioned in Chapter~\ref{cha:data} we downsample the resolution of this dataset to have  a spatial grid size of $64 \times 96$.
 We have designed this study to observe large scale trends across space, and so this reduction in resolution is perfectly acceptable for this study.
 Figure~\ref{fig:coarse_res} highlights the impact in resolution reduction for this case on the TREFHT variable.
@@ -52,9 +52,9 @@ For these we further induce sparsity by assuming we only observe between $5\%$ a
 In this study, we uniformly choose the number of temporal observations for each of these locations between these percentages.
 This is done independently for each of the $40$ replications which make up the study; so we have a random selection of temporal points each time. 
 This construction is similar to that of the sparsity used in the simulation study in Section~\ref{sec:sim_study}.
-These observed data we take to be our training data set.
+These observed data we take to be our training dataset.
 We do not add any noise to our training data, but let our CPACE framework decide on the noise variance under its observational model.
-The partially observed functions we take to be our validation data set.
+The partially observed functions we take to be our validation dataset.
 The remaining unseen observations we take to be our test dataset.
 We do this process independently for each of the $40$ simulations present in the CESM-LE dataset.
 Figure~\ref{fig:cesm_sparsity} gives an indication of the training observations compared to the full data at a particular time point in the dataset for the TREFHT variable.
@@ -76,7 +76,7 @@ As we can see this is an extreme case of sparsity, which should provide a good c
 \end{figure}
 
 \subsection{European Study \label{ssec:cesm_eur}}
-In contrast to the global study presented in Section~\ref{ssec:cesm_globe}, this study will consider a much narrower spatial domain.
+In contrast to the Global study presented in Section~\ref{ssec:cesm_globe}, this study will consider a much narrower spatial domain.
 We choose to observe in this study the domain bounded by the following latitude, longitude coordinates; $\left(-20, 35\right), \left(-20, 60\right), \left(45, 60\right), \left(-20, 60\right)$.
 This corresponds to setting our spatial domain to; $\mathcal{S} = \left[-20, 45\right] \times \left[35, 60\right]$ in a latitude, longitude coordinate system.
 This corresponds roughly to European continent, and is indicated in Figure~\ref{fig:cesm_eur_bbox}.
@@ -91,11 +91,11 @@ This corresponds roughly to European continent, and is indicated in Figure~\ref{
 The proposal of this study area is to consider a smaller spatial domain, where there is less likely to be large spatial variation. 
 In this case we no longer downsample the resolution and keep the full resolution data from the CESM-LE datasets.
 The study is then set up that we observe much more densely the functional data over this domain.
-We use this setup to consider how well the CPACE framework deals with the intricacies of smaller scale variation as compared to the global study.
+We use this setup to consider how well the CPACE framework deals with the intricacies of smaller scale variation as compared to the Global study.
 
 Another difference we consider in this study is the frequency of observation.
 In this study we choose to observe the functional data more regularly and at more locations across the domain.
-Here this may be viewed as relating to the scenario of having many monitoring locations, but often readings are missing of your variable of interest due to technical difficulties.
+Here, this may be viewed as relating to the scenario of having many monitoring locations, but often readings are missing of your variable of interest due to technical difficulties.
 For example, cloud obstructing imagery taken from satellites, \citep{meraner_cloud_2020}.
 This sparsity is induced in our dataset for this study by using the following parameters to generate our training data.
 
@@ -103,8 +103,8 @@ We assume we observe $25\%$ of our possible spatial locations across our domain,
 As with our previous studies we further induce sparsity by assuming we only observe between $20\%$ and $40\%$ of the temporal points for each of these observations.
 We do this independently for the $40$ simulations present in the CESM-LE dataset.
 This construction is similar to that of the sparsity used in the simulation study in Section~\ref{sec:sim_study}.
-These observed data we take to be our training data set.
-The functional data which have partial observations on them we will take to be our validation data set.
+These observed data we take to be our training dataset.
+The functional data which have partial observations on them we will take to be our validation dataset.
 The remaining unseen observations we take to be our test dataset for this study.
 We do this process independently for each of the $40$ simulations present in the CESM-LE dataset.
 Figure~\ref{fig:cesm_sparsity_eur} gives an indication of the training observations compared to the full data at a particular time point in the dataset for the TREFHT variable.
@@ -128,7 +128,7 @@ As can be seen this sparsity is less severe than that of the globe study, but st
 
 \section{Spatial Kernels \label{sec:cesm_kernels}}
 As in the simulation study from Section~\ref{sec:sim_study}, we consider a variety of spatial kernels in the CPACE framework to compare to the FPCA approach.
-In the following we describe the kernels which we use for the global and European study described in Section~\ref{sec:cesm_study}.
+In the following we describe the kernels which we use for the Global and European study described in Section~\ref{sec:cesm_study}.
 For most spatial kernels we must specify the metric between points of observation which captures the concept of distance in $\mathcal{S}$.
 In all of our studies on the CESM-LE data we must consider how we define this for our domain $\mathcal{S}$ which as given is the surface of the globe.
 We do so by projecting our domain from the surface of the globe to $\mathbb{R}^{3}$. 
@@ -137,19 +137,18 @@ We do so by projecting our domain from the surface of the globe to $\mathbb{R}^{
 The coordinate system for the CESM-LE data is given in latitude and longitude.
 The latitude of a point on the Earth's surface is the angle between the equatorial plane and the line which passes through that point and the centre of the Earth, \citep{lu_geodetic_2014}.
 Similarly the longitude of a point on the Earth's surface is the angle between the prime meridian and another meridian which passes through that point, \citep{lu_geodetic_2014}.
-As such it describes a coordinate reference system (CRS) over the surface of the globe.
+As such, it describes a coordinate reference system (CRS) over the surface of the globe.
 Therefore, when considering distance between two points in $\mathcal{S}$ we should consider the distance travelled on the globe between the two.
 If the Earth was a true sphere this would be relatively simple as the distance between two points can be found using the great-circle distance.
 This is given by the formula below for two points $\left(\text{lat}_1, \text{lon}_1\right)$ and $\left(\text{lat}_2, \text{lon}_2\right)$: 
 \begin{equation}
 	r \arccos\left(\sin(\text{lat}_1) \sin(\text{lat}_2) + \cos(\text{lat}_1) \cos(\text{lat}_2) \left( \text{lon}_1 - \text{lon}_2\right)\right)
 \end{equation}
+However, the world is not a true sphere, thus the above great circle distance would be an approximation. 
+In fact a standard coordinate system,  which the CESM-LE data uses, is the World Geodetic System (WGS) 84. 
+This is a specific coordinate system which describes the surface of the globe using an ellipsoidal model, \citep{lu_geodetic_2014}.
 
-However, the world is not a true sphere and in fact a standard coordinate system which the CESM-LE data uses is the World Geodetic System (WGS) 84. 
-This is a specific coordinate system which describes the surface of the globe using an ellipsoidal model, \citep{lu_geodetic_2014}. 
-Thus the above great circle distance would be an approximation. 
-
-Another issue with such an approach is how we define hyper parameters, such as length scale parameters in the Mat\'ern Three kernel (See Section~\ref{ssec:cesm_kern}), when using the WGS84 coordinate system.
+Another issue with such an approach is how we define hyperparameters, such as length scale parameters in the Mat\'ern Three kernel (See Section~\ref{ssec:cesm_kern}), when using the WGS84 coordinate system.
 Since the WGS84 defines the coordinate system using latitude and longitude it revolves around angles.
 We would therefore need to consider sensible measures of distance between these angles.
 For example; the distance between two points on the globe with the same latitude but longitudes of $0$ and $360$ respectively should be zero.
@@ -157,7 +156,7 @@ For example; the distance between two points on the globe with the same latitude
 
 As suggested in \citep{guinness_isotropic_2016}, we decide to project our domain $\mathcal{S}$ into $\mathbb{R}^3$.
 In this space we have alleviated the above issues as the standard concept of Euclidean distance will suffice in the kernels we study.
-That is we project our surface of the globe into three dimensions, and calculate the distance between two points as the Euclidean distance in this space rather than using the great circle distance or a custom metric on the WGS84 coordinate system. 
+That is, we project our surface of the globe into three dimensions, and calculate the distance between two points as the Euclidean distance in this space rather than using the great circle distance or a custom metric on the WGS84 coordinate system. 
 Figure~\ref{fig:spatial_projection} highlights the difference between these approaches for the distance between two points \verb*|A| and \verb*|B| on a circle and the Euclidean distance.
 Here we have reduced the dimension for ease of illustration but the same concept extends to three dimensions and the surface of the unit sphere. 
 
@@ -168,14 +167,14 @@ Here we have reduced the dimension for ease of illustration but the same concept
 	\label{fig:spatial_projection}
 \end{figure}
 
-Although it is a simplification \citep{guinness_isotropic_2016} highlight it isn't a limiting factor, \citep{guinness_isotropic_2016}. 
-Intuitively, this is because although our measure of distance between two points on the globe isn't accurate in the sense of true distance travelled our kernel hyper parameters will be estimated from the data and should allow for this from the observed correlation.
+Although it is a simplification \citeauthor{guinness_isotropic_2016} highlight it isn't a limiting factor, \citep{guinness_isotropic_2016}. 
+Intuitively, this is because, although our measure of distance between two points on the globe isn't accurate in the sense of true distance travelled our kernel hyperparameters will be estimated from the data and should allow for this from the observed correlation.
 In particular the approach to projecting to $\mathbb{R}^3$ will overcome the issue of periodicity in using latitude and longitude systems.
 
 Thus for each of the kernels specified below we first project our points in the spatial domain to $\mathbb{R}^3$ and then calculate the kernel value between them.
 We use a projection from the WGS84 geodetic view of latitude, longitude to the geocentric view of element in $\mathbb{R}^3$, \citep{lu_geodetic_2014}, which corresponds to the projection that takes $\mathcal{S}$ from the surface of the globe to $\mathbb{R}^3$.
 
-We do this for the full CPACE framework, for both likelihood calculation of our kernel hyper parameters and prediction.
+We do this for the full CPACE framework, for both likelihood calculation of our kernel hyperparameters and prediction.
 
 
 \subsection{Kernels \label{ssec:cesm_kern}}
@@ -184,20 +183,20 @@ We will denote the CPACE model with this kernel as  \verb*|fpca_gp| in our studi
 
 The second kernel we consider is the Anisotropic Mat\'ern Three kernel.
 Alike in the simulation study, Section~\ref{sssec:matern_three}, this kernel follows a Mat\'ern form that is formed from specifying that $\nu=\frac{3}{2}$.
-However in this kernel we let the length scale hyper parameter be different for each dimension of the domain.
-That is the general form of the Anisotropic Mat\'ern Three kernel is given by:
+However, in this kernel we let the length scale hyperparameter be different for each dimension of the domain.
+That is, the general form of the Anisotropic Mat\'ern Three kernel is given by:
 
 \begin{equation}
 	\zeta_k \left(\vesub{s}{i}, \vesub{s}{j}\right) = \lambda_k \left(1 + \sqrt{3}d \right)\exp \left(- \sqrt{3} d \right)
 \end{equation}
 where $d = \sqrt{\left(\vesub{s}{i} - \vesub{s}{j}\right) \vesup{R}{-1} \left(\vesub{s}{i} - \vesub{s}{j}\right)^\transpose}$, $R = \text{diag}\left(\ve{\rho}\right)$ and $\ve{\rho} = \left(\rho_1, \rho_2, \rho_3\right)^\transpose$ is our vector of length scale parameters per dimension.
-Here we have restricted the anisotropy to a length scale over each dimension of the domain which is independent of each other by specifying the diagonal form of $R$.
+Here we have restricted the anisotropy to a length scale over each dimension of the domain which are independent of each other by specifying the diagonal form of $R$.
 In this case $R \in \mathbb{R}^{3 \times 3}$ as we will project our spatial domain to three dimensions as discussed in Section~\ref{ssec:spatial_projection}.
 We will denote this kernel by \verb*|matern_three| for this study. 
 Figure~\ref{fig:matern_aniso} highlights an example covariance structure using this anisotropic kernel with $\ve{\rho} = \left(1.0, 4.0, 4.0\right)$ on our spatial domain $\mathcal{S}$ projected.
 Note the off diagonal structure which comes from the shorter length scale in the first dimension.
-We choose to use an anisotropic stationary kernel, such as this, as it is well used in the literature for geospatial applications, \citep{cressie_statistics_2015}.
-The anisotropy should allow the spatial kernel to capture difference in correlation between points of latitude and longitude which are often present in EO data sets. 
+We choose to use an anisotropic stationary kernel such as this as it is well used in the literature for geospatial applications, \citep{cressie_statistics_2015}.
+The anisotropy should allow the spatial kernel to capture difference in correlation between points of latitude and longitude which are often present in EO datasets. 
 
 \begin{figure}[h]
 	\centering
@@ -215,7 +214,8 @@ We found that two components was more than sufficient to capture interesting com
 We speak more of this in Chapter~\ref{cha:implementation}.
 Again, this is a non-stationary kernel which means it has the capability to capture non-stationary covariance structure in the CESM-LE dataset. 
 Similarly, the construction of the kernel should also allow it to capture stationary covariance structures as well.
-It also, alike the Mat\'ern Three kernel above should be able to capture any anisotropy in the data which is important for EO data, especially when observed at large spatial scales.
+Alike the Mat\'ern Three kernel above, it should be able to capture any anisotropy in the data.
+This is important for EO data, especially when observed at large spatial scales.
 
 To compare the effectiveness of the CPACE models with different kernels and the FPCA framework we use a collection of metrics. 
 We describe the metrics used in the study of the CESM-LE dataset in the following section. 
@@ -229,16 +229,16 @@ Finally, the test dataset consists of all time points for which we have no obser
 The metrics we consider are a measure of the ability of the models to reconstruct the individual pixel functions over the temporal domain.
 The same reasoning as given in Section~\ref{sec:sim_study} is applicable for the choice of these metrics for evaluating model performance.
 
-In addition to the RMSE and MAE metrics we also consider some metrics more tailored to image reconstruction.
+In addition to the RMSE and MAE metrics we consider some metrics more tailored to image reconstruction.
 We utilise the PSNR  and SSIM metrics, as described in Section~\ref{ssec:ftsm_sim_res}.
-Both these metrics offer a comparison of perceived similarity between images.
+Both of these metrics offer a comparison of perceived similarity between images.
 This differs from the RMSE and MAE metrics which only consider difference between pixels in the images, and make no attempt to allow for the structure of the reconstruction.
 We use these metrics as a further gauge on the comparative performance of the CPACE framework with an eye to provide good reconstruction across the whole spatial domain.
 As such, these metrics will be evaluated using the full dataset which is both the validation and test data combined. 
 Both these metrics are also discussed in Section~\ref{ssec:ftsm_sim_res} and their use in image reconstruction models is wide, \citep{hore_image_2010}.
 
 We note as the CESM-LE data consists of $40$ replications of each variable of interest across our spatial-temporal domain, we can evaluate these metrics on each simulation and present the distribution of these metrics across the simulations.
-We now proceed to discuss the results for both our globe and Europe study for each of our variables of interest from the CESM-LE dataset.
+We now proceed to discuss the results for both our Global and Europe study for each of our variables of interest from the CESM-LE dataset.
 
 \section{Global Study Results \label{sec:cesm_res}}
 Here we present the results of the study across the whole globe as described in Section~\ref{ssec:cesm_globe}.
@@ -247,7 +247,7 @@ We present the results separately for each variable of interest; Pressure (PS), 
 We have considered four models for this study, the same setup for each variable of interest.
 The \verb*|pace| model corresponds to the FPCA model or PACE framework, as describe in Chapter~\ref{cha:background},  which doesn't take into account spatial dependency.
 The second, \verb*|fpca_gp|, is our CPACE model with the White kernel.
-Again this doesn't take into account spatial dependency between functional observations, but is computed under our CPACE framework which allows for hyper parameters of the kernel; namely the spatial kernel variance for each components, to be estimated using the Gaussian process framework.
+Again this doesn't take into account spatial dependency between functional observations, but is computed under our CPACE framework which allows for hyperparameters of the kernel; namely the spatial kernel variance for each component to be estimated using the Gaussian process framework.
 Thirdly, we use the Mat\'ern Three kernel with anisotropic length scales as the spatial kernel in another CPACE model.
 This we denote by \verb*|matern_three|.
 Finally, we denote by \verb*|gibbs| the CPACE model using the Gibbs kernel.
@@ -256,17 +256,17 @@ For each of these models we use $5$ components in our decomposition of the obser
 \subsection{Pressure (PS)\label{ssec:cesm_ps}}
 Here we present and describe the results of using our CPACE framework to model the pressure variable from the CESM-LE dataset across the globe.
 
-We begin by presenting the metric results for our validation data set.
-These are reconstruction of partial observed functional data.
+We begin by presenting the metric results for our validation dataset.
+These are reconstructions of partial observed functional data.
 These are displayed in Table~\ref{tab:train_cesm_ps_globe}.
 As can be seen there is a discrepancy between the CPACE models and the PACE model.
 This can be seen as an impact of the large sparsity we have used in the study.
 Since we assume such sparse observations it is obviously difficult for the FPCA model to truly capture the variations in the functional data.
 This can be alleviated in the models which use spatial dependency as they can utilise spatial dependency to inform the curve at the prediction location to be similar to those close by.
-It is alleviated in \verb*|fpca_gp| model since the CPACE framework allows for further estimation of the White kernel variances in accordance with the Gaussian process structure, something which the \verb*|pace| model doesn't allow for. 
+It is alleviated in the \verb*|fpca_gp| model since the CPACE framework allows for further estimation of the White kernel variances in accordance with the Gaussian process structure, something which the \verb*|pace| model doesn't allow for. 
 
 \begin{table}
-	\caption[Results for the PS variable on validation data in the Global study.]{Results for reconstruction of the validation data for the PS variable in the global study from the CESM-LE dataset. Bold indicates best in class. We give the mean  and standard deviation of the metrics over the $40$  realisations.}
+	\caption[Results for the PS variable on validation data in the Global study.]{Results for reconstruction of the validation data for the PS variable in the Global study from the CESM-LE dataset. Bold indicates best in class. We give the mean  and standard deviation of the metrics over the $40$  realisations.}
 	\centering
 	\label{tab:train_cesm_ps_globe}
 	\begin{tabular}{lcc}
@@ -281,13 +281,13 @@ It is alleviated in \verb*|fpca_gp| model since the CPACE framework allows for f
 	\end{tabular}
 \end{table}
 
-We see this pattern again for the same metrics on the test data set.
+We see this pattern again for the same metrics on the test dataset.
 These are presented in Table~\ref{tab:test_cesm_ps_globe}.
 Again we can see the improvement resulting from the use of spatial information to help predict the curves.
 We note the extremely poor performance of the \verb*|pace| model comes from a few simulations in the dataset having catastrophic errors.
 The performance of this model on the other simulations is in line with the \verb*|fpca_gp| model.
 We can see an illustration of this occurring in Figure~\ref{fig:train_ex_ps_globe}.
-Here we can see how the true curve is very variable, and although all our models get the relative shape of the curve, they completely miss the peaks and troughs.
+Here, we can see how the true curve is very variable, and although all our models get the relative shape of the curve, they completely miss the peaks and troughs.
 This is because our component functions for these models haven't captured this aspect of the data.
 This results in fairly large prediction errors.
 However relative to the PACE framework our CPACE framework performs well.
@@ -301,7 +301,7 @@ As can be seen the models miss any periodic elements due to the fact that the ma
 
 
 \begin{table}
-	\caption[Results for the PS variable on test data in the Global study.]{Results for reconstruction of the test data for the PS variable in the global study from the CESM-LE dataset. Bold indicates best in class. Scale of $e+03$.}
+	\caption[Results for the PS variable on test data in the Global study.]{Results for reconstruction of the test data for the PS variable in the Global study from the CESM-LE dataset. Bold indicates best in class. Scale of $e+03$.}
 	\centering
 	\label{tab:test_cesm_ps_globe}
 	\begin{tabular}{lcc}
@@ -320,14 +320,14 @@ As can be seen the models miss any periodic elements due to the fact that the ma
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{phi_ps_globe}
-	\caption[The first eigenfunction from the FPCA decomposition used in all models for the PS variable in the global study.]{The first eigenfunction from the FPCA decomposition used in all models for the PS variable in the global study.  Example true curves in light grey given for context.}
+	\caption[The first eigenfunction from the FPCA decomposition used in all models for the PS variable in the Global study.]{The first eigenfunction from the FPCA decomposition used in all models for the PS variable in the Global study.  Example true curves in light grey given for context.}
 	\label{fig:phi_ps_globe}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{train_ex_ps_globe}
-	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE pressure variable from the validation dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE pressure variable from the validation dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE pressure variable from the validation dataset from the Global study.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE pressure variable from the validation dataset from the Global study.}
 	\label{fig:train_ex_ps_globe}
 \end{figure}
 
@@ -343,7 +343,7 @@ We can see clearly the impact of utilising the spatial dependency but note we do
 Similarly we can see the Gibbs model captures some more intricate  spatial details but fails to match the Mat\'ern kernel in overall performance as it doesn't capture the scale of the changes as well. 
 
 \begin{table}
-	\caption[Results for the PS variable on full data in the Globe study.]{Results for reconstruction of the full data for the PS variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the PS variable on full data in the Global study.]{Results for reconstruction of the full data for the PS variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_ps_globe}
 	\begin{tabular}{lcc}
@@ -365,10 +365,10 @@ Similarly we can see the Gibbs model captures some more intricate  spatial detai
 	\label{fig:full_ex_ps_globe}
 \end{figure}
 
-Overall, we can see that the CPACE framework adapts well to the pressure variable from the CESM-LE data set.
+Overall, we can see that the CPACE framework adapts well to the pressure variable from the CESM-LE dataset.
 We can see from Figure~\ref{fig:phi_ps_globe} that we find a reasonable and interpretable eigenfunction, which corresponds to level shifts in the pressure.
 However we find that this dominates the eigen decomposition, and thus the results can have relatively large errors due to failing to capture intricate local variations in the data.
-We view this as stemming from the sparsity of the study data set, as many of these variations are not observed in the training data.
+We view this as stemming from the sparsity of the study dataset, as many of these variations are not observed in the training data.
 For example, Figure~\ref{fig:train_ex_ps_globe} shows we only observe $4$ observations on that whole example function.
 The CPACE models with spatial dependency perform substantially better for reconstruction from both the test metric perspective and the image reconstruction perspective. 
 These promising results are a good indication of the usefulness of the CPACE framework with regards to EO data across the globe.
@@ -378,14 +378,14 @@ In this section we present and describe the results of using our CPACE framework
 We present these in a similar way to Section~\ref{ssec:cesm_ps}.
 
 In Table~\ref{tab:train_cesm_trefht_globe} we show the resulting metrics from the study on the validation dataset.
-Here we can see again the distinct advantage of the CPACE framework and especially with using spatial dependency.
+Here, we can see again the distinct advantage of the CPACE framework and especially when utilising a kernel which uses the spatial dependency.
 Similar to the pressure variable results in Section~\ref{ssec:cesm_ps} we see that the Mat\'ern model performs best in class followed closely by the Gibbs model.
 It is worth noting, that we do not observe the catastrophic error for the \verb*|pace| model unlike in the PS study.
-This causes the \verb*|pace| and \verb*|fpca_gp| model are comparable.
-This is expected as they essentially are equivalent models, albeiit the \verb*|fpca_gp| model uses our CPACE framework so has the ability to refine the eigenvalue estimates.
+This causes the \verb*|pace| and \verb*|fpca_gp| model to be comparable.
+This is expected as they essentially are equivalent models, albeit the \verb*|fpca_gp| model uses our CPACE framework so has the ability to refine the eigenvalue estimates.
 
 \begin{table}
-	\caption[Results for the TREFHT variable on validation data in the Global study.]{Results for reconstruction of the validation data for the TREFHT variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on validation data in the Global study.]{Results for reconstruction of the validation data for the TREFHT variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_trefht_globe}
 	\begin{tabular}{lcc}
@@ -401,13 +401,13 @@ This is expected as they essentially are equivalent models, albeiit the \verb*|f
 \end{table}
 
 Next we consider the test reconstructions.
-That is reconstruction of completely unobserved functions. 
+That is, reconstruction of completely unobserved functions. 
 An example of such reconstructions for our models considered is given in Figure~\ref{fig:test_ex_trefht_globe}.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_trefht_globe}
-	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the global study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the Global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the Global study from the test dataset.}
 	\label{fig:test_ex_trefht_globe}
 \end{figure}
 
@@ -423,7 +423,7 @@ In Table~\ref{tab:full_cesm_trefht_globe} we can see clearly the difference in t
 For illustration, we display an example reconstruction using the various models in Figure~\ref{fig:full_ex_trefht_globe}.
 
 \begin{table}
-	\caption[Results for the TREFHT variable on test data in the Global study.]{Results for reconstruction of the test data for the TREFHT variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on test data in the Global study.]{Results for reconstruction of the test data for the TREFHT variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_trefht_globe}
 	\begin{tabular}{lcc}
@@ -439,7 +439,7 @@ For illustration, we display an example reconstruction using the various models 
 \end{table}
 
 \begin{table}
-	\caption[Results for the TREFHT variable on full data in the Global study.]{Results for reconstruction of the full data for the TREFHT variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TREFHT variable on full data in the Global study.]{Results for reconstruction of the full data for the TREFHT variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_trefht_globe}
 	\begin{tabular}{lcc}
@@ -457,41 +457,41 @@ For illustration, we display an example reconstruction using the various models 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_trefht_globe}
-	\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TREFHT variable using the various models in the global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TREFHT variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TREFHT variable using the various models in the Global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TREFHT variable using the various models in the Global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_trefht_globe}
 \end{figure}
 
 Alike Section~\ref{ssec:cesm_ps}, we find similar patterns in our study.
 The CPACE framework outperforms the PACE methodology but we don't manage to truly capture all underlying eigenfunctions from our dataset.
-Again as our study is using extremely sparse data this is understandable, as we simply haven't seen this variation in the training data.
-For the temperature variable the Mat\'ern model tends to perform best however the Gibbs model is in close competition, and often may perform better with a more useful confidence level.
+Again, as our study is using extremely sparse data this is understandable, as we simply haven't seen this variation in the training data.
+For the temperature variable the Mat\'ern model tends to perform best however the Gibbs model is in close competition and often may perform better with a more useful confidence level.
 In fact Figure~\ref{fig:cesm_trefht_dist} highlight this by showing that the SSIM metric for the Gibbs kernel can outperform the Mat\'ern model; just not on average.
-This may be because, in certain scenarios, the Gibbs kernel with its extra hyper parameters fails to converge to the best solution. 
+This may be because, in certain scenarios, the Gibbs kernel with its extra hyperparameters fails to converge to the best solution. 
 Occasionally it will, and in those scenarios will capture more of the complex nature of the spatial dependency. 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{cesm_trefht_dist}
-	\caption[Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the TREFHT variable.]{Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the TREFHT variable.}
+	\caption[Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the TREFHT variable in the Global study.]{Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the TREFHT variable in the Global study.}
 	\label{fig:cesm_trefht_dist}
 \end{figure}
 
 \subsection{Precipitation (TMQ) \label{ssec:cesm_tmq}}
-In this section we present the results of the global study for the precipitation variable, TMQ.
+In this section we present the results of the Global study for the precipitation variable, TMQ.
 We start by considering the decomposition of the data. 
 
 One important aspect of both the PACE and CPACE methodologies is the eigen decomposition of the data common to both. 
 Figure~\ref{fig:phi_tmq_globe} shows the impact of the first two eigenfunctions in the FPCA decomposition.
 We can see from the first eigenfunction, Figure~\ref{fig:phi_1_tmq_globe}, that this clearly represents a level shift in the functions.
 This is similar to the first eigenfunction from the study on the PS variable.
-This intuitively makes sense as we would expect different base precipitation level for different areas of the globe.
+This intuitively makes sense as we would expect different base precipitation levels for different areas of the globe.
 The second eigenfunction, Figure~\ref{fig:phi_2_tmq_globe}, is perhaps a bit more complicated.
 This can be considered as an eigenfunction which will stretch the peaks and troughs of the mean function.
-These eigenfunctions are encouraging as it suggest that both the PACE and CPACE frameworks are appropriate for this dataset as they are outputting eigenfunctions with relatable interpretations.
-We note as with the study on the PS variable that the first eigenfunction is particularly dominating.
+These eigenfunctions are encouraging as they suggest that both the PACE and CPACE frameworks are appropriate for this dataset as they are outputting eigenfunctions with relatable interpretations.
+We note, as with the study on the PS variable, that the first eigenfunction is particularly dominating.
 This again is understandable as we can see that the main mode of variation comes from a level shift.
 However, it is disappointing that the second eigenfunction doesn't pick up the drastic changes in peaks that are present in some locations. 
-This is most likely due to the sparsity of observations used for training meaning it isn't obviously present from the training data only.
+This is most likely due to the sparsity of observations used for training, meaning it isn't obviously present from the training data only.
 
 \begin{figure}
 	\centering
@@ -506,7 +506,7 @@ This is most likely due to the sparsity of observations used for training meanin
 		\caption{Second eigenfunction.}
 		\label{fig:phi_2_tmq_globe}
 	\end{subfigure}
-	\caption[The first two eigenfunctions impact on the mean function from the PACE and CPACE framework of the TMQ variable in the global study.]{The first two eigenfunctions impact on the mean function from the PACE and CPACE framework of the TMQ variable in the global study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
+	\caption[The first two eigenfunctions impact on the mean function from the PACE and CPACE framework of the TMQ variable in the Global study.]{The first two eigenfunctions impact on the mean function from the PACE and CPACE framework of the TMQ variable in the Global study. Here the shaded region shows the impact of two standard deviations from the mean function using the corresponding eigenfunction. Sample curves from the dataset are plotted for context.}
 	\label{fig:phi_tmq_globe}
 \end{figure}
 
@@ -515,11 +515,11 @@ Table~\ref{tab:train_cesm_tmq_globe} displays the metrics for the partially obse
 It is interesting to note that the Gibbs model provides best in class performance on the  validation data.
 We can also see that the Mat\'ern model performs best in class for the test data, while the Gibbs model performs close to best in class.
 The Gibbs model's test metrics have a much larger variance, and suggest that while it performs on average worse than the Mat\'ern model it occasionally may produce better results.
-This is probably an effect of over fitting the complex non-stationary model which underpins the Gibb's model.
-Whereas the Mat\'ern model has a relatively simpler kernel, and thus estimating its hyper parameters is less prone to error.
+This is probably an effect of over fitting the complex non-stationary model which underpins the Gibb's model,
+whereas the Mat\'ern model has a relatively simpler kernel, thus estimating its hyperparameters is less prone to error.
 
 \begin{table}
-	\caption[Results for the TMQ variable on training data in the Global study.]{Results for reconstruction of the training data for the TMQ variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TMQ variable on training data in the Global study.]{Results for reconstruction of the training data for the TMQ variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_tmq_globe}
 	\begin{tabular}{lcc}
@@ -535,7 +535,7 @@ Whereas the Mat\'ern model has a relatively simpler kernel, and thus estimating 
 \end{table}
 
 \begin{table}
-	\caption[Results for the TMQ variable on test data in the Global study.]{Results for reconstruction of the test data for the TMQ variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the TMQ variable on test data in the Global study.]{Results for reconstruction of the test data for the TMQ variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_tmq_globe}
 	\begin{tabular}{lcc}
@@ -551,9 +551,9 @@ Whereas the Mat\'ern model has a relatively simpler kernel, and thus estimating 
 \end{table}
 
 An illustration of the reconstruction ability from the temporal point of view for test data is given in Figure~\ref{fig:test_ex_tmq_globe}.
-It highlights the improvement that the spatial models can make, but also points out that we are not capturing truly the underlying functions.
+It highlights the improvement that the spatial models can make, but also points out that we are not truly capturing the underlying functions.
 It is evident that we clearly miss the change in periodicity of the curves.
-Again this may be difficult to pick up based on the sparsity of our observed data.
+Again, this may be difficult to pick up based on the sparsity of our observed data.
 The sparsity of observations can be seen from Figure~\ref{fig:full_ex_tmq_globe} which gives an illustration of the reconstruction ability spatially.
 This figure also highlights the discrepancy between the Gibbs and the Mat\'ern model.
 We can see that although the Gibbs model has some areas of correct structure it fails to capture fully the data across the whole domain, whereas the Mat\'ern model achieves a much better global structure.
@@ -561,32 +561,32 @@ We can see that although the Gibbs model has some areas of correct structure it 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_tmq_globe}
-	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the global study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the Global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TMQ variable in the Global study from the test dataset.}
 	\label{fig:test_ex_tmq_globe}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{full_ex_tmq_globe}
-	\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TMQ variable using the various models in the global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TMQ variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+	\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TMQ variable using the various models in the Global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE TMQ variable using the various models in the Global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 	\label{fig:full_ex_tmq_globe}
 \end{figure}
 
 
 \subsection{Wind Speed (U10)\label{ssec:cesm_u10}}
-We present the results of the global study for the wind speed variable, U10.
+We present the results of the Global study for the wind speed variable, U10.
 Similar to the other global studies we focus on the metrics for the validation and test datasets.
 
 First, the validation metrics.
 These are displayed in Table~\ref{tab:train_cesm_u10_globe}.
-We can see that on the validation data models perform similarly well, with the Mat\'ern and Gibbs models performing best in class.
-However all models seem to have similar reconstruction ability.
+We can see that on the validation data the models perform similarly well, with the Mat\'ern and Gibbs models performing best in class.
+However, all models seem to have similar reconstruction ability.
 We can see an illustration of the relative performances of the models on validation data in Figure~\ref{fig:train_ex_u10_globe}.
-This also identifies that we seem to have missed again the periodicity in the model.
-Again, similar to the previous variables, this is down to the models focusing on the level shift as their main mode of variation.
+This also identifies that we have again missed the periodicity in the model.
+Similar to the previous variables this is down to the models focusing on the level shift as their main mode of variation.
 
 \begin{table}
-	\caption[Results for the U10 variable on validation data in the Globe study.]{Results for reconstruction of the validation data for the U10 variable in the globe study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on validation data in the Global study.]{Results for reconstruction of the validation data for the U10 variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:train_cesm_u10_globe}
 	\begin{tabular}{lcc}
@@ -604,24 +604,24 @@ Again, similar to the previous variables, this is down to the models focusing on
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{train_ex_u10_globe}
-\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the validation dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the validation dataset.}
+\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the Global study from the validation dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the Global study from the validation dataset.}
 \label{fig:train_ex_u10_globe}
 \end{figure}
 
 We next consider the test data performance, and display the metrics for this in Table~\ref{tab:test_cesm_u10_globe}.
 We can see a clear distinction in the test metrics in preference to the CPACE models with the spatial kernels.
-It seems that the simpler Mat\'ern model is performing best over all.
-However the distinction between that and the Gibbs model is small from these metrics.
+It seems that the simpler Mat\'ern model is performing best overall.
+However, the distinction between that and the Gibbs model is small from these metrics.
 Considering our image reconstruction metrics, we can see a clearer preference to the Mat\'ern model, see Table~\ref{tab:full_cesm_u10_globe}. 
 It is interesting to note that the Gibbs model can outperform that of the Mat\'ern model in certain situations.
-We can see this by looking at the distribution of the SSIM metric over the simulations present in the CESM-LE dataset for the global study.
+We can see this by looking at the distribution of the SSIM metric over the simulations present in the CESM-LE dataset for the Global study.
 We show this in Figure~\ref{fig:cesm_u10_dist}, where the distribution of the \verb*|gibbs| model metrics has a higher peak SSIM. 
 However, over all simulations, we also see a larger range which is on average lower than the \verb*|matern_three| model. 
 Hence, the poorer performance on average.
 
 
 \begin{table}
-	\caption[Results for the U10 variable on test data in the Global study.]{Results for reconstruction of the training data for the U10 variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on test data in the Global study.]{Results for reconstruction of the training data for the U10 variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:test_cesm_u10_globe}
 	\begin{tabular}{lcc}
@@ -637,7 +637,7 @@ Hence, the poorer performance on average.
 \end{table}
 
 \begin{table}
-	\caption[Results for the U10 variable on training data in the Global study.]{Results for reconstruction of the test data for the U10 variable in the global study from the CESM-LE dataset. Bold indicates best in class.}
+	\caption[Results for the U10 variable on training data in the Global study.]{Results for reconstruction of the test data for the U10 variable in the Global study from the CESM-LE dataset. Bold indicates best in class.}
 	\centering
 	\label{tab:full_cesm_u10_globe}
 	\begin{tabular}{lcc}
@@ -655,7 +655,7 @@ Hence, the poorer performance on average.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{cesm_u10_dist}
-	\caption[Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the U10 variable from the global study.]{Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the U10 variable from the global study.}
+	\caption[Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the U10 variable from the Global study.]{Distribution plot of the SSIM metric for the Gibbs and Mat\'ern kernel models for the U10 variable from the Global study.}
 	\label{fig:cesm_u10_dist}
 \end{figure}
 
@@ -666,38 +666,38 @@ As mentioned before, this is likely because we just don't have enough evidence f
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{test_ex_u10_globe}
-\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the global study from the test dataset.}
+\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the Global study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE U10 variable in the Global study from the test dataset.}
 \label{fig:test_ex_u10_globe}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{full_ex_u10_globe}
-\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE U10 variable using the various models in the global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE U10 variable using the various models in the global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
+\caption[An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE U10 variable using the various models in the Global study.]{An indicative example of the CPACE model performance on reconstruction for the full globe of the CESM-LE U10 variable using the various models in the Global study. Clockwise from the top left we have the true data, the observed data at a particular time point, the Mat\'ern Three model reconstruction, the Gibbs model reconstruction, and the White model reconstruction under the CPACE framework.}
 \label{fig:full_ex_u10_globe}
 \end{figure}
 
 \subsection{Discussion \label{ssec:globe_discussion}}
-In Sections~\ref{ssec:cesm_ps}~-~\ref{ssec:cesm_u10} we have considered an application of the CPACE model to the global study of the CESM-LE data. 
+In Sections~\ref{ssec:cesm_ps}~-~\ref{ssec:cesm_u10} we have considered an application of the CPACE model to the Global study of the CESM-LE data. 
 We have presented results which show clearly the advantage of using the CPACE framework with spatial kernels.
 This is intuitive as the geographic nature of this dataset clearly should have spatial dependency for all of these variables.
 
-Our results show that typically the Mat\'ern model tends to perform best of our models considered.
-This is intriguing since we may expect the non-stationary component of the Gibbs model to pick out perhaps more complex spatial dependencies.
+Our results show that typically the Mat\'ern model tends to perform the best of our models considered.
+This is intriguing since we may expect the non-stationary component of the Gibbs model to pick out more complex spatial dependencies.
 We suppose the reason for the lack of this is twofold.
 Firstly; on the global scale, with our reduced resolution we may indeed mask a lot of these complexities, since the variation across large spatial scales dwarfs the subtleties of local variation.
 Secondly; our challenge of using sparse training data for this study may have meant that we often exclude a lot of intricate variation by simply not having enough evidence in the training datasets. 
-This theory is backed up by the fact that in the most case the Gibbs kernel tends itself towards behaving like the Mat\'ern kernel.
+This theory is backed up by the fact that in most cases the Gibbs kernel tends itself towards behaving like the Mat\'ern kernel.
 This is comforting as it suggest that rather than the Gibbs model failing to identify these trends, it is actually that our training data only suggests large scale variation.
 
-We also note that in the study across the variables our eigen decomposition which makes the base of all these models tended to be dominated by a single large component.
+We also note that in the study across the variables our eigen decomposition, which makes the base of all these models, tended to be dominated by a single large component.
 This represented a level shift of the functional data.
 The CPACE models with a spatial kernel tend to outperform the other as they use spatial information to inform on where to apply this level shift.
 This leads to a good increase in performance.
 Again, this intuitively makes sense which gives us comfort in the feasibility of the CPACE framework being applied to EO data as it produces interpretable results.
 
 We note that even in the non-spatial dependent kernels the CPACE framework tends to outperform the PACE framework.
-Again, attributable to the additional refinement of the models hyper parameters compared to the PACE model.
+Again, attributable to the additional refinement of the model's hyperparameters compared to the PACE model.
 
 In the following section we move on to consider our European study. 
 This more localised European study, presented in Section~\ref{ssec:cesm_eur}, will consider a slightly different challenge to the CPACE framework with less sparse data and less global variation.
@@ -705,13 +705,13 @@ This more localised European study, presented in Section~\ref{ssec:cesm_eur}, wi
 \section{European Study Results \label{sec:cesm_res_eurr}}
 Here we present the results of the study across the spatial domain as described in Section~\ref{ssec:cesm_eur}.
 This roughly corresponds to the European continent.
-This study has two components that differ from the global study; namely the spatial scale and the density of observations.
+This study has two components that differ from the Global study; namely the spatial scale and the density of observations.
 This gives us a chance to see how well the CPACE framework compares to the PACE framework under these scenarios.
 
 We have considered four models for this study, the same setup for each variable of interest.
 The \verb*|fpca| model corresponds to the FPCA model or PACE framework, which doesn't take into account spatial dependency.
 The second, \verb*|fpca_gp|, is our CPACE model with the White kernel.
-Again this doesn't take into account spatial dependency between functional observations, but is computed under our CPACE framework which allows for hyper parameters of the kernel; namely the spatial kernel variance for each components, to be estimated using the Gaussian process framework.
+Again this doesn't take into account spatial dependency between functional observations, but is computed under our CPACE framework which allows for hyperparameters of the kernel; namely the spatial kernel variance for each component, to be estimated using the Gaussian process framework.
 Thirdly, we use the Mat\'ern Three kernel with anisotropic length scales as the spatial kernel in another CPACE model.
 This we denote by \verb*|matern_three|.
 Finally, we denote by \verb*|gibbs| the CPACE model using the Gibbs kernel.
@@ -723,11 +723,11 @@ We present the results separately for each variable of interest; Pressure (PS), 
 Here we present the results from our models applied to the pressure variable in the European study.
 We start by looking at the eigen decomposition common to all models.
 Figure~\ref{fig:phi_ps_eur} displays the impact of the first two eigenfunctions under this study for a single simulation of the PS variable from the CESM-LE dataset.
-It is of note that again the first eigenfunction, Figure~\ref{fig:phi_1_ps_eur}, represents a level shift; as was seen in the global study of the pressure variable.
-The second eigenfunction, Figure~\ref{fig:phi_2_ps_eur}, shows this time however a stretching of the peaks and troughs from the mean function.
-It is perhaps slightly more complicated that that,  showing more variation at the start and end of the domain, but in general that is a fair interpretation of the second eigenfunction.
-This is encouraging as intuitively this is an important part of the data set and highlights the ability of the PACE methodology to help in understanding the data, something which the CPACE methodology builds on.
-It is also interesting to note that we obtain a much more representative mean function than that of the global study.
+It is of note that again the first eigenfunction, Figure~\ref{fig:phi_1_ps_eur}, represents a level shift; as was seen in the Global study of the pressure variable.
+However, the second eigenfunction, Figure~\ref{fig:phi_2_ps_eur}, shows this time a stretching of the peaks and troughs from the mean function.
+It is perhaps slightly more complicated than that, showing more variation at the start and end of the domain, but in general that is a fair interpretation of the second eigenfunction.
+This is encouraging as intuitively this is an important part of the dataset and highlights the ability of the PACE methodology to help in understanding the data, something which the CPACE methodology builds on.
+It is also interesting to note that we obtain a much more representative mean function than that of the Global study.
 This is a result of the denser observations and the smaller spatial scale in this study.
 
 \begin{figure}
@@ -747,12 +747,12 @@ This is a result of the denser observations and the smaller spatial scale in thi
 	\label{fig:phi_ps_eur}
 \end{figure}
 
-Next we present the metrics of the predictions from our variety of models.
-We start by showing the resultant metrics on our validation data set in Table~\ref{tab:train_cesm_ps_eur}.
-Again, similar to the global study we see a close comparative performance between all CPACE models.
-We do not see the differentiation between the \verb*|pace| model and the CPACE models that was seen in the global study.
+Next, we present the metrics of the predictions from our variety of models.
+We start by showing the resultant metrics on our validation dataset in Table~\ref{tab:train_cesm_ps_eur}.
+Again, similar to the Global study we see a close comparative performance between all CPACE models.
+We do not see the differentiation between the \verb*|pace| model and the CPACE models that was seen in the Global study.
 
-All models perform roughly equally on the validation data set.
+All models perform roughly equally on the validation dataset.
 Perhaps we can argue that the spatial models perform slightly better than the non-spatial models, especially evident on the MAE metric.
 An indicative example of model reconstruction is given in Figure~\ref{fig:train_ex_ps_eur}.
 It highlights how similar the models predict partially observed functions. 
@@ -767,7 +767,7 @@ It highlights how similar the models predict partially observed functions.
 		\midrule
 		\verb*|pace| & 579.4300 (47.2497) & 438.0766 (28.8890) \\
 		\verb*|fpca_gp| & 562.3507 (38.1133) & 431.3178 (27.2087) \\
-		\verb*|matern_three| & 560.6262 (41.2007)& \textbf{423.1480 (27.5427)}\\
+		\verb*|matern_three| & \textbf{560.6262 (41.2007)}& \textbf{423.1480 (27.5427)}\\
 		\verb*|gibbs| & 559.1836 (36.0552) & 424.4744 (25.5373)\\
 		\bottomrule
 	\end{tabular}
@@ -785,7 +785,7 @@ We present the metric results for this in Table~\ref{tab:test_cesm_ps_eur}.
 As can be seen, we see a distinct improvement in using the CPACE framework with a spatial kernel.
 The Mat\'ern kernel performs best in class.
 The Gibbs kernel unfortunately suffers from occasional bad prediction accuracy on some simulations leading to higher metric results with larger variance.
-This is probably due to the added complexity in estimating the kernel hyper parameters.
+This is probably due to the added complexity in estimating the kernel hyperparameters.
 We discuss our approach to minimising this effect in Chapter~\ref{cha:implementation}.
 
 \begin{table}
@@ -814,12 +814,12 @@ This shows how the spatial models can adapt using the location of the spatial do
 	\label{fig:test_ex_ps_eur}
 \end{figure}
 
-Finally we consider the image reconstruction metrics.
+Finally, we consider the image reconstruction metrics.
 These consider how well the models perform to recreate the imagery as a whole. 
 This is presented in Table~\ref{tab:full_cesm_ps_eur}.
 Again, we can see the better performance of the spatial kernels, with the Mat\'ern kernel quite expectedly being best in class.
-Interestingly, the performance increase over the non-spatial kernel models is less pronounced than in the global study.
-This is a function of the less varied data and the increase in observations, which gives the non-spatial models more points at which the functions have some observations which is where they perform best.
+Interestingly, the performance increase over the non-spatial kernel models is less pronounced than in the Global study.
+This is a function of the less varied data and the increase in observations, which gives the non-spatial models more points at which the functions have some observations, which is where they perform best.
 
 \begin{table}
 	\caption[Results for the PS variable on full data in the European study.]{Results for reconstruction of the full data for the PS variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
@@ -839,9 +839,9 @@ This is a function of the less varied data and the increase in observations, whi
 
 From the above, we can see clear evidence that the CPACE framework is effective for the pressure variable.
 We can see that it replicates the PACE framework as the \verb*|fpca_gp| model performs almost identically to that of the \verb*|pace| model.
-We can see, alike in the corresponding global study, that the Mat\'ern model is generally best in class, with the Gibbs model being a close second.
+We can see, alike in the corresponding Global study, that the Mat\'ern model is generally best in class, with the Gibbs model being a close second.
 It is encouraging to see that the performance of the CPACE framework isn't particularly affected by the more dense observations, which suggests it is applicable in this setting. 
-Figure~\ref{fig:full_ex_ps_eur} gives a example illustration of the model reconstructions at a particular time point in our data set.
+Figure~\ref{fig:full_ex_ps_eur} gives a example illustration of the model reconstructions at a particular time point in our dataset.
 It confirms,  in an illustrative way, the advantage of the CPACE framework.
 
 \begin{figure}
@@ -853,7 +853,7 @@ It confirms,  in an illustrative way, the advantage of the CPACE framework.
 
 \subsection{Temperature (TREFHT) \label{ssec:cesm_trefht_eur}}
 In this section we present the results of the European study for the temperature variable. 
-Alike Section~\ref{ssec:cesm_ps_eur}, we begin by considering the eigen decompostion of the data set which is common to all models under the PACE and CPACE frameworks. 
+Alike Section~\ref{ssec:cesm_ps_eur}, we begin by considering the eigen decompostion of the dataset which is common to all models under the PACE and CPACE frameworks. 
 
 Figure~\ref{fig:phi_trefht_eur} shows the impact of the leading two eigenfunction in the decomposition for an example simulation. 
 Similar to the pressure variable, the first eigenfunction is clearly a level shift of the mean function, with the second being a stretching of the peaks and troughs.
@@ -903,7 +903,7 @@ We now consider the comparative performance on the test set.
 Here we may expect that utilising spatial information will give a good performance boost to the CPACE framework with spatial kernels.
 Table~\ref{tab:test_cesm_trefht_eur} displays these results.
 
-In fact we do see such an improvement, which again is an encouraging sign that the CPACE framework is applicable to this smaller spatial scale of the European study.
+In fact we do see such an improvement, which is an encouraging sign that the CPACE framework is applicable to this smaller spatial scale of the European study.
 As an illustrative example we display a reconstruction for a test curve from this dataset in Figure~\ref{fig:test_ex_trefht_eur}.
 It is interesting to note here, that the confidence interval for the Gibbs kernel is much more appropriate than the Mat\'ern model. 
 This might suggest that while the Mat\'ern model performs best in mean, the Gibbs model actually predicts with a more realistic confidence interval. 
@@ -928,13 +928,13 @@ This might suggest that while the Mat\'ern model performs best in mean, the Gibb
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{test_ex_trefht_eur}
-	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the European study from the test dataset]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the European study from the test dataset.}
+	\caption[An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the European study from the test dataset.]{An indicative example of the CPACE model performance on reconstruction of the CESM-LE TREFHT variable in the European study from the test dataset.}
 	\label{fig:test_ex_trefht_eur}
 \end{figure}
 
 Next we compare the results for full reconstruction of the dataset using our image reconstruction metrics.
 These are displayed in Table~\ref{tab:full_cesm_trefht_eur}.
-Again we see the Mat\'ern model performing best in class, but in fact the Gibbs and Mat\'ern model perform similarly.
+Again we see the Mat\'ern model performing best in class, but the Gibbs and Mat\'ern model perform similarly.
 We note, as expected, a good improvement over the PACE framework using spatial dependent kernels.
 An illustration of the effect is given in Figure~\ref{fig:full_ex_trefht_eur}.
 We see good reconstruction overall in this example, but unfortunately all models fail to capture the more extreme areas of the study, such as the most north-westerly locations.
@@ -967,19 +967,18 @@ We reason this will be because there is insufficient evidence in the training da
 
 \subsection{Precipitation (TMQ)\label{ssec:cesm_tmq_eur}}
 In this section we present the results of the European study for the Precipitation variable. 
-Alike Section~\ref{ssec:cesm_trefht_eur}, we begin by considering the eigen decompostion of the data set which is common to all models under the PACE and CPACE frameworks.
+Alike Section~\ref{ssec:cesm_trefht_eur}, we begin by considering the eigen decompostion of the dataset which is common to all models under the PACE and CPACE frameworks.
 
 As with the study of other variables we display the first two eigenfunctions impact on the estimate mean function for the TMQ variable.
 This can be seen in Figure~\ref{fig:phi_tmq_eur}.
 Two things are displayed in this.
 
-First, compared to the global study of the same variable in Section~\ref{ssec:cesm_tmq}, we see a stronger estimation of the mean function.
-That is for two reasons.
-The density of observations over space and frequency of observations across time is higher in the European study compared to the global study, by construction.
+First, compared to the Global study of the same variable in Section~\ref{ssec:cesm_tmq}, we see a stronger estimation of the mean function.
+That is for two reasons; the density of observations over space, and the frequency of observations across time is higher in the European study compared to the Global study, by construction.
 The mean estimator we have used, described in Section~\ref{sec:cpace_mean_estim} and Theorem~\ref{thm:cpace_mean}, will converge to the true mean given more observations.
-We also have that the variability across space is less in the European study than that of the global study.
+We also have that the variability across space is less in the European study than that of the Global study.
 This means that functions tend to be closer to the mean function, and so our estimate is often less skewed by unusual functions in this study.
-One important point is that in the global study we will tend to have two sets of functions with alternate periods.
+One important point is that in the Global study we will tend to have two sets of functions with alternate periods.
 These correspond to the functions from the two hemispheres of the globe respectively.
 This added variability is not present in the European study.
 
@@ -1004,15 +1003,15 @@ Again this provides confidence in the PACE and CPACE methodologies as they seem 
 	\label{fig:phi_tmq_eur}
 \end{figure}
 
-Next we summarise the various models ability to reconstruct the validation data set.
+Next, we summarise the various models ability to reconstruct the validation dataset.
 This is given in Table~\ref{tab:train_cesm_tmq_eur}.
 As can be seen, and alike other variable for the European study, both the PACE and CPACE models perform comparatively.
 The distribution of these metrics is displayed in Figure~\ref{fig:cesm_tmq_eur_dist}, which highlights why we have chosen the Mat\'ern kernel as best in class.
-This is encouraging from the CPACE models, since it highlights we do not lose any predictive ability using this Gaussian Process framework.
-Equally, the same reasoning applies as to why we do not see much improvement using the spatial kernels from the other European studies, namely the added density of observations means each function with partially observed data is more well observed meaning the models lean towards using this information to aid in predictions.
-Thus the spatial models gain less of a bonus from incorporating this additional spatial information.
+This is encouraging from the CPACE models, since it highlights we do not lose any predictive ability using this Gaussian process framework.
+Equally, the same reasoning applies as to why we do not see much improvement using the spatial kernels from the other European studies, namely the added density of observations means each function with partially observed data is more well observed, meaning the models lean towards using this information to aid in predictions.
+Thus, the spatial models gain less of a bonus from incorporating this additional spatial information.
 It is reassuring to see from this that the spatial kernels aren't becoming overly confident on the spatial component of the modelling.
-This can occur due to numerical issues when estimating the hyper parameters of the spatial kernels which cause the spatial kernel to essentially neglect the fact that the temporal component is present, by making them exceedingly large.
+This can occur due to numerical issues when estimating the hyperparameters of the spatial kernels, which cause the spatial kernel to essentially neglect the fact that the temporal component is present by making them exceedingly large.
 This is discussed more in Chapter~\ref{cha:implementation}.
 
 \begin{table}
@@ -1039,8 +1038,8 @@ This is discussed more in Chapter~\ref{cha:implementation}.
 	\label{fig:cesm_tmq_eur_dist}
 \end{figure}
 
-Next we consider the performance of our models on the test dataset.
-As mentioned in Section~\ref{ssec:eval_metrics}, this corresponds to functional data which we have not fully observed during estimation of model components and kernel hyper parameters where applicable.
+Next, we consider the performance of our models on the test dataset.
+As mentioned in Section~\ref{ssec:eval_metrics}, this corresponds to functional data which we have not fully observed during estimation of model components and kernel hyperparameters where applicable.
 Table~\ref{tab:test_cesm_tmq_eur} presents these results.
 
 \begin{table}
@@ -1061,10 +1060,10 @@ Table~\ref{tab:test_cesm_tmq_eur} presents these results.
 
 Again, we see the Mat\'ern model being best in class.
 Although the Gibbs model performs just as well, and both spatial kernels outperform the non-spatial models.
-It is encouraging to see that the \verb*|pace| and \verb*|fpca_gp| model perform equally, as these models are theoretically equivalent as explained in Chapter~\ref{cha:cpace}.
-This is a good indication that even on real world data sets using the CPACE framework is not detrimental to prediction performance in application.
+It is encouraging to see that the \verb*|pace| and \verb*|fpca_gp| models perform equally, as these models are theoretically equivalent as explained in Chapter~\ref{cha:cpace}.
+This is a good indication that even on real world datasets using the CPACE framework is not detrimental to prediction performance in application.
 For an illustration of the improvements the CPACE framework with spatial kernels can make, we display an example of a curve prediction across the whole temporal domain in Figure~\ref{fig:test_ex_tmq_eur}.
-Here we can see clearly, how the spatial models are informed by the neighbouring observed curves to help firstly predict the level shift in the curves, but also help in predicting the amplitude shift to the mean function.
+Here, we can see clearly, how the spatial models are informed by the neighbouring observed curves to help predict the level shift in the curves, but also help in predicting the amplitude shift to the mean function.
 It is interesting to note how similar the Gibbs and Mat\'ern models predict here.
 However, in this case the Gibbs model confidence band for the prediction seems much more reasonable, whereas the Mat\'ern model seems to be overly confident.
 
@@ -1076,7 +1075,7 @@ However, in this case the Gibbs model confidence band for the prediction seems m
 \end{figure}
 
 Finally, we consider the image reconstruction metrics for the models.
-Given the similar performance between the Gibbs and Mat\'ern models, as with other studies, the difference between image reconstruction metrics which consider perceived similarity between the true surfaces and the reconstruction may often be the metric of interest in choosing which to use for real world applications.
+Given the similar performance between the Gibbs and Mat\'ern models, as with other studies, the difference between image reconstruction metrics which consider perceived similarity between the true surfaces and the reconstruction, may often be the metric of interest in choosing which to use for real world applications.
 These metric results are given in Table~\ref{tab:full_cesm_tmq_eur}.
 This confirms the Mat\'ern models best in class performance.
 However, two other important points can be raised from this.
@@ -1111,16 +1110,16 @@ This indicates it might not be a clear cut decision that the Mat\'ern model is a
 \end{figure}
 
 Irrespective of this we can see clearly a performance increase in using the CPACE framework with spatial kernels.
-Whilst this is not unexpected and ties in nicely with the global study and the simulation study, it is encouraging to see that the CPACE framework continues to outperform the PACE framework on  higher density observed functional data which is under consideration in this study.
+Whilst this is not unexpected and ties in nicely with the Global study and the simulation study, it is encouraging to see that the CPACE framework continues to outperform the PACE framework on  higher density observed functional data which is under consideration in this study.
 Finally, for illustration we display an example reconstruction for all models for a specific point in time across the full spatial domain in Figure~\ref{fig:full_ex_tmq_eur}.
 Here, we can clearly see the visual  improvements which are represented in the metrics throughout this section.
 However, we can also see that there are some areas in which we just don't capture the spatial variation correctly.
-These corresponds to the areas of the highest peaks  and troughs, where we fail to completely capture this extreme rapid variation from the mean curve.
+These correspond to the areas of the highest peaks and troughs, where we fail to completely capture this extreme rapid variation from the mean curve.
 This is likely because the spatial variation changes quite rapidly over time in this dataset.
 The CPACE model assumes separate but constant spatial structure over time for each eigenfunction, and so with our $5$ components in the models we do not capture these extreme cases of spatial variation, which occur infrequently over time.
-Increasing the number of components $K$ in our models would likely alleviate this issue, however for this study we have not considered how to choose $K$ .
+Increasing the number of components $K$ in our models would likely alleviate this issue, however for this study we have not considered how to choose $K$.
 A discussion on this, not relating to these studies, is given in Chapter~\ref{cha:implementation}.
-More modest variation across space is well captured however since this tends to be more consistent over time.
+More modest variation across space is well captured however, since this tends to be more consistent over time.
 
 \begin{figure}
 	\centering
@@ -1130,7 +1129,7 @@ More modest variation across space is well captured however since this tends to 
 \end{figure}
 
 \subsection{Wind Speed (U10) \label{ssec:cesm_u10_eur}}
-In this section we present the results of the European study for the Wind Speed variable. 
+In this section we present the results of the European study for the Wind speed variable.
 We begin by considering the training metrics for this study.
 That is the RMSE and MAE for our models ability to reconstruct partially observed functions.
 Table~\ref{tab:train_cesm_u10_eur} displays the mean and standard deviation of these metrics from the $40$ simulations which are part of the CESM-LE dataset. 
@@ -1139,7 +1138,7 @@ The Mate\'rn is chosen as best in class because of its lower mean metric scores.
 However, all models are within one standard deviation of each other, hence this isn't a definitive indication that this kernel will perform best over all simulations.
 
 Figure~\ref{fig:train_ex_u10_eur} gives an illustration of a reconstruction of a partially observed function.
-We can see that on the whole the models captures the periodic nature well, but struggle to capture the amplitude changes between observations.
+We can see that, on the whole, the models capture the periodic nature well, but struggle to capture the amplitude changes between observations.
 This isn't an unusual sight for models with a periodic temporal component.
  
 \begin{table}
@@ -1165,13 +1164,13 @@ This isn't an unusual sight for models with a periodic temporal component.
 	\label{fig:train_ex_u10_eur}
 \end{figure}
 
-A similar set of results is obtained by looking at the performance of the models on the test data, that is the prediction of completely unobserved functional data.
+A similar set of results is obtained by looking at the performance of the models on the test data, that is, the prediction of completely unobserved functional data.
 Table~\ref{tab:test_cesm_u10_eur} displays these results.
-Here, we can clearly see a preference for the spatial kernels under the CPACE framework.
+We can clearly see a preference for the spatial kernels under the CPACE framework.
 Unlike the European studies for the previous variables of interest, the Mat\'ern model is clearly the best model for this variable.
 An example reconstruction of a test data point is given in Figure~\ref{fig:test_ex_u10_eur} which highlights the difference between models. 
 We can see clearly that they all fail to capture the variation in the peak in the middle of the domain, but the spatial kernel models capture the beginning and end of the temporal domain much better than the non-spatial kernel. 
-The Mat\'ern model seems to slightly outperform the Gibbs kernel in this one example in this area also. 
+The Mat\'ern model seems to slightly outperform the Gibbs kernel in this one example in this area too. 
 
 \begin{table}
 	\caption[Results for the U10 variable on test data in the European study.]{Results for reconstruction of the test data for the U10 variable in the European study from the CESM-LE dataset. Bold indicates best in class.}
@@ -1198,13 +1197,13 @@ The Mat\'ern model seems to slightly outperform the Gibbs kernel in this one exa
 
 Finally, we consider the ability of the models under the image reconstruction metrics as described in Section~\ref{sec:cesm_study}.
 We display these results in Table~\ref{tab:full_cesm_u10_eur}.
-As expected we see the Mat\'ern model performing best in class.
+As expected, we see the Mat\'ern model performing best in class.
 However, it is interesting to note that unlike the the previous variables in the European study, the ability to reconstruct the U10 variable is much less.
 We can see a clear example of the struggles of modelling this data through Figure~\ref{fig:full_ex_u10_eur}, which shows the reconstruction across the whole domain at a particular point in time.
 Here, it is obvious all models missed the large increase in windspeed in the Atlantic.
 Similar to the study on the precipitation, Section~\ref{ssec:cesm_tmq_eur}, this is because this phenomena is short lived, and the spatial variation is not constant through time.
 The short lived nature of such phenomena make it difficult for the PACE and CPACE frameworks to pick up as eigenfunctions, since overall it doesn't account for much variation. 
-Further, the change in spatial variation this causes is not picked up by the CPACE framework as it would be required to be an eigenfunction which would then get its own spatial variation over time. 
+Further, the change in spatial variation this causes is not picked up by the CPACE framework, as it would be required to be an eigenfunction which would then get its own spatial variation over time. 
 One way to capture this would be to let $K$, the number of components of the model be increased.
 However, in these studies we have not considered how to choose $K$, a discussion on this is presented in Chapter~\ref{cha:implementation}.
 
@@ -1237,26 +1236,26 @@ This is a prime example of the added flexibility of the non-stationary Gibbs ker
 
 \subsection{Discussion \label{ssec:cesm_dis_eur}}
 In the above, we have considered comparing the PACE methodology with our CPACE framework with a number of different kernels on a subset of the full CESM-LE dataset.
-We can see that in all cases, alike with the global studies, the CPACE spatially dependent models outperform the PACE framework.
+We can see that in all cases, alike with the Global studies, the CPACE spatially dependent models outperform the PACE framework.
 This is again intuitive due to the geographic nature of the dataset which clearly has a spatial component that isn't accounted for in a PACE framework.
 
 Our results suggest a Mat\'ern kernel is typically the most appropriate kernel of the three considered.
 This is usually closely followed by the Gibbs kernel, and in some cases the Gibbs kernel is preferred, especially when considering the model which may maximise the image reconstruction metrics.
-We can see a clear improvement in reconstructing the smaller European dataset than compared to the global study.
+We can see a clear improvement in reconstructing the smaller European dataset than compared to the Global study.
 Again, this is quite expected due to the construction of this study having denser observations.
 This allows for a better estimate of the  mean and covariance structure, which are used in both the PACE and CPACE framework.
 It is encouraging to note that the CPACE framework still outperforms the PACE framework in this setting, that is the denser observations do not reduce the need for a spatial kernel.
 Although we do see a slight decrease in comparative performance of the CPACE framework on partially observed functions when densely observed.
 
 The wind speed, U10, and precipitation, TMQ, in general were the most difficult to model.
-As explained in Sections~\ref{ssec:cesm_u10_eur},~\ref{ssec:cesm_tmq_eur} respectively this is because of non-constant spatial variation over time, and the limited number of component eigenfunctions we have used in this study.
+As explained in Section~\ref{ssec:cesm_u10_eur} and Section~\ref{ssec:cesm_tmq_eur} respectively. This is because of non-constant spatial variation over time, and the limited number of component eigenfunctions we have used in this study.
 
 The European studies illustrate that the CPACE framework is quite applicable to smaller spatial scale studies.
 
 
 \section{Summary \label{sec:cesm_summ}}
-In the above global and European studies, Sections~\ref{sec:cesm_res},~\ref{sec:cesm_res_eurr} respectively, we compared how the CPACE framework handles our CESM-LE data.
-As described in Section~\ref{sec:cesmle}, this is often used as a real world  EO data set.
+In the above global and European studies, Section~\ref{sec:cesm_res} and Section~\ref{sec:cesm_res_eurr} respectively, we compared how the CPACE framework handles our CESM-LE data.
+As described in Section~\ref{sec:cesmle}, this is often used as a real world  EO dataset.
 The data generating process of this dataset is far removed from the assumed model that the CPACE framework is based on.
 We see encouraging results from both studies.
 We found  a good performance increase on the pixel related metrics of the RMSE and MAE.
@@ -1273,6 +1272,6 @@ The reasoning on how to select $K$, the number of components in the CPACE model,
 
 It is notable, that in the eigen decomposition of all the variables, across the European and global studies, the first eigenfunction typically related to a level shift of the mean function.
 This is both interesting and encouraging, as this often corresponds to a shift in the mean function as you travel across latitude bands of the globe.
-This highlights an important aspect of the PACE modellingl; which is its ability to explain data sets.
+This highlights an important aspect of the PACE modelling; which is its ability to explain datasets.
 This is something that the CPACE framework keeps with the same eigen decomposition. 
 It is encouraging to see that this application resulted in such interpretable eigenfunctions.

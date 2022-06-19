@@ -15,7 +15,7 @@ In Chapter~\ref{cha:cpace} we presented the CPACE framework to model functional 
 We have shown the improvements that such a framework can achieve on simulated and real world data in Chapter~\ref{cha:application} and Chapter~\ref{cha:real_application} respectively.
 The framework relies on adapting the PACE methodology and viewing the collection of functional data as a realisation from a larger random field.
 To this end, we proposed to model such a realisation as a Gaussian process whose kernel function is informed by the principal components from the PACE framework.
-As such there are a number of components which need to be estimated, namely the mean function and covariance surface, the eigenfunctions and eigenvalues of the covariance surface, the noise variance, and the between function spatial kernel hyper parameters.
+As such there are a number of components which need to be estimated, namely the mean function and covariance surface, the eigenfunctions and eigenvalues of the covariance surface, the noise variance, and the between function spatial kernel hyperparameters.
 We have shown in Chapter~\ref{cha:cpace} theoretically how one would estimate these, and shown in Theorems~\ref{thm:cpace_mean},~\ref{thm:cpace_cov} the validity of estimating the mean and covariance functions using a penalised B-spline approach for correlated functional data.
 
 However, implementing these approaches often requires subtleties.
@@ -23,15 +23,15 @@ This can be due to numerical stability in calculation or computational feasibili
 In this chapter we look at the implementation details we have used, the reasoning behind them and the benefits they give.
 We begin by looking at our approach to estimating the penalised B-spline smoother which is used to estimate our mean, covariance surfaces, and eigenfunctions.
 This section is focused on the implementation details used within the CPACE framework, however the same considerations apply to the functional time series model (described in Chapter~\ref{cha:ftsm}).
-Following this; we consider implementation details used in the simulation study and application to the CESM-LE dataset regarding numerically stable results.
-Finally, we consider our approach to kernel hyper parameter estimation with a view on reducing computation time and applicability to large datasets.
+Following this; we consider implementation details used in the simulation study, and application to the CESM-LE dataset regarding numerically stable results.
+Finally, we consider our approach to kernel hyperparameters estimation with a view on reducing computation time and applicability to large datasets.
 In addition, we focus on our implementation of the Gibbs kernel for use within this framework.
 
 \section{Penalised B-Spline Smoothing \label{sec:psplines}}
-The theoretical aspects of penalised spline smoothing using B-splines have been discussed in Section~\ref{sec:splines} with the validity of using these for mean function and covariance surface estimation in Theorems~\ref{thm:cpace_mean},~\ref{thm:cpace_cov} respectively.
+The theoretical aspects of penalised spline smoothing using B-splines have been discussed in Section~\ref{sec:splines} with the validity of using these for mean function and covariance surface estimation in Theorem~\ref{thm:cpace_mean} and Theorem~\ref{thm:cpace_cov} respectively.
 Here, we focus on a discussion of the implementation details.
 
-To begin, we consider how to specify the penalty matrix $\ve{P}$ in Equation~\ref{eqn:phatc}.
+To begin, we consider how to specify the penalty matrix $\ve{P}$ in Equation~\eqref{eqn:phatc}.
 Theoretically, as mentioned in Section~\ref{ssec:spline_reg}, this matrix is formed with $\left(l, m\right)^\text{th}$ element being the inner product between $L\left(B_l \right)$ and $L\left(B_m\right)$, where $L$ is some linear differential operator and $B_l, B_m$ are the $l^\text{th}$ and $m^\text{th}$ basis functions respectively.
 In this work we have considered only the simple case where $L$ is the first or higher order derivative.
 Specifying a more complicated form of $L$ is indeed a common action in functional data analysis, \citep{ramsay_functional_2010}, however it often is used when some underlying known process is being captured through this.
@@ -47,30 +47,30 @@ This offers the ability to mix and match derivative based penalties with B-splin
 In addition, both \citep{wood_p-splines_2017} and \citep{wood_low-rank_2006} show a method to extend this approach to tensor product of B-splines which we utilise in our implementation of both the CPACE framework (for the covariance surface) and our functional time series model in Chapter~\ref{cha:ftsm}.
 This methodology is both computationally stable and efficient.
 
-Finally, one must consider how to choose the smoothing parameter; $\omega$ in Equation~\ref{eqn:phatc}.
+Finally, one must consider how to choose the smoothing parameter; $\omega$ in Equation~\eqref{eqn:phatc}.
 As discussed in Section~\ref{ssec:spline_reg} we utilise the GCV to choose the smoothing parameter.
 There are plenty of schemes designed to minimise the GCV with respect to $\omega$, many of which are discussed in \citep{wood_fast_2011}.
 These consider the more general case where the model is a generalised additive model, whereas in our models the link function is simply the identity.
 We opt to use the direct fitting method, as described in \citep{wood_fast_2008}.
 This highlights a hierarchical method to estimating the smoothness parameters via first estimating the coefficients of the system through a penalised iteratively re-weighted least squares (P-IRLS) approach.
-We can safely ignore the iteration because we can directly estimate the coefficients from Equation~\ref{eqn:phatc}.
-We utilise their proposed stable approach to solving Equation~\ref{eqn:phatc}, by considering the QR decomposition of the design matrix adjusted by the square root of the penalty matrix by appending it to the rows, \citep{wood_fast_2008}.
+We can safely ignore the iteration because we can directly estimate the coefficients from Equation~\eqref{eqn:phatc}.
+We utilise their proposed stable approach to solving Equation~\eqref{eqn:phatc}, by considering the QR decomposition of the design matrix adjusted by the square root of the penalty matrix by appending it to the rows, \citep{wood_fast_2008}.
 Then with this fixed, estimates of the derivatives of the GCV with respect to the smoothing parameter $\omega$ can be achieved.
 
 We diverge from \citep{wood_fast_2008} at this point since we choose not to utilise the analytic approach suggested.
 We choose to use automatic differentiation to calculate this derivative, discussed further in Section~\ref{sec:auto_diff}.
 This approach allows for speed of development, with no need to directly implement the relatively complicated updates to calculate the analytic derivative.
-This numerical derivative along with the calculated GCV for a particular smoothing parameter is then fed into an numerical optimisation routine.
+This numerical derivative along with the calculated GCV for a particular smoothing parameter is then fed into a numerical optimisation routine.
 
-For our spline smoothing we opt to utilise the N-ADAM optimizer routine, \citep{dozat_incorporating_2016}.
-This is a first order gradient based optimizer routine which incorporates the Nesterov momentum into the popular ADAM optimizer, \citep{dozat_incorporating_2016}.
+For our spline smoothing we opt to utilise the N-ADAM optimiser routine, \citep{dozat_incorporating_2016}.
+This is a first order gradient based optimiser routine which incorporates the Nesterov momentum into the popular ADAM optimiser, \citep{dozat_incorporating_2016}.
 This was chosen purely for the performance and speed of iteration, and is utilised in the smoothing models which are within both the FTSM model in Chapter~\ref{cha:ftsm} and the CPACE model in Chapter~\ref{cha:cpace}.
-As the N-ADAM optimizer is purely gradient-based, good initialisation is crucial.
-Another issue and implementation detail for the penalised B-spline smoothing is the initialisation of the smoothing parameter and the setup of the design matrix in Equation~\ref{eqn:phatc}.
+As the N-ADAM optimiser is purely gradient-based, good initialisation is crucial.
+Another issue and implementation detail for the penalised B-spline smoothing is the initialisation of the smoothing parameter and the setup of the design matrix in Equation~\eqref{eqn:phatc}.
 We initialise the smoothing parameter to a variety of values independently, and choose to continue the minimisation routine with the best performing initial smoothing parameter.
 
 The setup of the design matrix for the penalised B-spline smoother which we utilise throughout the CPACE framework is also of importance.
-The normalisation of the design matrix, $\ve{B}$, and the response vector $\vesub{Y}{i}$ from Equation~\ref{eqn:phatc} is a standard approach to this.
+The normalisation of the design matrix, $\ve{B}$, and the response vector $\vesub{Y}{i}$ from Equation~\eqref{eqn:phatc} is a standard approach to this.
 We follow, \citep{wood_generalized_2006}, and firstly normalise both the response $\vesub{Y}{i}$ and the design matrix by the norm of the design matrix $\ve{B}$.
 This aids in numerical stability. 
 
@@ -87,30 +87,30 @@ Each component is represented with a penalised B-spline smoother in our CPACE fr
 In addition, extra computation is needed for the Gaussian process framework, which is discussed in Section~\ref{sec:cpace_gp}.
 So as always, there is a trade-off between choosing $K$ large enough to capture sufficient variation whilst maintaining computation feasibility.
 
-One approach to choosing $K$, is to choose $K$ such that the eigenfunction explain $\alpha$\% of the total variance.
+One approach, is to choose $K$ such that the eigenfunction explain $\alpha$\% of the total variance.
 This approach relies on first computing the full eigen decomposition of an estimated covariance matrix into its eigenvectors and eigenvalues.
-This estimated covariance matrix is the discretized version of the covariance surface described in Section~\ref{sec:cpace_eigen_estim}.
+This estimated covariance matrix is the discretised version of the covariance surface described in Section~\ref{sec:cpace_eigen_estim}.
 The eigenvalues correspond to the variance of the respective eigenvectors.
 From this we can then choose the first $K$ components which capture $\alpha$\% of the total variation. 
 This is a common holistic method in PCA, \citep{jolliffe_choosing_2002}.
 We use this method in our implementation of the CPACE framework for both the simulation study and the application to the CESM-LE dataset, which led to our choice of $K=5$ in both cases.
 
-However, this holistic method makes no guarantees that this is the optimum choice of $K$ for reconstructive ability of the CPACE framework.
+However, there is no guarantee that this holistic method will lead to the optimum choice of $K$ for reconstructive ability of the CPACE framework.
 There are a variety of other methods, discussed in \citep{jolliffe_choosing_2002} and more recently by \citeauthor{josse_selecting_2012} in \citep{josse_selecting_2012}.
 One such method which seems promising would be the selection of $K$ through a form of cross-validation, \citep{josse_selecting_2012}.
-Intuitively this would be performing an hierarchical model selection step, which would involve selecting $K$, estimating all the model's hyper parameters, then evaluation on a proportion of the observed data to obtain a loss score.
+Intuitively, this would be performing an hierarchical model selection step, which would involve selecting $K$, estimating all the model's hyperparameters, then evaluating on a proportion of the observed data to obtain a loss score.
 We repeat this for a selection of $K$ values, then choose the $K$ which would minimise this score.
 In this work, we haven't considered such an exhaustive search for $K$ since it would lead to increased model estimation time.
 However, such an approach certainly would be a good direction for future work on the CPACE framework.
 
 \section{CPACE Gaussian Process Implementation \label{sec:cpace_gp}}
 As discussed in Chapter~\ref{cha:cpace} the CPACE framework is built upon viewing functional data as a realisation from a Gaussian process with a specific structured field.
-Gaussian processes are well known to offer some nice properties; such as finite moments and analytical predictive variance, \citep{williams_gaussian_2006}.
+Gaussian processes are known to offer some nice properties; such as finite moments and analytical predictive variance, \citep{williams_gaussian_2006}.
 However, it is well known that Gaussian process models scale poorly with increase in data size.
-In this section, we present out implementation of the CPACE framework which help to address these issues whilst retaining the positive properties that a Gaussian process model has.
+In this section, we present our implementation of the CPACE framework which helps to address these issues, whilst retaining the positive properties that a Gaussian process model has.
 
 We first consider the construction of the space-time covariance kernel that the CPACE framework assumes.
-The functional form of which is given in Equation~\ref{eqn:cpace_k_fn_form}.
+The functional form of which is given in Equation~\eqref{eqn:cpace_k_fn_form}.
 We repeat this below for convenience.
 \begin{equation}
 	a_\mathcal{X}\left( \ve{s}, t, \vesup{s}{\prime}, t^\prime \right) = \vesup{\phi}{\transpose}(t)\text{Diag}\left(a_1(\ve{s}, \vesup{s}{\prime}), a_2(\ve{s}, \vesup{s}{\prime}), \cdots, a_K(\ve{s}, \vesup{s}{\prime}) \right) \ve{\phi}(t^\prime)
@@ -152,11 +152,10 @@ The corresponding matrix $\ve{A} \in \mathbb{R}^{KN \times KN}$ can be formed su
 The $k^\text{th}$ block $A_k$ is found simply by evaluating the spatial kernel $a_k(\ve{s}, \vesup{s}{\prime})$ at all pairs of spatial points $\vesub{s}{i}$ for $i=1,2, \dots, N$. 
 
 This approach has a number of advantages.
-Firstly computation of the spatial kernel component is greatly sped up by having to only evaluating the component spatial kernels each on $N \times N$ positions.
+Firstly, computation of the spatial kernel component is greatly sped up by having to only evaluate the component spatial kernels each on $N \times N$ positions.
 This is a reduction by a factor of $K$.
 Typically the spatial kernel will be more computationally intensive to compute than the eigenfunctions so this saves a great deal of computation time.
-Secondly; this representation is inherently sparse.
-This has two implications.
+Secondly, this representation is inherently sparse, which has two implications.
 We can speed up the matrix multiplications between the sparse representation for $\ve{U}$ and the block diagonal matrix of $\ve{A}$, using a matrix multiplication algorithm for sparse matrices. 
 Many linear algebra routines have functionality built in to accommodate this.
 In our implementation we use the \verb*|tensorflow| library which has this capability, \citep{abadi_tensorflow_2016}.
@@ -165,16 +164,16 @@ This is simply down to the fact we do not have to store large matrices in this r
 In fact, in our implementation for the CPACE model we only need to store the sparse representation for $\ve{U}$ and the blocks of $\ve{A}$. 
 
 We illustrate the comparative time taken for this approach to the naive one in Figure~\ref{fig:imp_utau}.
-We can see the similarity in computation time for small values of the datasets, but we can see the much shallower increase in computation time between the naive method and vectorised method.
+We can see the similarity in computation time for small values of the datasets, but we can also see the much shallower increase in computation time between the naive method and vectorised method.
 The reason for such great speed up is given above.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{imp_utau}
-	\caption[A illustration for the computer time taken to calculate $\Sigma_\mathcal{X}$ for the naive and vectorised methods for multiple sizes of observed data.]{A illustration for the computer time taken to calculate $\Sigma_\mathcal{X}$ for the naive and vectorised methods for multiple sizes of observed data. Here we use $K = 5$ for our illustrative example. The above computation times were taken from a single machine running with the Darwin kernel Version 21.1.0 on an i386 processor with 16Gb of RAM.}
+	\caption[An illustration for the computer time taken to calculate $\Sigma_\mathcal{X}$ for the naive and vectorised methods for multiple sizes of observed data.]{A illustration for the computer time taken to calculate $\Sigma_\mathcal{X}$ for the naive and vectorised methods for multiple sizes of observed data. We use $K = 5$ for our illustrative example. The above computation times were taken from a single machine running with the Darwin kernel Version 21.1.0 on an i386 processor with 16Gb of RAM.}
 	\label{fig:imp_utau}
 \end{figure}
 
-This method for calculation of $\Sigma_{\mathcal{X}}$ has an additional use in the calculation of the log marginal likelihood, given in Equation~\ref{eqn:mll_cpace}.
+This method for calculation of $\Sigma_{\mathcal{X}}$ has an additional use in the calculation of the log marginal likelihood, given in Equation~\eqref{eqn:mll_cpace}.
 Renowned for being the bottleneck of a standard Gaussian process model, \citep{williams_gaussian_2006}, the minimisation of the log marginal likelihood is typically time consuming due to the need to calculate the inverse and determinant of the covariance matrix of the process for the training observations.
 This can be particularly challenging since the standard approach for doing so involves the Cholesky decomposition of $\ve{\Sigma}\left( \ve{Y}, \ve{Y} \right)$.
 The algorithm used to compute this Cholesky decomposition has computational complexity of $O(\frac{\lvert \mathcal{X} \rvert^3}{6})$.
@@ -187,7 +186,7 @@ In particular, noting that $\ve{\Sigma}\left( \ve{Y}, \ve{Y} \right) = \Sigma_\m
 \end{equation}
 We can use the Woodbury matrix identity to calculate it's inverse, and the matrix determinant lemma to calculate its determinant.
 
-The Woodbury matrix identity, \citep{woodbury_inverting_1950} states that inversion of a rank $k$ matrix can be computed by applying a rank $k$ correction to the inverse of the original matrix.
+The Woodbury matrix identity states that inversion of a rank $k$ matrix can be computed by applying a rank $k$ correction to the inverse of the original matrix, \citep{woodbury_inverting_1950}.
 In our model we have:
 \begin{equation}
 	 \left( \ve{U} \ve{A}  \vesup{U}{\transpose} + \sigma_\varepsilon^2 \ve{I} \right)^{-1} = p \ve{I} - p \ve{U}\left(\vesup{A}{-1} + p^2\vesup{U}{\transpose}\ve{U}\right)^{-1} \vesup{U}{\transpose}
@@ -198,7 +197,7 @@ Here this has reduced the large $\lvert \mathcal{X} \rvert \times \lvert \mathca
 We note now that the inversion of the matrix $\ve{A}$ can be simplified further due to its block diagonal structure.
 This inversion actually only requires $K$ lots of $N \times N$ inversions.
 The outer inversion, $\left(\vesup{A}{-1} + p^2\vesup{U}{\transpose}\ve{U}\right)$ isn't inverted directly as for the marginal log likelihood we require $\ve{\Sigma}\left( \ve{Y}, \ve{Y} \right)^{-1} \ve{Y}$.
-Hence by postmultiplying Equation~\ref{eqn:woodbury} by $\ve{Y}$ we can use the Cholesky factor of this outer matrix and a Cholesky solve against $\vesup{U}{\transpose}\ve{Y}$ to calculate this component in a numerical stable way.
+Hence by postmultiplying Equation~\eqref{eqn:woodbury} by $\ve{Y}$ we can use the Cholesky factor of this outer matrix and a Cholesky solve against $\vesup{U}{\transpose}\ve{Y}$ to calculate this component in a numerical stable way.
 
 For the marginal log likelihood we also require the determinant of $\ve{\Sigma}\left( \ve{Y}, \ve{Y} \right)$.
 The matrix determinant lemma, \citep{harville_determinants_1997}, is the analogue to the Woodbury matrix identity for their determinants.
@@ -208,8 +207,8 @@ By using the matrix determinant lemma the determinant of $\ve{\Sigma}\left( \ve{
 	\det \left(\ve{\Sigma}\left( \ve{Y}, \ve{Y} \right) \right) = \det \left(\vesup{A}{-1} + p^2\vesup{U}{\transpose}\ve{U}\right) \det (\ve{A}) \det (\sigma_\varepsilon^2 \ve{I})
 \end{equation}
 
-Again, this works in tandem with the Cholesky decomposition of the larger outer matrix and if the inner inversion of $\ve{A}$ is also calculated with a Cholesky decomposition the full determinant follows easily from the Woodbury inversion in Equation~\ref{eqn:woodbury}.
-Note that these formulas are exact and no approximations are required, and thus we retain the exact properties of the Gaussian process if we follow the above implementation whilst reducing the complexity of calculating the expensive operations in the marginal log likelihood from $O(\frac{\lvert \mathcal{X} \rvert^3}{6})$ to $O((KN)^3)$.
+Again, this works in tandem with the Cholesky decomposition of the larger outer matrix and if the inner inversion of $\ve{A}$ is also calculated with a Cholesky decomposition the full determinant follows easily from the Woodbury inversion in Equation~\eqref{eqn:woodbury}.
+Note that these formulas are exact and no approximations are required, thus we retain the exact properties of the Gaussian process if we follow the above implementation whilst reducing the complexity of calculating the expensive operations in the marginal log likelihood from $O(\frac{\lvert \mathcal{X} \rvert^3}{6})$ to $O((KN)^3)$.
 This essentially means that the number of time points we observe at each spatial location is not a limiting factor in our estimation procedure.
 Since our computation time only has cubic growth with the number of spatial points and model components.
 Figure~\ref{fig:imp_woodbury} highlights the effect of using the above method on computation time for a matrix inversion. 
@@ -222,25 +221,25 @@ As can be seen from this the above implementation using the Woodbury inversion t
 	\label{fig:imp_woodbury}
 \end{figure}
 
-The above implementation for our CPACE model makes the model feasible on relatively large data sets.
-However, it still requires multiple evaluations of the marginal log likelihood to estimate the hyper parameters of the spatial kernels.
+The above implementation for our CPACE model makes the model feasible on relatively large datasets.
+However, it still requires multiple evaluations of the marginal log likelihood to estimate the hyperparameters of the spatial kernels.
 We discuss our approach to this in the following section.
 
 \subsection{Maximising the Marginal Log Likelihood \label{ssec:imp_gp_min}}
-We have stated in Chapter~\ref{cha:cpace} that any hyper parameters of the CPACE model, most prominently the spatial kernel hyper parameters, are estimated by minimising the negative log marginal likelihood of the model; this is equivalent to maximising the marginal log likelihood.
+We have stated in Chapter~\ref{cha:cpace} that any hyperparameters of the CPACE model, most prominently the spatial kernel hyperparameters, are estimated by minimising the negative log marginal likelihood of the model; this is equivalent to maximising the marginal log likelihood.
 To do so we follow our minimisation methodology from Section~\ref{sec:psplines} and use a gradient descent based algorithm.
 In particular, we also use automatic differentiation to calculate our gradients.
 This is discussed in Section~\ref{sec:auto_diff}.
 
 In our implementation, we have opted to use a stochastic gradient descent (SGD), \citep{sra_optimization_2012}, algorithm for this.
 Whilst in principle any gradient descent algorithm should perform fine, we found through experimentation that a SGD algorithm tended to perform best.
-Our intuitive reasoning for this is that due to the large number of hyper parameters in the CPACE framework, it is relatively easy for the gradient descent algorithms to get stuck in local optima.
+Our intuitive reasoning for this is that, due to the large number of hyperparameters in the CPACE framework, it is relatively easy for the gradient descent algorithms to get stuck in local optima.
 The stochastic nature of SGD essentially randomly perturbs the true direction of travel by approximating the gradient from a random subset of data. 
-This added variability gives it the chance to overcome any small local optima caused by specific hyper parameters, whereas deterministic approached like N-ADAM, \citep{dozat_incorporating_2016}, tended not to find these.
+This added variability gives it the chance to overcome any small local optima caused by specific hyperparameters, whereas deterministic approached like N-ADAM, \citep{dozat_incorporating_2016}, tended not to find these.
 
-Two more items are important in implementing such a gradient descent approach to maximising the marginal log likelihood; the initialisation of the algorithm and the stopping criterion.
+Two more items are important in implementing such a gradient descent approach to maximising the marginal log likelihood; the initialisation of the algorithm, and the stopping criterion.
 To initialise our minimisation routine we opt for random starts.
-In particular, we pick a number of places from the likely domain of the hyper parameters.
+In particular, we pick a number of places from the likely domain of the hyperparameters.
 For each choice we calculate the marginal log likelihood, then start the SGD initialised at the point which has maximum marginal log likelihood.
 Whilst this doesn't guarantee to aide in finding global optima it is a often used heuristically, \citep{sra_optimization_2012}.
 The reasoning being it gives the descent algorithm a chance of starting in a location where the global optimum may exist.
@@ -250,51 +249,51 @@ The trade off for choosing this is purely down to time available for training.
 There is a similar trade off used in deciding when to stop the gradient descent algorithm.
 
 As with any minimisation procedure, how to stop is often a tricky problem.
-For SGD it is of particular importance as the stochastic nature may mean you can step away from the gradient only to return to it later in the routine.
-Early stopping is a classic heuristic to prevent wasted computation when this happens, \citep{sra_optimization_2012}.
+For SGD it is of particular importance, as the stochastic nature may mean you can step away from the gradient only to return to it later in the routine.
+Early stopping is a classic heuristic approach to prevent wasted computation when this happens, \citep{sra_optimization_2012}.
 In our implementation for our simulation study we decided to stop when the absolute relative change in gradient was less than a tolerance of $0.001$\% or the relative change of the maximum log likelihood was less than a tolerance of $1e^{-5}$\%. 
 Again, these stopping criterion are usually problem dependent, \citep{sra_optimization_2012}.
-The larger tolerance for stopping can often reduce estimation time but may mean you end up with sub-optimal hyper parameters.
-A narrow tolerance may mean you produce more optimal hyper parameter estimation, but can cause the computational time to increase largely.
+The larger tolerance for stopping can often reduce estimation time but may mean you end up with sub-optimal hyperparameters.
+A narrow tolerance may mean you produce more optimal hyperparameter estimation, but can cause the computational time to increase largely.
 
 Finally, to help speed up computation of this minimisation procedure we implement batched stochastic gradient descent, \citep{li_efficient_2014}.
-We consider our training datasets in batches, and perform the update for the hyper parameters on each batch in sequence.
+We consider our training datasets in batches, and perform the update for the hyperparameters on each batch in sequence.
 Our training data is split into $b$ sized batches, $b$ is chosen heuristically.
 Typical choices are $16, 32$, and $64$.
-A single iteration, or epoch, of estimation of our hyper parameters results in batching our training data then looping through all batches of our training data and performing a SGD update step.
+A single iteration, or epoch, of estimation of our hyperparameters results in batching our training data then looping through all batches of our training data and performing a SGD update step.
 This effectively adds two improvements to our estimation procedure.
 There is a dramatic speed up since now gradients of the marginal log likelihood are computed over the batch, so the batch size, $b$, is determining our maximum size of the computationally complex Cholesky decomposition as described in Section~\ref{ssec:imp_gp_min}.
 We note that when we split our training data up into batches, we split entirely on the location, thus we are splitting $N$ into batches.
 This means that all temporal observations for a particular functional data are contained in the same batch.
 
-This batched approach to estimating kernel hyper parameters is well used in Machine learning, \citep{li_efficient_2014}. 
+This batched approach to estimating kernel hyperparameters is well used in Machine learning, \citep{li_efficient_2014}. 
 The speed up of computation offered by this is bought at the price of added noise.
 In practice, this approach works well with SGD and is widely used, \citep{li_efficient_2014}, \citep{sra_optimization_2012}.
 
-In this section we have detailed our estimation procedure for the hyper parameters in the CPACE framework.
+In this section we have detailed our estimation procedure for the hyperparameters in the CPACE framework.
 As with most Gaussian process implementations we estimate these through maximising the marginal log likelihood.
 We have detailed our implementation of this maximisation approach using a batched gradient descent algorithm. 
-What remains to be specified is how we obtain the gradients with respect to the hyper parameters which are used in such gradient based algorithms.
+What remains to be specified is how we obtain the gradients with respect to the hyperparameters which are used in such gradient based algorithms.
 We do so in the following section.
 
 \section{Automatic Differentiation \label{sec:auto_diff}}
-In our CPACE framework, described in Chapter\ref{cha:cpace}, there a two main places where we need to estimate hyper parameters;
-in the estimation of eigen functions through penalised B-Spline smoothing and in the estimation of our spatial kernel hyper parameters.
-We have outlined our implementation of estimating these in Sections~\ref{sec:psplines}, \ref{ssec:imp_gp_min} respectively.
-Each of which requires a gradient based optimiser, and thus need gradients with respect to hyper parameters.
+In our CPACE framework, described in Chapter~\ref{cha:cpace}, there are two main places where we need to estimate hyperparameters;
+in the estimation of eigen functions through penalised B-Spline smoothing and in the estimation of our spatial kernel hyperparameters.
+We have outlined our implementation of estimating these in Section~\ref{sec:psplines} and Section~\ref{ssec:imp_gp_min} respectively.
+Each of these require a gradient based optimiser, and thus need gradients with respect to hyperparameters.
 In this section we outline how we go about obtaining these.
 
 There are three popular methods for computing gradients and Hessians of complex mathematical functions using a computer; numeric, symbolic, and automatic differentiation.
 Numeric differentiation uses the method of finite differences to approximate the derivative.
-It can introduce rounding errors through the discretization of the problem as well as issues surrounding cancellation causing the estimated gradient to be a poor approximation of the exact gradient.
+It can introduce rounding errors through the discretisation of the problem as well as issues surrounding cancellation causing the estimated gradient to be a poor approximation of the exact gradient.
 Symbolic differentiation manipulates expression through mathematics, using known gradients of simple operations and a combination of the product and chain rules of derivatives.
-These are then combined to a single expression which represents the gradient of the function which is then evaluated at locations of interest.
-It is often inappropriate to use since converting computer code into a single mathematical expression of the gradient it often difficult, especially if there are conditions such as if and else statements. 
+These are then combined to a single expression, which represents the gradient of the function which is then evaluated at locations of interest.
+It is often inappropriate to use since converting computer code into a single mathematical expression of the gradient can be difficult, especially if there are conditions such as; \verb*|if| and \verb*|else| statements. 
 This can lead to inefficient code, \citep{baydin_automatic_2018}.
 
 Automatic differentiation is a series of techniques that allows one to efficiently and accurately evaluate derivatives of numeric functions expressed as computer programs, \citep{neidinger_introduction_2010}.
 It exploits the fact that a computer program executes a series of elementary mathematical operations and functions.
-It is broadly split into two categories; forward mode and reverse mode.
+It is broadly split into two categories; forward mode, and reverse mode.
 We discuss reverse mode automatic differentiation briefly as it is the implementation we use in this work.
 For more detailed discussion on these approaches we refer the reader to \citep{neidinger_introduction_2010}.
 
@@ -329,7 +328,7 @@ That is:
 
 The backward pass then starts at the last node and evaluates the derivative with respect to its parent components.
 So firstly, $\frac{dz}{dw_5} = 1$.
-Then next, $w_5$ depends linearly on $w_3$ and $w_4$, so we calculate the derivative of $w_5$ with respect to these; then can use the chain rule to accumulate this up to the derivative of $z$ with respect to these components, keeping each. 
+Then, $w_5$ depends linearly on $w_3$ and $w_4$, so we calculate the derivative of $w_5$ with respect to these; then can use the chain rule to accumulate this up to the derivative of $z$ with respect to these components, keeping each. 
 That is:
 \begin{eqnarray*}
 	\frac{dz}{dw_3} &=& \frac{dz}{dw_5}\frac{dw_5}{dw_3} = 1 \times 1 \\
@@ -356,13 +355,13 @@ This methodology doesn't suffer particularly from round off error due to never s
 
 In our implementation of the CPACE framework we make use of reverse mode automatic differentiation.
 We use the Python package, \verb*|tensorflow| which is capable of calculating gradients through this exact approach, \citep{abadi_tensorflow_2016}. 
-This means our gradient based optimisation procedures for penalised B-spline smoothing and spatial kernel hyper parameters can be achieved, even when the number of parameters we need derivatives for is extremely high such as the case for the Gibbs kernel.
+This means our gradient based optimisation procedures for penalised B-spline smoothing and spatial kernel hyperparameters can be achieved, even when the number of parameters we need derivatives for is extremely high such as the case for the Gibbs kernel.
 We discuss this particular kernel more in the following section.
 
 
 \section{Gibbs Kernel \label{sec:gibbs_kernel}}
-This Gibbs kernel is our main non-stationary kernel of interest in both our simulation study and application to the CESM-LE study; Chapters~\ref{cha:application},~\ref{cha:real_application} respectively.
-The general form of which , previously discussed in Section~\ref{ssec:spatial_kern}and given here for convenience is: 
+This Gibbs kernel is our main non-stationary kernel of interest in both our simulation study and application to the CESM-LE study; Chapter~\ref{cha:application} and Chapter~\ref{cha:real_application} respectively.
+The general form of which, previously discussed in Section~\ref{ssec:spatial_kern} and given here for convenience is: 
 \begin{equation}
 	k\left(s_{i}, s_{j}\right) = \sum_{q=1}^{Q} \sqrt{\frac{2l_q(s_i)l_q(s_j)}{l_q(s_i)^2 + l_q(s_j)^2}} \exp \left(-\frac{\left(s_i - s_j\right)^2}{l_q(s_i)^2 + l_q(s_j)^2}\right)
 \end{equation}
@@ -373,10 +372,10 @@ We mentioned briefly in Sections~\ref{sec:sim_study},~\ref{sec:cesm_kernels} tha
 This is not the only model that could be used.
 For example, \citep{paciorek_spatial_2006} considers parametrising their length scale models using a latent Gaussian process.
 In our implementation of the Gibbs kernel, we have opted to use a neural network model for a couple of reasons.
-Firstly; given a sufficient structure they are flexible and can approximate a variety of surfaces.
-Secondly; they are somewhat agnostic to specific construction.
+Firstly, given a sufficient structure they are flexible and can approximate a variety of surfaces.
+Secondly, they are somewhat agnostic to specific construction.
 That is as long as the network structure we use is sufficiently large, we can be somewhat lazy about exact network structure. 
-That isn't to say we should be lazy in constructing these hyper parameter models, but that given they are not our main area of interest in the CPACE framework, we should be happy that we can give a general construction which should perform reasonably well.
+That isn't to say we should be lazy in constructing these hyperparameter models, but that given they are not our main area of interest in the CPACE framework, we should be happy that we can give a general construction which should perform reasonably well.
 Finally, they are fast to evaluate and fast to train, \citep{abadi_tensorflow_2016}.
 In particular, such a network model fits in naturally to the use of \verb*|tensorflow| to implement the CPACE framework.
 
@@ -384,23 +383,22 @@ Having decided on a structure of the neural network, for example in our simulati
 The simplest way to do this is to model the log length scale using the neural network and exponentiate the output.
 This is how we have implemented the Gibbs kernel in both the simulation study and application to the CESM-LE dataset. 
 
-Estimation of the parameters of the length scale model follows as in Section~\ref{sec:cpace_gp} where they are estimated in conjunction with the other hyper parameters of the CPACE framework.
-This is where having an efficient and fast calculation of the log marginal likelihood and its gradient with respect to the hyper parameters becomes powerful.
-Since without this using a length scale model which relies on a large number of hyper parameters would be infeasible in terms of computational cost.
+Estimation of the parameters of the length scale model follows, as in Section~\ref{sec:cpace_gp}, where they are estimated in conjunction with the other hyperparameters of the CPACE framework.
+This is where having an efficient and fast calculation of the log marginal likelihood and its gradient with respect to the hyperparameters becomes powerful.
+Since without this using a length scale model which relies on a large number of hyperparameters would be infeasible in terms of computational cost.
 
 Finally, we give an indicative example of the output from an estimated length scale model using the above approach in Figure~\ref{fig:gibbs_lengthscale}.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{gibbs_lengthscale}
+	\caption[An indicative example of the length scale model used in our implementation of the Gibbs kernel.]{An indicative example of the length scale model used in our implementation of the Gibbs kernel. The full length scale model for each dimension of the dataset is plotted in the corresponding graphs. Here we show the first component of the Gibbs kernel only and for a single spatial kernel of the CPACE framework. We use this to highlight the reconstructive ability of a relative simple neural network model for representing the full unknown length scale model used in the Gibbs kernel.}
+	\label{fig:gibbs_lengthscale}
+\end{figure}
 This is taken from a single simulation for the pressure variable from the CESM-LE dataset.
 The full model results, which includes this simulation, are given in Section~\ref{ssec:cesm_ps}.
 We use this to highlight that the neural network approach gives a reasonable method for implementing the Gibbs kernel in the CPACE framework.
-As we can see it captures interesting variation in the length scale which corresponds to distinct areas of the globe where pressure often has differing correlation structure.
-
+As we can see, it captures interesting variation in the length scale which corresponds to distinct areas of the globe where pressure often has differing correlation structure.
 
 Whilst we haven't attempted to show that using such a neural network model is the definitive way to implement the length scale models in the Gibbs kernel; through our simulation studies and application to CESM-LE dataset this approach has faired well.
 It often converges to reasonably interpretable structures and the results for the CPACE models utilising this implementation were comparable to those that used a more standard kernel.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{gibbs_lengthscale}
-	\caption[An indicative example of the length scale model used in our implementation of the Gibbs kernel.]{An indicative example of the length scale model used in our implementation of the Gibbs kernel. The full length scale model for each dimension of the data set is plotted in the corresponding graphs. Here we show the first component of the Gibbs kernel only and for a single spatial kernel of the CPACE framework. We use this to highlight the reconstructive ability of a relative simple neural network model for representing the full unknown length scale model used in the Gibbs kernel..}
-	\label{fig:gibbs_lengthscale}
-\end{figure}

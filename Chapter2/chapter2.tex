@@ -9,7 +9,7 @@
 \nomenclature[z-U10]{U10}{Wind speed at height of $10\si{\meter}$ from CESM-LE.}
 \nomenclature[z-CESM-LE]{CESM-LE}{Community Earth System Model - Large Ensemble.}
 
-\chapter{Data Sets\label{cha:data}}  %Title of the Second Chapter
+\chapter{Datasets\label{cha:data}}  %Title of the Second Chapter
 
 \ifpdf
     \graphicspath{{Chapter2/Figs/Raster/}{Chapter2/Figs/PDF/}{Chapter2/Figs/}}
@@ -18,11 +18,11 @@
 \fi
 
 In the following chapter we describe in detail our data which we will use as a source for assessing the performance of the models described within.
-We use a publicly available set of climate model simulations known as the CESM Large Ensemble (CESM-LE) data set, \citep{kay_community_2015}.
-The CESM-LE data set provides a good example of EO data that is discussed in Section~\ref{sec:eo}. The data set is publicly available from \url{https://www.cesm.ucar.edu/projects/community-projects/LENS/data-sets.html}.
+We use a publicly available set of climate model simulations known as the CESM Large Ensemble (CESM-LE) dataset, \citep{kay_community_2015}.
+The CESM-LE dataset provides a good example of EO data that is discussed in Section~\ref{sec:eo}. The dataset is publicly available from \url{https://www.cesm.ucar.edu/projects/community-projects/LENS/data-sets.html}.
 
  \section[CESM-LE]{\label{sec:cesmle}Community Earth System Model - Large Ensemble}
- The CESM-LE data set is an extremely popular and significant data set in the climate research community.
+ The CESM-LE dataset is an extremely popular and significant dataset in the climate research community.
  It was developed to enable the assessment of recent past and near future climate change in the presence of internal climate variability, \citep{kay_community_2015}.
  It does so by providing $40$ simulations of a complex climate model where each simulation is subject to the same radiative forcing scenario but initialised from a slightly perturbed atmospheric state.
  As such the forty resultant simulations present the various trajectories the model might take due to internal climate variability of the model. 
@@ -47,9 +47,9 @@ The CESM-LE data set provides a good example of EO data that is discussed in Sec
  We apply a set of preprocessing to the raw data provided by the CESM-LE model as described below. 
  
  \subsection{Preprocessing \label{sec:preprocessing}}
- The full CESM-LE data consists of a large number of climate variables on a relatively large spatial grid consisting of $192 \times 276$ locations and as such is a rather large data set. 
+ The full CESM-LE data consists of a large number of climate variables on a relatively large spatial grid consisting of $192 \times 276$ locations and as such is a rather large dataset. 
  The main goal in our preprocessing is to reduce the size of the data through a series of variable selection, spatial resampling, and temporal sectioning.
- We reduce the data size by considering only a subset of the full data set by selecting four variables to study from the full model which are; temperature, pressure, wind speed, and precipitation. 
+ We reduce the data size by considering only a subset of the full dataset by selecting four variables to study from the full model which are; temperature, pressure, wind speed, and precipitation. 
  The next preprocessing step we use is a temporal cut.
  We consider only the output of the CESM-LE which occurs between December 2020 and January 2026. 
  These time points were chosen such that the length of time gave reasonable ability to capture periodic elements but that the size of the data did not become too large.
@@ -58,8 +58,8 @@ The CESM-LE data set provides a good example of EO data that is discussed in Sec
  The final step in our preprocessing pipeline is to reduce the spatial dimension.
  To do this we resample the model simulations to a smaller spatial grid for each variable of interest.
  Resampling is achieved by averaging values of neighbouring locations until our desired resolution is achieved.
- In this case we resample until the spatial size of the data set is $64 \times 96$ which corresponds to a reduction factor of $3$ from the original CESM-LE data.
- Figure~\ref{fig:cesm_grid} shows the comparison between the full and resampled spatial observation grid over the globe due to our preprocessing step
+ In this case we resample until the spatial size of the dataset is $64 \times 96$ which corresponds to a reduction factor of $3$ from the original CESM-LE data.
+ Figure~\ref{fig:cesm_grid} shows the comparison between the full and resampled spatial observation grid over the globe due to our preprocessing step.
  The figure uses the temperature variable as at January 2021 as an illustrative example. 
  Obviously using such an approach reduces the spatial resolution and thus our ability to see small scale spatial patterns.
  However, this is traded off against agility in terms of modelling due to the reduced data size.
@@ -84,9 +84,9 @@ The CESM-LE data set provides a good example of EO data that is discussed in Sec
  \subsection{Variables \label{ssec:variables}}
  In the following section we focus our description to the four atmospheric model variables from the  CESM-LE simulations that we will use in this body of work.
  These are; pressure, temperature, precipitation, and wind speed.
- We describe each variable in detail in their respective section and throughout this work we consider each as a separate EO data set.
+ We describe each variable in detail in their respective section and throughout this work we consider each as a separate EO dataset.
  We aim to show, through the use of an example time point and spatial locations, the various spatial and temporal processes that exist in each of these variables.
- These make such a data set a credible EO data set to test our proposed CPACE model on. 
+ These make such a dataset a credible EO dataset to test our proposed CPACE model on. 
 
 \subsubsection{Precipitation \label{sssec:precip}}
 The total (vertically integrated) precipitable water component, abbreviated as TMQ, is an atmospheric component output of the CESM-LE, \citep{kay_community_2015}.
@@ -94,7 +94,7 @@ The variable is given units of $\si{\kilogram\per\metre\squared} $ and is availa
 The monthly precipitation is calculated as the average over time from the  CESM-LE model six hourly output. 
 
 We can see clearly the spatial variability of the precipitation over the globe by considering the heat map of June 2021 monthly precipitation for a single simulation; which is shown in Figure~\ref{fig:precip_june}. 
-As one would expect there is clear spatial correlation.
+As one would expect, there is clear spatial correlation.
 For example, the tropics observe large amounts of precipitation whereas desert regions observe little. 
 We can also see some subtler differences in the spatial correlation structure. 
 Figure~\ref{fig:precip_june} shows that bands of precipitation are evident over the globe.
@@ -253,7 +253,7 @@ Here the standard deviation is with respect to the $40$ replications of the CESM
 		\caption{U10.}
 		\label{fig:std_wind_june}
 	\end{subfigure}             
-	\caption[Spatial overview of variability of Precipitation, Pressure, Temperature, and Wind speed from the CESM-LE dataset.]{ Standard deviation of the four variables considered at June 2021 for the $40$ replications present in the CESM-LE data set. The locations of the UK and Colombia are shown by the white square and circle markers respectively. These points are used as examples in Figure~\ref{fig:std_overview_temp}. }
+	\caption[Spatial overview of the variability of Precipitation, Pressure, Temperature, and Wind speed from the CESM-LE dataset.]{ Standard deviation of the four variables considered at June 2021 for the $40$ replications present in the CESM-LE dataset. The locations of the UK and Colombia are shown by the white square and circle markers respectively. These points are used as examples in Figure~\ref{fig:std_overview_temp}. }
 	\label{fig:std_overview}
 \end{figure}
 
@@ -270,7 +270,7 @@ For example, the localised high variance of the coast of India and eastern Afric
 These may pose a significant challenge to accommodate in a model for this variable.
 
 Similar to the spatial variability in replications we can consider the variability over time.
-Figure~\ref{fig:std_overview_temp} highlights this variation over the $40$ replications from the CESM-LE data set. 
+Figure~\ref{fig:std_overview_temp} highlights this variation over the $40$ replications from the CESM-LE dataset. 
 
 \begin{figure}[htbp!] 
 	\centering
@@ -295,7 +295,7 @@ Figure~\ref{fig:std_overview_temp} highlights this variation over the $40$ repli
 		\caption{U10.}
 		\label{fig:std_wind_temp}
 	\end{subfigure}             
-	\caption[Temporal overview of variability of Precipitation, Pressure, Temperature, and Wind speed from the CESM-LE dataset.]{ Four variables over observation period December 2020 to January 2026 for the $40$ replications present in the CESM-LE data set at two locations; namely Colombia and UK. These are represented by the blue and orange colours respectively.}
+	\caption[Temporal overview of the variability of Precipitation, Pressure, Temperature, and Wind speed from the CESM-LE dataset.]{ Four variables over observation period December 2020 to January 2026 for the $40$ replications present in the CESM-LE dataset at two locations; namely Colombia and UK. These are represented by the blue and orange colours respectively.}
 	\label{fig:std_overview_temp}
 \end{figure}
 
@@ -309,4 +309,4 @@ It may be interesting to assess whether any model for this variable is able to p
 Pressure similarly exhibits very different function variability between locations, with the Colombia functions showing large changes in pressure compared to the changes observed between replications at the UK location. 
 Again this indicates that there is a clear spatial component to the process driving such replications. 
 
-The above illustration of variability in replications gives an indication about the difficulties that any model must overcome to describe such variables and gives testament to the use of such a data set to test our proposed model for EO data.
+The above illustration of variability in replications gives an indication about the difficulties that any model must overcome to describe such variables and gives testament to the use of such a dataset to test our proposed model for EO data.

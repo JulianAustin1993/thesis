@@ -5,7 +5,7 @@
 
 \chapter{Background Methodologies \label{cha:background}}  %Title of the Thrid Chapter
 
-\nomenclature[a-GP]{$\mathcal{GP}\left(m(\cdot), k(\cdot, \cdot)\right)$}{Gaussian Process with mean function $m(\cdot)$ and covariance function $k(\cdot, \cdot)$}
+\nomenclature[a-GP]{$\mathcal{GP}\left(m(\cdot), k(\cdot, \cdot)\right)$}{Gaussian Process with mean function $m(\cdot)$ and covariance function $k(\cdot, \cdot)$}.
 \nomenclature[s-k]{$k$}{Principal component index.}
 
 \ifpdf
@@ -18,7 +18,7 @@ In the following chapter we consider the various statistical methodologies  upon
 This chapter is structured as follows.
 First we focus on common FDA techniques applicable to EO data.
 We follow this by discussing smoothing methodologies which are of use in the FDA techniques. 
-Finally we discuss Gaussian processes that are used in the CPACE framework to model correlation. 
+Finally we discuss Gaussian processes that are used in the CPACE framework to model correlation between functions.
 
 \section{Functional Principal Components Analysis \label{sec:fpca}}
 A commonly used technique in multivariate statistics is Principal Components Analysis (PCA), \citep{wold_principal_1987}. 
@@ -35,7 +35,7 @@ The formulation of FPCA begins by assuming that $\mathcal{X}(t)$, $t \in \mathca
 By square integrable we formally mean that:
 
 \begin{equation}
-	\mathcal{X} \text{is square integrable} \iff \int_{\mathcal{T}} \lvert \mathcal{X}(t) \rvert^2 dt < \infty
+	\mathcal{X} \text{ is square integrable} \iff \int_{\mathcal{T}} \lvert \mathcal{X}(t) \rvert^2 dt < \infty
 \end{equation}
 
 Let the mean and the covariance of the stochastic process $\mathcal{X}$ be denoted by $\mu(t)$ and $G\left(s, t\right)$ respectively, where:
@@ -159,7 +159,7 @@ where $\hat{\sigma}_\varepsilon^2$ is the estimated variance of the noise proces
 The estimation method for this is discussed in Section~\ref{sec:splines}.
 \citeauthor{yao_functional_2005} also provide asymptotic properties of such an estimator  along with asymptotic confidence bands where the mean and covariance surfaces are estimated with local linear smoothers, \citep{fan_study_1996}.
 
-The conditional expectation technique describe above from \citep{yao_functional_2005} alleviates the issue of poor integral approximation from sparsely observed data when the estimated covariance surface is a relatively good fit to the true covariance surface.
+The conditional expectation technique described above from \citep{yao_functional_2005} alleviates the issue of poor integral approximation from sparsely observed data when the estimated covariance surface is a relatively good fit to the true covariance surface.
 This is a somewhat better condition as it allows one to pool data from different observed subjects to estimate such a surface and thus the requirement of dense data per subject is relaxed to having dense data from the collection over all subjects.
 We discuss a particular method for estimating such surfaces in Section~\ref{sec:splines}.
 
@@ -226,7 +226,7 @@ A B-spline basis system of size $Q$ can then be considered by choosing the exten
 where $Q$ is the number of basis functions to use in the system, $\ve{\tau}$ is the extended knot vector, and $B_{d, q}^{\ve{\tau}}$ is the $q^\text{th}$ B-spline of order $d$ defined by Equation~\eqref{eqn:bspline_high} for our knot vector $\ve{\tau}$.
 
 \subsection{Regression splines \label{ssec:spline_reg}}
-As discussed in Section~\ref{sec:pace} the PACE methodology requires estimation of both the mean function, $\mu(t)$, and covariance surface $G\left(s, t\right)$. 
+As discussed in Section~\ref{sec:pace} the PACE methodology requires estimation of both the mean function, $\mu(t)$, and covariance surface, $G\left(s, t\right)$. 
 Estimating such functions is a problem due to their infinite dimensional nature.
 A well studied and effective method for representing such functions is the use of a basis function expansion,  \cite{ramsay_functional_2010}.
 That is representing the target surface using a linear combination of known basis functions.
@@ -282,7 +282,7 @@ An issue with the classical least squares fitting using a basis system expansion
 We are constrained to choose $Q$ to be less than or equal to the number of observations, $J_i$. This is because more than $J_i$ basis functions would results in Equation~\eqref{eqn:whatc} being ill defined since the matrix $\ve{B}$ would have linearly dependent columns.
 However, we still have the choice to choose $Q$ between $1$ and $J_i$.
 Exactly which value for $Q$ to choose is unknown and results in bias - variance trade off in the estimator, \citep{ramsay_functional_2010}.
-A large number of basis functions reduces bias in the estimator $\hat{\chi}_i(t)$, but the variance of this estimator may be unacceptably high.
+A large number of basis functions reduce bias in the estimator $\hat{\chi}_i(t)$, but the variance of this estimator may be unacceptably high.
 Conversely, a lower number of basis functions will result in high bias of the estimator but low variance.
 The bias-variance trade off is well studied and there is a vast literature on the methodology of choosing the number of basis functions. 
 However, there is no gold standard and often the choice is made in an ad hoc fashion, \citep{ramsay_functional_2010}. 
@@ -396,7 +396,7 @@ We focus on a technique introduced by \citeauthor{hyndman_forecasting_2009} in \
 Such a method is of interest as it expands methodology on how to use existing forecasting techniques in a functional setting.
 In particular \citep{hyndman_forecasting_2009} uses the FPCA decomposition described in Section~\ref{sec:fpca} to decompose functional observations and then uses independent forecasting of each principal component score using standard multivariate techniques.
 
-\citeauthor{hyndman_robust_2007} in \citep{hyndman_robust_2007} suggests to assume the principal component scores, $\xi_{ik}$, follow independent univariate time series models.
+\citeauthor{hyndman_robust_2007} in \citep{hyndman_robust_2007} suggest to assume the principal component scores, $\xi_{ik}$, follow independent univariate time series models.
 Then, conditioning on the observed data $\ve{Y}$ given in Equation~\eqref{eqn:observed_data} and the set of principal components $\ve{\phi}(t) = \left(\phi_1(t), \phi_2(t), \cdots, \phi_K(t)\right)$ they obtain the $h$-step ahead forecast of $\chi_{i+h | i}(t)$ as, \citep{hyndman_robust_2007}:
 
 \begin{equation}\label{eqn:forecast}
@@ -431,7 +431,7 @@ where $w \in \Omega$. A sample function of the stochastic process is the mapping
 A Gaussian process is a stochastic process which is parametrised by a mean function $m: \mathcal{S} \to \mathbb{R}$ where $m(\ve{s}) = \E\left(\xi(\ve{x})\right)$ and its covariance function: 
 \begin{align*}
 	k&: \mathcal{S}^2 \to \mathbb{R} \\
-	k&: \ve{s} \mapsto \text{Cov}\left(\xi(\ve{s}), \xi(\ve{s})\right)
+	k&: \left(\ve{s}, \vesup{s}{\prime} \right) \mapsto \text{Cov}\left(\xi(\ve{s}), \xi(\vesup{s}{\prime})\right)
 \end{align*}
 where for any finite collection of points, $\vesub{s}{1}, \vesub{s}{2}, \cdots, \vesub{s}{n} \in \mathcal{S}$, the joint distribution of $\vesub{\xi}{n} = \left(\xi(\vesub{s}{1}), \xi(\vesub{s}{2}), \cdots, \xi(\vesub{s}{n})\right)^\transpose$ is a multivariate normal distribution with mean vector $\vesub{m}{n} = \left(m(\vesub{s}{1}), m(\vesub{s}{2}), \cdots, m(\vesub{s}{n})\right)^\transpose$ and covariance matrix $\vesub{K}{n}$ whose $\left(l,m\right)^\text{th}$ entry is given by $k(\vesub{s}{l}, \vesub{s}{m})$, \citep{shi_gaussian_2011}.
 As such, Gaussian processes are a natural way of defining a prior distribution over spaces of functions, which are the parameter spaces for Bayesian non linear regression models.
@@ -470,7 +470,7 @@ This concept extends to higher dimensions.
 \begin{figure}[htbp!] 
 	\centering    
 	\includegraphics[width=1.0\textwidth]{example_kernel}
-	\caption[Example realisations from a Gaussian processes with the Mat\'ern covariance function with differing $\nu$ parameters.]{Example realisations from Gaussian processes with the Mat\'ern covariance function with differing $\nu$ parameters. We plot a single realisation from each of three processes with $m(s) = 0$ and $k(s) = C_\nu(d(s, s^\prime))$ for $\nu = 0.5, 1.5, 2.5$ over the domain of $\mathcal{S} = \left[0, 5\right] \subset \mathbb{R}$.}
+	\caption[Example realisations from a Gaussian process with the Mat\'ern covariance function with differing $\nu$ parameters.]{Example realisations from Gaussian processes with the Mat\'ern covariance function with differing $\nu$ parameters. We plot a single realisation from each of three processes with $m(s) = 0$ and $k(s) = C_\nu(d(s, s^\prime))$ for $\nu = 0.5, 1.5, 2.5$ over the domain of $\mathcal{S} = \left[0, 5\right] \subset \mathbb{R}$.}
 	\label{fig:example_matern}
 \end{figure}
 
@@ -487,10 +487,10 @@ where $Q(\ve{s}, \vesup{s}{\prime}) = \left(\ve{s} - \vesup{s}{\prime}\right)^\t
 
 There have been other proposed approaches for introducing non-stationarity into the kernels of Gaussian processes.
 \citeauthor{sampson_nonparametric_1992} considers a non-parametric estimation procedure to model non-stationary kernels, \citep{sampson_nonparametric_1992}.
-Whilst non-stationary kernels have been consider by combining locally stationary kernels, \cite{genton_classes_2001}.
+Whilst non-stationary kernels have been considered by combining locally stationary kernels, \cite{genton_classes_2001}.
 Both of the above methods are interesting in their own right, however in this work we focus on the class of covariances formed through \citeauthor{paciorek_spatial_2006} methods; as described above.
 
 
-With almost all covariance functions and especially non-stationary covariances there are typically hyper parameters which must be estimated from the data.
+With almost all covariance functions and especially non-stationary covariances there are typically hyperparameters which must be estimated from the data.
 For example in the Mat\`{e}rn covariance we have the shape parameter $\nu$ and any length scale parameters defined in the distance function $d(\cdot, \cdot)$.
 These are typically estimated though maximum likelihood estimation, \citep{williams_gaussian_2006}, however fully Bayesian estimation can also be achieved through some Markov Chain Monte Carlo (MCMC) scheme, \citep{paciorek_spatial_2006}. 

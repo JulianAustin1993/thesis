@@ -27,7 +27,7 @@
 \nomenclature[a-N]{N}{Number of spatial observations.}
 \nomenclature[a-Ji]{$J_i$}{Number of temporal observations for $i^\text{th}$ functional observation.}
 \nomenclature[a-y]{$y_{ij}$}{Observed response at time $t_j$ for $i^\text{th}$ functional observation.}
-\nomenclature[a-Y]{Y}{Observed data set.}
+\nomenclature[a-Y]{Y}{Observed dataset.}
 \nomenclature[g-chi]{$\chi$}{Functional data (observation of $\mathcal{X}$).}
 \nomenclature[g-epsilon]{$\varepsilon_{ij}$}{Noise process at time $t_j$ for $i^\text{th}$ functional observation.}
 \nomenclature[s-i]{$i$}{Spatial index.}
@@ -51,12 +51,12 @@ Climatology is the study of the atmosphere and weather patterns over time.
 In this case spatial and temporal dependency in the EO data used in various climatology studies is fairly evident.
 For example, consider the Community Earth System Model (CESM), \citep{kay_community_2015}, produced by the National Centre for Atmospheric Research (NCAR).
 Such a model provides simulations of various aspects of the Earth's climates for past, present and future time points.
-See Section~\ref{sec:cesmle} for a more detailed description of such a data set.
+See Section~\ref{sec:cesmle} for a more detailed description of such a dataset.
 Figure~\ref{fig:cesm_example} provides an example of a subset of the CESM data focusing on the temperature in Kelvin ($\si{\kelvin}$) over the globe.
 As expected we can see a clear temporal pattern emerging in various regions which relates to the seasons.
 For example, there is clear evidence for temporal correlation over the polar regions due to the gradual increase then reduction in temperature we see over these regions.
 Figure~\ref{fig:cesm_example} also highlights clear spatial patterns with temperature varying as we move around the globe.
-One particularly noticeable pattern is the localised change in temperature over north Africa between the months of May to September.
+One particularly noticeable pattern is the localised change in temperature over North Africa between the months of May to September.
 For another example, consider the transition from sea to land.
 The change in temperature as we move from sea to land is often more abrupt than the same change in temperature we may see when moving the same distance over land. 
 This is possibly evidence for the existence of a complex spatial and temporal process driving such a variable.
@@ -67,7 +67,7 @@ Understanding such a complex process motivates a model which must take into acco
 \begin{figure}[htbp!] 
 	\centering    
 	\includegraphics[width=1.0\textwidth]{cesm_temp_example}
-	\caption[The Average monthly temperature from the CESM-LE dataset.]{Monthly average temperature over the globe in Kelvin ($\si{\kelvin}$) from a single simulation from CESM-LE. The figure illustrates both the temporal and spatial dependency that is observed in temperature across the globe. The figure is projected to the Robinson projection for illustration purposes.}
+	\caption[The average monthly temperature from the CESM-LE dataset.]{Monthly average temperature over the globe in Kelvin ($\si{\kelvin}$) from a single simulation from CESM-LE. The figure illustrates both the temporal and spatial dependency that is observed in temperature across the globe. The figure is projected to the Robinson projection for illustration purposes.}
 	\label{fig:cesm_example}
 \end{figure}
 
@@ -82,7 +82,7 @@ One particularly prominent remote sensing system is the European Space Agency's 
 The Sentinel constellation of satellites provides a wide range of remote sensing sensors which are easily accessible.
 The constellation provides capabilities to capture various physical characteristics through the many forms of sensors equipped to its satellites.
 These include  Synthetic Aperture Radar (SAR), optical and multispectral sensors.
-For example, European Space Agency's Sentinel-4 from the Sentinel Constellation, \cite{aschbacher_european_2012}, provides observation dedicated to air quality monitoring.
+For example, European Space Agency's Sentinel-4 from the Sentinel constellation, \cite{aschbacher_european_2012}, provides observation dedicated to air quality monitoring.
 As such the Sentinel constellation has been widely used in EO studies; the three studies above, \citep{muro_short-term_2016, khabbazan_crop_2019, raspini_continuous_2018}  all utilise the Sentinel 1 SAR sensors for their observation source. 
 
 \begin{figure}[htbp!] 
@@ -94,11 +94,11 @@ As such the Sentinel constellation has been widely used in EO studies; the three
 
 A prominent focus of the Sentinel satellite constellation is to provide repeated observations at relatively high frequency, \cite{aschbacher_european_2012}.
 This is in response to the rising demand for monitoring EO processes over time.
-High frequency revisit times has been made possible by the development of remote sensing technologies.
+High frequency revisit times have been made possible by the development of remote sensing technologies.
 For example, the Sentinel 1 satellite constellation can provide revisit times of approximately five days for areas of Europe.
 Such short revisit times are advantageous as they give higher temporal resolution and thus studies can incorporate this additional information.
 For example, \citeauthor{raspini_continuous_2018} utilise this in their study of land deformation change to identify anomalous regions, \citep{raspini_continuous_2018}.
-The increasing availability of high temporal frequency EO data such as those provided by the CESM-LE data set or the Sentinel satellite constellation thus drives a demand for statistical models which can handle both high resolution spatial and temporal dependency.  
+The increasing availability of high temporal frequency EO data such as those provided by the CESM-LE dataset or the Sentinel satellite constellation thus drives a demand for statistical models which can handle both high resolution spatial and temporal dependency.  
 
 Earth observation data, such as those provided by the CESM model or through remote sensing, have an inherent spatial and temporal dependency.
 That is to say the underlying process driving both remotely sensed observations of the Earth and the CESM simulations will vary over the globe and also will be driven by the state of the system at prior time points.
@@ -112,7 +112,7 @@ This usually relates to the repeated imaging of the same area of interest at mul
 
 The description of such spatio-temporal processes is well studied in statistics and a large amount of effort has been used to develop various models to suit them.
 A well known monograph which deals with such processes is that written by \citeauthor{cressie_statistics_2011}, \cite{cressie_statistics_2011}.
-The monograph details various forms of spatio-temporal processes and typically focuses on the extension of spatial method to incorporate the additional temporal dimension.
+The monograph details various forms of spatio-temporal processes and typically focuses on the extension of spatial methods to incorporate the additional temporal dimension.
 We discuss these methods in more detail in Section~\ref{sec:st_methods}.
 Of particular importance in these methods is that temporal and spatial dimensions are treated distinctly as they are inherently different in the physical process.
 For example, one could consider a spatial point influencing its neighbours in all directions however a temporal point reasonably shouldn't influence its past.
@@ -139,7 +139,7 @@ In Section~\ref{sec:fr} we make concrete our definition of functional data.
 
 \section{Functional Representation \label{sec:fr}}
 As mentioned in Section~\ref{sec:eo} EO data can be viewed as a collection of functional data.
-However, there is a choice about how we interpret observations in this conversion.
+However, there is a choice about how we interpret observations in this collection.
 We may consider the data as a collection of functional observations with time being our functional dimension and space our collection dimension.
 For example, we may consider each spatial location from Figure~\ref{fig:cesm_example} giving rise to a trajectory over time of which we have only observed 12 time points.
 Or we may consider the functional observations having a spatial domain and the collection dimension being time.
@@ -173,10 +173,11 @@ The canonical way to present functional data and the subsequent methods is to us
 However, there is no such restrictions in either Definition~\ref{def:functional_variable} or Definition~\ref{def:functional_dataset}. 
 In fact, another case is to consider the functional domain of the variables to be space.
 In our proposed methodologies we present when possible with respect to time due to the simplification it brings in notation.
-We will make explicit reference to when we change the domain of our functional data, for example if we consider space as our continuous domain. 
+We will make explicit reference when we change the domain of our functional data, for example if we consider space as our continuous domain. 
 
 We introduce the following notation for use in the remainder of this work.
-We consider our EO data set to be observed in some spatial domain which we denote by $\mathcal{S} \subset \mathbb{R}^2$ and temporal domain donated by $\mathcal{T} \subset \mathbb{R}$.
+We consider our EO dataset to be observed in some spatial domain with dimension $p$, which we denote by $\mathcal{S} \subset \mathbb{R}^p$, and temporal domain donated by $\mathcal{T} \subset \mathbb{R}$.
+Typically $p$ will be two or three since these represent the space of common spatial domains in EO data.
 Any observed dataset we can enumerate with one index over the spatial location and the other indexing the temporal locations.
 
 We assume our dataset is comprised of $N$ spatial locations and let $\ve{s}_i \in \mathcal{S}$ be the spatial location of the $i^\text{th}$ observed functional variable.
@@ -202,7 +203,7 @@ In this case one considers the modelling of the EO dataset by ensuring smoothnes
 We can then consider building in spatial dependency by assuming a sampling correlation in our $N$ functional data.
 An area where such spatial dependency has been long studied is multivariate spatio-temporal methods.
 
-\section{Spatio-Temporal Methods, \label{sec:st_methods}}
+\section{Spatio-Temporal Methods \label{sec:st_methods}}
 In the statistical literature spatial and spatio-temporal models have been extremely well studied, especially due to the prevalence of geo-statistical applications.
 In the following we briefly review some of the most commonly observed spatial and spatio-temporal statistical models in the multivariate analysis literature. 
 
@@ -211,7 +212,7 @@ Generally speaking, spatial data can be split into one of three categories; geo-
 In this work the EO data described in Section~\ref{sec:eo}  are most suitably modelled using geo-statistical models.
 The canonical model used in geo-statistical settings is the Kriging model.
 The Kriging model is well described in \cite{stein_interpolation_1999}.
-Such models treat spatial data as samples from a random spatial process and that predictions for unknown values can be calculated from a weighted combination of known values in a neighbourhood of our unknown location utilising the correlation among neighbouring points.
+Such models treat spatial data as samples from a random spatial process and predictions for unknown values can be calculated from a weighted combination of known values in a neighbourhood of our unknown location utilising the correlation among neighbouring points.
 A prime example of the spatial Kriging model in use for EO data is given in \cite{rossi_kriging_1994}.
 Extensions to the basic Kriging technique have also been employed across a number of geo-statistical settings, including Co-Kriging involving extra covariate information for reconstruction, \cite{zhang_restoration_2009}.
 Kriging is well known in many fields through various names, in the FDA literature it is most often referred to as Gaussian processes regression.
@@ -254,20 +255,20 @@ We then estimate a spatial correlation structure for each component using well k
 The combination of the resulting estimated spatial covariance structures with the principal directions aims to capture the majority of temporal and spatial dependency observed in the data.
 We can then utilise the CPACE model to help predict responses at unseen spatial and temporal locations, which is an area of keen interest in EO studies.
 We assess our model using various simulated data both with known correct data generating distribution and to simulations drawn from an incorrect data generating procedure.
-We apply our CPACE model to selected atmospheric variables from the CESM data set as an example application of the model to EO data.
+We apply our CPACE model to selected atmospheric variables from the CESM dataset as an example application of the model to EO data.
 
 The work is structured as follows.
-In Chapter~\ref{cha:data} we describe our example data sets which we use to illustrate the performance of the model.
+In Chapter~\ref{cha:data} we describe our example datasets which we use to illustrate the performance of the model.
 In Chapter~\ref{cha:background} we present the methodologies underpinning the CPACE models, these are typically well known FDA and spatio-temporal statistical methods.
 We also present the smoothing methodologies used to estimate the mean and covariance surfaces of our random functional variables.
-In Chapter~\ref{cha:ftsm} we present an interim model built on the combination of two well known existing methodologies in the FDA literature with a focus on application to an EO data set.
-Such a model proposes an novel approach to modelling EO data and helps to highlight the need of including both spatial and temporal effects in modelling such data.
+In Chapter~\ref{cha:ftsm} we present an interim model built on the combination of two well known existing methodologies in the FDA literature with a focus on application to an EO dataset.
+Such a model proposes a novel approach to modelling EO data and helps to highlight the need to include both spatial and temporal effects in modelling such data.
 In addition, the proposed model in Chapter~\ref{cha:ftsm} gives an opportunity to explore EO data where the functional domain is space rather than time.
 We present the benefits and limitations of such an approach in practice in this chapter.
-In Chapter~\ref{cha:cpace} we introduce the main contribution of this work; which is the CPACE model for correlated functional data.
+In Chapter~\ref{cha:cpace}, we introduce the main contribution of this work; which is the CPACE model for correlated functional data.
 We describe the model in detail as well as providing asymptotic results.
-In Chapter~\ref{cha:application} we apply the CPACE model to simulated data and in Chapter~\ref{cha:real_application} to real world data sets.
+In Chapter~\ref{cha:application}, we apply the CPACE model to simulated data and in Chapter~\ref{cha:real_application} to real world datasets.
 Simulation results are presented with comparisons to various existing models with a focus on comparative ability to recover known data generating parameters.
-Applied results to real world data sets are included with comparisons to existing techniques with a focus on interpolation and forecasting abilities of the model.
-In Chapter~\ref{cha:implementation} we highlight the practical difficulties in implementing the model with discussion on various techniques which are used to overcome the high dimensionality which is typical in the EO data.
-Finally, in Chapter~\ref{cha:conclusions} we draw the conclusions of the work and present area of further work. 
+Applied results to real world datasets are included with comparisons to existing techniques; with a focus on interpolation and forecasting abilities of the model.
+In Chapter~\ref{cha:implementation}, we highlight the practical difficulties in implementing the model, with discussion on various techniques which are used to overcome the high dimensionality which is typical in the EO data.
+Finally, in Chapter~\ref{cha:conclusions} we draw the conclusions of the work and present areas of possible further work.
