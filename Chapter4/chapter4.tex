@@ -409,10 +409,10 @@ The impact of such noise can be see in Figure~\ref{fig:ftsm_noise_example} which
 \end{figure}
 
 \subsection{Model parameters \label{ssec:sim_params}}
-The model described in Section~\ref{sec:ftsm_model} has various hyper-parameters which control exactly how the model acts.
+The model described in Section~\ref{sec:ftsm_model} has various hyperparameters which control exactly how the model acts.
 We specify these  below, along with justification for such choices where needed.
 
-The first set of hyper-parameters correspond to those of the basis system used for the basis expansion of the functional variables.
+The first set of hyperparameters correspond to those of the basis system used for the basis expansion of the functional variables.
 In our case we limit ourselves to B-spline basis systems of order $4$, as described in Section~\ref{ssec:basis_splines}.
 We choose order $4$ B-spline functions as cubic functions are the standard in many applications, \citep{de_boor_practical_2001}. 
 We choose $16$ basis functions across each dimension of our surfaces, giving a total number of $256$ basis functions for the tensor product basis system, as described in Section~\ref{ssec:spline_reg}. 
@@ -422,7 +422,7 @@ However the additional computational cost in estimating these coefficients quick
 To penalise the fitting, as described in Section~\ref{ssec:spline_reg}, we use the GCV fitting procedure given in \citep{wahba_spline_1990} with the tensor product penalty given by \citep{wood_p-splines_2017}.
 We choose the penalty order to be $1$ which essentially places first derivative smoothness over the marginal basis, again such a choice is standard in spline fitting. 
 
-The next set of hyper-parameters relates to the functional decomposition.
+The next set of hyperparameters relates to the functional decomposition.
 We choose to examine a maximum of $4$ principal components in our decomposition.
 That is we set $K = 4$. 
 This is chosen as to be a fairly substantive dimensionality reduction whilst maintaining a degree of representativeness, as we know through our simulation that the first $3$ components should capture the majority of the variation.
@@ -430,10 +430,10 @@ Next we set our MAFR operator $L$ to be the first order derivative.
 This will again set out preference for smooth surfaces. 
 Again, the first order derivative is chosen as it is often a standard in functional data analysis, \citep{ramsay_functional_2010}. 
 
-We have already stated we choose the hyper-parameters to these processes by maximum likelihood estimation of the Gaussian process.
+We have already stated we choose the hyperparameters to these processes by maximum likelihood estimation of the Gaussian process.
 This estimation process is discussed in detail in \citep{williams_gaussian_2006}.
 
-The final set of simulation hyper-parameters refers to how we split between training and testing data.
+The final set of simulation hyperparameters refers to how we split between training and testing data.
 The training and test data split depends on our objective of either interpolation or forecasting.
 For interpolation, we randomly select $30$ points of our time domain $\mathcal{T}$ as training points and observe the noisy simulated data at these points.
 The remaining time points then represent the test data which we will evaluate our model performance against.
